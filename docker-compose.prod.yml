@@ -1,0 +1,89 @@
+version: '3.8'
+
+services:
+  postgres:
+    image: postgres:16-alpine
+    container_name: smartwash_postgres
+    restart: always
+    environment:
+      POSTGRES_USER: ${DB_USERNAME:-smartwash}
+      POSTGRES_PASSWORD: ${DB_PASSWORD:-smartwash}
+      POSTGRES_DB: ${DB_DATABASE:-smartwash_db}
+    ports:
+      - "5437:5432"
+    volumes:
+      - smartwash_pgdata:/var/lib/postgresql/data
+    networks:
+      - smartwash_net
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${DB_USERNAME:-smartwash} -d ${DB_DATABASE:-smartwash_db}"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  redis:
+    image: redis:7-alpine
+    container_name: smartwash_redis
+    restart: always
+    ports:
+      - "6381:6379"
+    volumes:
+      - smartwash_redisdata:/data
+    networks:
+      - smartwash_net
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  api:
+    build:
+      context: .
+      dockerfile: apps/api/Dockerfile
+    container_name: smartwash_api
+    restart: always
+    environment:
+      - PORT=3011
+      - DATABASE_URL=postgresql://${DB_USERNAME:-smartwash}:${DB_PASSWORD:-smartwash}@smartwash_postgres:5432/${DB_DATABASE:-smartwash_db}
+      - CORS_ORIGINS=http://localhost:3010,http://195.158.24.137:3010
+      - NODE_ENV=production
+    ports:
+      - "3011:3011"
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    volumes:
+      - smartwash_uploads:/app/uploads
+    networks:
+      - smartwash_net
+
+  web:
+    build:
+      context: .
+      dockerfile: apps/web/Dockerfile
+      args:
+        - NEXT_PUBLIC_API_URL=${NEXT_PUBLIC_API_URL:-http://195.158.24.137:3011/api}
+    container_name: smartwash_web
+    restart: always
+    environment:
+      - PORT=3010
+      - NODE_ENV=production
+      - NEXT_PUBLIC_API_URL=${NEXT_PUBLIC_API_URL:-http://195.158.24.137:3011/api}
+    ports:
+      - "3010:3010"
+    depends_on:
+      - api
+    networks:
+      - smartwash_net
+
+volumes:
+  smartwash_pgdata:
+  smartwash_redisdata:
+  smartwash_uploads:
+
+networks:
+  smartwash_net:
+    driver: bridge
