@@ -5,6 +5,7 @@ RUN apk add --no-cache libc6-compat
 WORKDIR /app
 COPY package.json package-lock.json* ./
 COPY apps/api/package.json ./apps/api/
+COPY packages/shared/package.json ./packages/shared/
 # Next.js monorepo often needs the whole lockfile
 RUN npm ci
 
@@ -21,6 +22,8 @@ COPY --from=builder /app/node_modules ./node_modules
 COPY --from=builder /app/apps/api/dist ./apps/api/dist
 COPY --from=builder /app/apps/api/package.json ./apps/api/package.json
 COPY --from=builder /app/package.json ./package.json
+# Shared files for runtime if needed (types/utils)
+COPY --from=builder /app/packages/shared ./packages/shared
 # For the schema.sql which is read from __dirname
 COPY --from=builder /app/apps/api/src/db/schema.sql ./apps/api/dist/db/schema.sql
 
