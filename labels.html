@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>JPG Style SmartWash | Label Templates</title>
+  <link rel="stylesheet" href="labels.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Outfit:wght@400;700;800;900&family=Playfair+Display:ital,wght@1,800;1,900&display=swap" rel="stylesheet">
+  <style>
+    .print-controls {
+      background: #1e293b;
+      color: white;
+      padding: 20px;
+      text-align: center;
+      margin-bottom: 40px;
+      border-bottom: 5px solid #ec4899;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 15px;
+    }
+
+    .print-button {
+      background: linear-gradient(135deg, #ec4899 0%, #be185d 100%);
+      color: white;
+      border: none;
+      padding: 12px 30px;
+      border-radius: 50px;
+      font-size: 1.1rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+      box-shadow: 0 4px 15px rgba(236, 72, 153, 0.4);
+    }
+
+    .print-button:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(236, 72, 153, 0.6);
+    }
+
+    .print-button:active {
+      transform: translateY(0);
+    }
+
+    .instructions {
+      font-size: 0.9rem;
+      opacity: 0.8;
+      max-width: 600px;
+      line-height: 1.5;
+    }
+
+    @media print {
+      .print-controls {
+        display: none;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="print-controls">
+    <div class="instructions">
+      <h1>Label Design Center - JPG Style SmartWash</h1>
+      <p>This page contains premium, print-ready label designs for your products. Use the button below to print or save as PDF. <b>Important:</b> In the print dialog, set "Background Graphics" to ON for the gradients to appear.</p>
+    </div>
+    <button class="print-button" onclick="window.print()">Print This Page / Save PDF</button>
+  </div>
+
+  <div class="label-container">
+    <!-- EXACT REPLICA: Nano Shampoo Bubble Gum 5L -->
+    <div class="label-premium">
+      <div class="premium-swoosh"></div>
+      <div class="premium-logo">JPG-Style</div>
+      
+      <div class="premium-content">
+        <div class="premium-car-icon"></div>
+        <div class="premium-title">SmartWash</div>
+        <div class="premium-subtitle">Nano Shampoo</div>
+        <div class="premium-variant">Bubble Gum</div>
+        
+        <div class="premium-volume-badge">5L</div>
+        
+        <ul class="premium-details">
+          <li>ULTRA FOAM FORMULA</li>
+          <li>CERAMIC INFUSED</li>
+          <li>HIGH GLOSS & PROTECTION</li>
+          <li>PLEASANT BUBBLE GUM SCENT</li>
+          <li>NANO TECHNOLOGY</li>
+        </ul>
+      </div>
+
+      <div class="premium-bubbles"></div>
+
+      <div class="premium-footer">
+        <div class="premium-footer-text">PREMIUM CAR CARE</div>
+        <div class="premium-footer-icons">
+          <div class="icon">ISO</div>
+          <div class="icon">♻️</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- REPLICA: Wax Bubble Gum 5L -->
+    <div class="label-premium" style="background: #fbbf24;">
+      <div class="premium-swoosh"></div>
+      <div class="premium-logo">JPG-Style</div>
+      
+      <div class="premium-content">
+        <div class="premium-car-icon"></div>
+        <div class="premium-title">SmartWash</div>
+        <div class="premium-subtitle">Premium Wax</div>
+        <div class="premium-variant">Bubble Gum</div>
+        
+        <div class="premium-volume-badge">5L</div>
+        
+        <ul class="premium-details">
+          <li>HYDROPHOBIC EFFECT</li>
+          <li>BRILLIANT SHINE</li>
+          <li>EASY APPLICATION</li>
+          <li>PROTECTIVE SHIELD</li>
+        </ul>
+      </div>
+
+      <div class="premium-footer">
+        <div class="premium-footer-text">PREMIUM CAR CARE</div>
+      </div>
+    </div>
+
+    <!-- REPLICA: Pink Panther 20kg (Large) -->
+    <div class="label-premium" style="width: 180mm; height: 240mm; background: #ec4899;">
+      <div class="premium-swoosh"></div>
+      <div class="premium-logo" style="font-size: 4rem;">JPG-Style</div>
+      
+      <div class="premium-content">
+        <div class="premium-car-icon" style="width: 200px; height: 60px;"></div>
+        <div class="premium-title" style="font-size: 6rem;">Pink Panther</div>
+        <div class="premium-subtitle" style="font-size: 3rem;">Magic Active Foam</div>
+        <div class="premium-variant" style="font-size: 5rem;">Ultra Active</div>
+        
+        <div class="premium-volume-badge" style="width: 120px; height: 120px; font-size: 4rem;">20KG</div>
+        
+        <ul class="premium-details" style="font-size: 1.2rem; margin: 40px 100px;">
+          <li>MAGIC PINK FOAM EFFECT</li>
+          <li>HIGHLY CONCENTRATED</li>
+          <li>PROFESSIONAL STRENGTH</li>
+          <li>SAFE FOR COATINGS</li>
+        </ul>
+      </div>
+
+      <div class="premium-footer">
+        <div class="premium-footer-text" style="font-size: 1.5rem;">JPG-STYLE AUTOMOTIVE SOLUTIONS</div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

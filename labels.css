@@ -1,0 +1,375 @@
+:root {
+  --primary-gradient: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+  --accent-pink: #ec4899;
+  --accent-blue: #3b82f6;
+  --accent-purple: #8b5cf6;
+  --accent-green: #10b981;
+  --accent-orange: #f59e0b;
+  --accent-truck: #475569;
+  --text-light: #f8fafc;
+  --text-dark: #334155;
+  --gold: #d4af37;
+}
+
+@page {
+  size: A4 portrait;
+  margin: 0;
+}
+
+body {
+  margin: 0;
+  padding: 20px;
+  background: #f1f5f9;
+  font-family: 'Outfit', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  color: var(--text-dark);
+}
+
+.label-container {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 40px;
+  justify-items: center;
+  max-width: 210mm;
+  margin: 0 auto;
+}
+
+/* Template 1: Nano Shampoo */
+.label-shampoo {
+  width: 130mm;
+  height: 180mm;
+  background: linear-gradient(180deg, #1a0b1f 0%, #3d123d 100%);
+  color: white;
+  border-radius: 8px;
+  padding: 2.5cm 1cm 1cm 1cm;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+}
+
+.label-shampoo::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: var(--accent-pink);
+}
+
+.brand-section {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.brand-name {
+  font-size: 2.5rem;
+  font-weight: 800;
+  letter-spacing: -2px;
+  margin-bottom: 5px;
+  background: linear-gradient(to right, #fff, #ffcde4);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.brand-logo-sim {
+  width: 80px;
+  height: 30px;
+  margin: 0 auto 10px;
+  border: 1.5px solid rgba(255,255,255,0.7);
+  border-radius: 4px;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.brand-logo-sim::after {
+  content: 'JPG';
+  font-size: 0.8rem;
+  letter-spacing: 2px;
+  font-weight: 700;
+  opacity: 0.8;
+}
+
+.product-section {
+  text-align: center;
+  flex-grow: 1;
+}
+
+.product-name {
+  font-size: 3.5rem;
+  font-weight: 900;
+  text-transform: uppercase;
+  line-height: 1;
+  margin-bottom: 10px;
+}
+
+.product-variant {
+  font-size: 2.2rem;
+  font-weight: 400;
+  color: var(--accent-pink);
+  font-style: italic;
+  margin-bottom: 30px;
+}
+
+.features-list {
+  list-style: none;
+  padding: 0;
+  margin: 20px 0;
+  text-align: left;
+}
+
+.features-list li {
+  font-size: 0.95rem;
+  margin-bottom: 12px;
+  display: flex;
+  align-items: center;
+  opacity: 0.9;
+}
+
+.features-list li::before {
+  content: '✦';
+  color: var(--accent-pink);
+  margin-right: 12px;
+  font-size: 1.2rem;
+}
+
+.footer-section {
+  border-top: 1px solid rgba(255,255,255,0.1);
+  padding-top: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+}
+
+.volume-badge {
+  background: var(--accent-pink);
+  padding: 8px 15px;
+  border-radius: 20px;
+  font-weight: 800;
+  font-size: 1.2rem;
+}
+
+.standard-icons {
+  display: flex;
+  gap: 15px;
+  opacity: 0.6;
+}
+
+.icon {
+  width: 20px;
+  height: 20px;
+  border: 1px solid white;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 8px;
+}
+
+/* Template 2: Dry Fog / Small */
+.label-small {
+  width: 80mm;
+  height: 160mm;
+  background: linear-gradient(135deg, #2e1065 0%, #4c1d95 100%);
+  color: white;
+  border-radius: 4px;
+  padding: 1.5cm 0.6cm 0.6cm 0.6cm;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+}
+
+/* Template 4: Exact Premium Product Copy (from photo) */
+.label-premium {
+  width: 130mm;
+  height: 180mm;
+  background: #d81b60; /* Deep Pink base */
+  color: white;
+  border-radius: 4px;
+  position: relative;
+  overflow: hidden;
+  box-sizing: border-box;
+  font-family: 'Inter', sans-serif;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+}
+
+.premium-swoosh {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 150px;
+  background: #0c1b33; /* Dark Blue swoosh */
+  clip-path: ellipse(120% 60% at 50% 0%);
+  z-index: 1;
+}
+
+.premium-logo {
+  position: relative;
+  z-index: 2;
+  text-align: center;
+  padding-top: 40px;
+  font-size: 3rem;
+  font-weight: 700;
+  letter-spacing: -1px;
+}
+
+.premium-content {
+  position: relative;
+  z-index: 2;
+  text-align: center;
+  margin-top: 20px;
+}
+
+.premium-car-icon {
+  width: 120px;
+  height: 40px;
+  margin: 0 auto 5px;
+  background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 30" fill="white"><path d="M10 20 L25 10 L75 10 L90 20 L95 20 L95 25 L5 25 L5 20 Z M20 25 Q20 30 25 30 Q30 30 30 25 M70 25 Q70 30 75 30 Q80 30 80 25" /></svg>');
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+.premium-title {
+  font-size: 4rem;
+  font-weight: 900;
+  text-transform: none;
+  margin: 0;
+  line-height: 0.9;
+}
+
+.premium-subtitle {
+  font-size: 2.2rem;
+  font-weight: 500;
+  margin: 5px 0;
+}
+
+.premium-variant {
+  font-size: 3.5rem;
+  font-family: 'Playfair Display', serif;
+  font-style: italic;
+  font-weight: 900;
+  color: #fff;
+  margin: 10px 0;
+  text-shadow: 0 4px 10px rgba(0,0,0,0.2);
+}
+
+.premium-bubbles {
+  position: absolute;
+  bottom: 80px;
+  left: 20px;
+  width: 100px;
+  height: 100px;
+  opacity: 0.6;
+  background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 50 50"><circle cx="10" cy="10" r="5" fill="white" opacity="0.5"/><circle cx="20" cy="25" r="8" fill="white" opacity="0.3"/><circle cx="35" cy="15" r="4" fill="white" opacity="0.4"/></svg>');
+  background-size: contain;
+  background-repeat: no-repeat;
+}
+
+.premium-volume-badge {
+  background: #0c1b33;
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2.5rem;
+  font-weight: 900;
+  margin: 20px auto;
+  border: 4px solid #fff;
+}
+
+.premium-details {
+  list-style: none;
+  padding: 0;
+  margin: 20px 40px;
+  font-size: 0.8rem;
+  text-align: left;
+  column-count: 1;
+}
+
+.premium-details li {
+  margin-bottom: 5px;
+  text-transform: uppercase;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+}
+
+.premium-details li::before {
+  content: '■';
+  font-size: 0.5rem;
+  margin-right: 10px;
+}
+
+.premium-footer {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 30px;
+  border-top: 1px solid rgba(255,255,255,0.2);
+}
+
+.premium-footer-text {
+  font-size: 1rem;
+  font-weight: 800;
+  letter-spacing: 2px;
+}
+
+.premium-footer-icons {
+  display: flex;
+  gap: 15px;
+}
+
+/* Color Themes */
+.theme-pink { background: linear-gradient(180deg, #1a0b1f 0%, #3d123d 100%); }
+.theme-pink .accent-text { color: var(--accent-pink); }
+.theme-pink .volume-badge { background: var(--accent-pink); }
+
+.theme-blue { background: linear-gradient(180deg, #0c1b33 0%, #1a365d 100%); }
+.theme-blue .accent-text { color: var(--accent-blue); }
+.theme-blue .volume-badge { background: var(--accent-blue); }
+
+.theme-truck { background: linear-gradient(180deg, #1e293b 0%, #334155 100%); }
+.theme-truck .accent-text { color: #94a3b8; }
+.theme-truck .volume-badge { background: var(--accent-truck); }
+
+.theme-gold { background: linear-gradient(180deg, #1a1a1a 0%, #333333 100%); }
+.theme-gold .accent-text { color: #fbbf24; }
+.theme-gold .volume-badge { background: #d97706; }
+
+.theme-tire { background: linear-gradient(180deg, #000 0%, #222 100%); }
+.theme-tire .accent-text { color: #60a5fa; }
+.theme-tire .volume-badge { background: #2563eb; }
+
+@media print {
+  body {
+    background: white;
+    padding: 0;
+  }
+  .label-container {
+    gap: 20px;
+    width: 210mm;
+    page-break-after: always;
+  }
+  .label-shampoo, .label-small, .label-xl {
+    box-shadow: none;
+    border: 1px solid #ddd;
+    page-break-inside: avoid;
+  }
+}
