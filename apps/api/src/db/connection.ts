@@ -14,8 +14,12 @@ pool.on('error', (err) => {
 /**
  * Execute a query against the database.
  */
-export function query<T = any>(text: string, params?: any[]): Promise<{ rows: T[]; rowCount: number | null }> {
-  return pool.query(text, params);
+export async function query<T = any>(text: string, params?: any[]): Promise<{ rows: T[]; rowCount: number | null }> {
+  const result = await pool.query(text, params);
+  return {
+    rows: result.rows as T[],
+    rowCount: result.rowCount
+  };
 }
 
 /**
