@@ -207,6 +207,21 @@ export const translations: Translations = {
 
   // Reviews count (for product page)
   'product.reviews': { ru: 'отзывов', uz: 'sharhlar', 'uz-cy': 'шарҳлар', en: 'reviews' },
+
+  // How It Works
+  'howItWorks.title': { ru: 'Как заказать', uz: 'Qanday buyurtma berish', 'uz-cy': 'Қандай буюртма бериш', en: 'How to Order' },
+  'howItWorks.subtitle': { ru: 'Три простых шага до идеального результата', uz: 'Ideal natijagacha uchta oddiy qadam', 'uz-cy': 'Идеал натижагача учта оддий қадам', en: 'Three simple steps to a perfect result' },
+  'howItWorks.1.title': { ru: 'Выберите товар', uz: 'Mahsulotni tanlang', 'uz-cy': 'Маҳсулотни танланг', en: 'Choose a Product' },
+  'howItWorks.1.desc': { ru: 'Найдите нужное средство в каталоге или через SmartBot', uz: 'Katalogdan yoki SmartBot orqali kerakli vositani toping', 'uz-cy': 'Каталогдан ёки SmartBot орқали керакли воситани топинг', en: 'Find the product in the catalog or via SmartBot' },
+  'howItWorks.2.title': { ru: 'Оформите заказ', uz: 'Buyurtma bering', 'uz-cy': 'Буюртма беринг', en: 'Place an Order' },
+  'howItWorks.2.desc': { ru: 'Укажите адрес доставки и удобный способ оплаты', uz: 'Yetkazib berish manzili va qulay to\'lov usulini kiriting', 'uz-cy': 'Етказиб бериш манзили ва қулай тўлов усулини киритинг', en: 'Enter delivery address and convenient payment method' },
+  'howItWorks.3.title': { ru: 'Получите доставку', uz: 'Yetkazib oling', 'uz-cy': 'Етказиб олинг', en: 'Receive Delivery' },
+  'howItWorks.3.desc': { ru: 'Доставим в день заказа по всему Ташкенту', uz: 'Toshkent bo\'ylab buyurtma kunida yetkazamiz', 'uz-cy': 'Тошкент бўйлаб буюртма кунида етказамиз', en: 'Same-day delivery across Tashkent' },
+
+  // Promo Banner
+  'promo.title': { ru: 'Бесплатная доставка от 500 000 сўм', uz: '500 000 сўмдан бепул етказиб бериш', 'uz-cy': '500 000 сўмдан бепул етказиб бериш', en: 'Free delivery from 500,000 UZS' },
+  'promo.desc': { ru: 'Закажите на сумму от 500 000 сўм и получите бесплатную доставку по Ташкенту', uz: '500 000 сўмдан кўпроқ buyurtma qiling va Toshkent bo\'ylab bepul yetkazib oling', 'uz-cy': '500 000 сўмдан кўпроқ буюртма қилинг ва Тошкент бўйлаб бепул етказиб олинг', en: 'Order over 500,000 UZS and get free delivery in Tashkent' },
+  'promo.btn': { ru: 'Заказать сейчас', uz: 'Hozir buyurtma', 'uz-cy': 'Ҳозир буюртма', en: 'Order Now' },
 };
 
 interface LanguageContextType {

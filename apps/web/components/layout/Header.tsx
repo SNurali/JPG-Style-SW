@@ -75,6 +75,7 @@ function LogoIcon({ className = '' }: { className?: string }) {
 
 export function Header() {
   const router = useRouter();
+  const [scrolled, setScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [searchOpen, setSearchOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
@@ -98,6 +99,14 @@ export function Header() {
       return () => clearTimeout(timer);
     }
   }, [totalItems]);
+
+  useEffect(() => {
+    function handleScroll() {
+      setScrolled(window.scrollY > 20);
+    }
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
 
   // Close search when clicking outside
   useEffect(() => {
@@ -142,7 +151,7 @@ export function Header() {
   };
 
   return (
-    <header id="site-header" className="sticky top-0 z-50 header-glass border-b border-white/[0.06]">
+    <header id="site-header" className={`sticky top-0 z-50 header-glass border-b border-white/[0.06] transition-all duration-300 ${scrolled ? 'scrolled' : ''}`}>
       <div className="max-w-7xl mx-auto px-6 lg:px-10">
         <div className="flex items-center justify-between h-[72px]">
           {/* ─── Logo ─── */}
