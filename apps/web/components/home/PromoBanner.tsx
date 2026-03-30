@@ -39,7 +39,7 @@ export function PromoBanner() {
               viewport={{ once: true }}
               transition={{ delay: 0.2 }}
             >
-              🚚 {t('promo.title')}
+              🚚 {t('promoBanner.title')}
             </motion.h3>
             <motion.p
               className="text-text-muted text-sm sm:text-base max-w-md"
@@ -48,7 +48,7 @@ export function PromoBanner() {
               viewport={{ once: true }}
               transition={{ delay: 0.3 }}
             >
-              {t('promo.desc')}
+              {t('promoBanner.desc')}
             </motion.p>
           </div>
 
@@ -59,7 +59,7 @@ export function PromoBanner() {
             transition={{ delay: 0.4 }}
           >
             <Link href="/categories" className="btn-primary px-8 py-3 text-base whitespace-nowrap ripple">
-              {t('promo.btn')}
+              {t('promoBanner.btn')}
             </Link>
           </motion.div>
         </div>

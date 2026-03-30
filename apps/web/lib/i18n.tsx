@@ -219,9 +219,9 @@ export const translations: Translations = {
   'howItWorks.3.desc': { ru: 'Доставим в день заказа по всему Ташкенту', uz: 'Toshkent bo\'ylab buyurtma kunida yetkazamiz', 'uz-cy': 'Тошкент бўйлаб буюртма кунида етказамиз', en: 'Same-day delivery across Tashkent' },
 
   // Promo Banner
-  'promo.title': { ru: 'Бесплатная доставка от 500 000 сўм', uz: '500 000 сўмдан бепул етказиб бериш', 'uz-cy': '500 000 сўмдан бепул етказиб бериш', en: 'Free delivery from 500,000 UZS' },
-  'promo.desc': { ru: 'Закажите на сумму от 500 000 сўм и получите бесплатную доставку по Ташкенту', uz: '500 000 сўмдан кўпроқ buyurtma qiling va Toshkent bo\'ylab bepul yetkazib oling', 'uz-cy': '500 000 сўмдан кўпроқ буюртма қилинг ва Тошкент бўйлаб бепул етказиб олинг', en: 'Order over 500,000 UZS and get free delivery in Tashkent' },
-  'promo.btn': { ru: 'Заказать сейчас', uz: 'Hozir buyurtma', 'uz-cy': 'Ҳозир буюртма', en: 'Order Now' },
+  'promoBanner.title': { ru: 'Бесплатная доставка от 500 000 сўм', uz: '500 000 сўмдан бепул етказиб бериш', 'uz-cy': '500 000 сўмдан бепул етказиб бериш', en: 'Free delivery from 500,000 UZS' },
+  'promoBanner.desc': { ru: 'Закажите на сумму от 500 000 сўм и получите бесплатную доставку по Ташкенту', uz: '500 000 сўмдан кўпроқ buyurtma qiling va Toshkent bo\'ylab bepul yetkazib oling', 'uz-cy': '500 000 сўмдан кўпроқ буюртма қилинг ва Тошкент бўйлаб бепул етказиб олинг', en: 'Order over 500,000 UZS and get free delivery in Tashkent' },
+  'promoBanner.btn': { ru: 'Заказать сейчас', uz: 'Hozir buyurtma', 'uz-cy': 'Ҳозир буюртма', en: 'Order Now' },
 };
 
 interface LanguageContextType {
