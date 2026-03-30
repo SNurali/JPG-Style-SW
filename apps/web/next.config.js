@@ -16,11 +16,11 @@ const nextConfig = {
     return [
       {
         source: '/api/:path*',
-        destination: 'http://localhost:4001/api/:path*',
+        destination: 'http://smartwash_api:3011/api/:path*',
       },
       {
         source: '/images/:path*',
-        destination: 'http://localhost:4001/images/:path*',
+        destination: 'http://smartwash_api:3011/images/:path*',
       },
     ];
   },

@@ -37,7 +37,7 @@ export interface Review {
   productName: string;
 }
 
-const API_URL = 'http://localhost:4001';
+const API_URL = process.env.NEXT_PUBLIC_API_URL || '';
 
 export const categories: Category[] = [
   {

@@ -1,0 +1,58 @@
+name: Deploy to VPS
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+env:
+  VPS_IP: ${{ secrets.VPS_IP }}
+  VPS_USER: ${{ secrets.VPS_USER }}
+  VPS_SSH_KEY: ${{ secrets.VPS_SSH_KEY }}
+  PROJECT_PATH: /home/yoyo/jpg-style-smartwash
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup SSH
+        run: |
+          mkdir -p ~/.ssh
+          echo "${{ env.VPS_SSH_KEY }}" > ~/.ssh/deploy_key
+          chmod 600 ~/.ssh/deploy_key
+          ssh-keyscan -H ${{ env.VPS_IP }} >> ~/.ssh/known_hosts
+
+      - name: Pull latest code
+        run: |
+          ssh -i ~/.ssh/deploy_key ${{ env.VPS_USER }}@${{ env.VPS_IP }} \
+            "cd ${{ env.PROJECT_PATH }} && git pull origin main"
+
+      - name: Build and restart containers
+        run: |
+          ssh -i ~/.ssh/deploy_key ${{ env.VPS_USER }}@${{ env.VPS_IP }} \
+            "cd ${{ env.PROJECT_PATH }} && \
+             docker compose -f docker-compose.prod.yml down && \
+             docker compose -f docker-compose.prod.yml up -d --build"
+
+      - name: Wait for services
+        run: sleep 15
+
+      - name: Health check
+        run: |
+          ssh -i ~/.ssh/deploy_key ${{ env.VPS_USER }}@${{ env.VPS_IP }} \
+            "curl -f http://localhost:3010 && \
+             curl -f http://localhost:3011/api/health || exit 1"
+
+      - name: Cleanup
+        if: always()
+        run: rm -f ~/.ssh/deploy_key
+
+      - name: Notify success
+        if: success()
+        run: echo "✅ Deployment successful"
+
+      - name: Notify failure
+        if: failure()
+        run: echo "❌ Deployment failed"

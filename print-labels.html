@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Этикетки JPG-STYLE (Идеально для печати)</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Anton&family=Bebas+Neue&family=Great+Vibes&family=Montserrat:ital,wght@0,400;0,500;0,700;0,800;0,900;1,700;1,900&family=Oswald:wght@500;700&family=Playfair+Display:ital,wght@0,600;0,700;0,800;0,900;1,700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            /* Формат A5 для 10/20л: 148х210 мм. Идеально подходят для большинства канистр */
+            --label-width: 148mm;
+            --label-height: 210mm;
+        }
+
+        body {
+            background-color: #2a2a2a;
+            display: flex;
+            gap: 40px;
+            padding: 40px;
+            flex-wrap: wrap;
+            margin: 0;
+            font-family: 'Montserrat', sans-serif;
+            justify-content: center;
+        }
+
+        /* Настройки для идеального сохранения в PDF */
+        @media print {
+            body { background: white !important; margin: 0; padding: 0 !important; display: block; }
+            .label-wrapper { 
+                page-break-after: always; 
+                margin: 0 !important; 
+                padding: 0 !important;
+                box-shadow: none !important;
+                /* Выравнивание строго по левому верхнему краю листа */
+                position: absolute; left: 0; top: 0;
+            }
+            .label {
+                box-shadow: none !important;
+                border-radius: 0 !important; 
+                border: none !important;
+            }
+        }
+
+        .label-wrapper {
+            box-shadow: 0 20px 50px rgba(0,0,0,0.8);
+            border-radius: 5mm; 
+            overflow: hidden;
+            background: #fff;
+            position: relative; /* Чтобы при печати сбрасывалось правильно */
+        }
+
+        .label {
+            width: var(--label-width);
+            height: var(--label-height);
+            position: relative;
+            box-sizing: border-box;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+        }
+
+
+        /* =========================================================
+           1. MATTE TIRE SHINE (Чернитель матовый)
+           ========================================================= */
+        .l-matte {
+            background: radial-gradient(circle at 50% 50%, #3a3a3a 0%, #151515 90%);
+            color: #fff;
+            padding: 12mm;
+            justify-content: space-between;
+        }
+        .l-matte::before {
+            content: ""; position: absolute; top:0; left:0; right:0; bottom:0;
+            background-image: repeating-linear-gradient(45deg, rgba(255,255,255,0.02) 0px, rgba(255,255,255,0.02) 1px, transparent 1px, transparent 15px);
+            z-index: 0;
+        }
+        .l-matte-content { position: relative; z-index: 1; display: flex; flex-direction: column; height: 100%; justify-content: space-between;}
+        
+        .l-matte .brand { text-align: center; margin-top: 10mm; }
+        .l-matte .jpg-style { font-size: 55px; font-weight: 900; letter-spacing: 2px; color: #e6e6e6; margin:0; line-height:1; text-shadow: 0 5px 10px rgba(0,0,0,0.8);}
+        .l-matte .smartwash { font-size: 24px; letter-spacing: 6px; color: #bababa; margin-top: 5px;}
+        
+        .l-matte .title-box { text-align: center; margin-top: -10mm;}
+        .l-matte .title-ru { font-family: 'Playfair Display', serif; font-size: 65px; line-height: 1.05; margin: 0; text-shadow: 0 5px 15px rgba(0,0,0,0.9); }
+        .l-matte .type { font-size: 32px; font-weight: 400; color: #aaa; margin-top: 20px; letter-spacing: 2px; text-transform: uppercase;}
+        .l-matte .title-en { font-size: 22px; font-weight: 700; color: #888; margin-top: 15px; letter-spacing: 3px; }
+        
+        .l-matte .footer { display: flex; justify-content: space-between; align-items: flex-end; border-top: 1px solid rgba(255,255,255,0.2); padding-top: 10px; margin-bottom: 5mm; }
+        .l-matte .f-text { font-size: 14px; line-height: 1.5; color: #999; }
+        .l-matte .f-text.right { text-align: right; }
+        .l-matte .f-vol { font-size: 50px; font-weight: 900; color: #fff; line-height: 0.8; }
+
+
+        /* =========================================================
+           2. GLOSS TIRE SHINE (Чернитель глянцевый)
+           ========================================================= */
+        .l-gloss { background-color: #111; padding: 0; }
+        .l-gloss .red-panel {
+            background: linear-gradient(180deg, #d81b1b 0%, #aa0000 100%);
+            margin: 8mm; /* Black border around */
+            border-radius: 4mm;
+            height: calc(100% - 16mm);
+            position: relative;
+            overflow: hidden;
+            display: flex; flex-direction: column;
+            box-shadow: inset 0 0 20px rgba(0,0,0,0.7);
+            padding: 8mm;
+            box-sizing: border-box;
+        }
+        
+        .l-gloss .top-brand { background: #111; margin: -8mm -8mm 10mm -8mm; padding: 10mm 10mm 8mm; text-align: center; border-bottom: 2px solid #fff; }
+        .l-gloss .jpg-style { font-size: 50px; font-weight: 900; font-style: italic; color: transparent; -webkit-text-stroke: 1.5px #fff; letter-spacing: 1px; line-height:1; margin:0; text-shadow: 3px 3px 0 #d81b1b; }
+        .l-gloss .smartwash { font-size: 38px; font-weight: 900; color: #fff; margin-top: 5px; letter-spacing: -1px; text-shadow: 2px 2px 0 #d81b1b;}
+        
+        .l-gloss .title-box { text-align: left; position: relative; z-index: 2; margin-top: 10mm;}
+        .l-gloss .title-ru { font-size: 55px; font-weight: 900; line-height: 1; color: #111; margin: 0; text-transform: uppercase; text-shadow: -1px -1px 0 #fff, 1px -1px 0 #fff, -1px 1px 0 #fff, 1px 1px 0 #fff, 4px 4px 0 rgba(0,0,0,0.5); }
+        .l-gloss .white-ribbon { background: #fff; color: #111; margin: 5mm -8mm 0 -8mm; padding: 5mm 8mm; display: inline-block; width: calc(100% + 16mm); box-sizing: border-box; box-shadow: 0 4px 10px rgba(0,0,0,0.4);}
+        .l-gloss .type { font-size: 38px; font-weight: 900; text-transform: uppercase; margin: 0; line-height: 1; }
+        .l-gloss .title-en { font-size: 24px; font-weight: 900; color: #aa0000; margin-top: 5px; }
+        
+        .l-gloss .footer { margin-top: auto; display: flex; justify-content: flex-end; position: relative; z-index: 2; padding-bottom: 5mm;}
+        .l-gloss .f-vol { 
+            font-size: 65px; font-weight: 900; color: #d81b1b; -webkit-text-stroke: 1.5px #fff; 
+            background: #111; padding: 2px 15px; border-radius: 8px; border: 3px solid #d81b1b; box-shadow: 4px 4px 0 rgba(0,0,0,0.5);
+            line-height: 1.1;
+        }
+
+        /* Abstract Tire Graphic */
+        .l-gloss .tire-gfx {
+            position: absolute; bottom: -30mm; left: -20mm; width: 140mm; height: 140mm; 
+            border-radius: 50%; border: 30mm solid #222; 
+            box-shadow: inset 0 0 15px #000, 0 0 30px #000; z-index: 1;
+            background: repeating-conic-gradient(#333 0 10deg, #111 10deg 20deg); opacity: 0.6;
+            clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+        }
+
+
+        /* =========================================================
+           3. BUBBLE GUM WAX (Розово-синяя)
+           ========================================================= */
+        .l-bubble {
+            background: linear-gradient(160deg, #3d84c6 0%, #a448a6 50%, #e06666 100%);
+            padding: 8mm;
+        }
+        .l-bubble .gold-frame {
+            border: 3px solid #e1c270;
+            height: 100%; box-sizing: border-box;
+            border-radius: 5mm; padding: 6mm;
+            display: flex; flex-direction: column; align-items: center;
+            position: relative;
+            background: rgba(255,255,255,0.08);
+            box-shadow: inset 0 0 30px rgba(0,0,0,0.3);
+        }
+        .l-bubble .gold-frame::before { content: ""; position: absolute; width: calc(100% - 10px); height: calc(100% - 10px); border: 1px solid rgba(225, 194, 112, 0.5); border-radius: 4mm; top: 4px; left: 4px; pointer-events: none;}
+        
+        .l-bubble .logo-img { font-size: 35px; color: #e1c270; margin-bottom: 5mm; text-shadow: 0 0 10px rgba(0,0,0,0.5);}
+        .l-bubble .jpg-style { font-family: 'Playfair Display', serif; font-size: 44px; font-weight: 900; color: #e1c270; margin: 0; line-height: 1; text-shadow: 2px 2px 5px rgba(0,0,0,0.6); text-align: center; letter-spacing: 2px;}
+        .l-bubble .divider { width: 50%; height: 2px; background: #e1c270; margin: 5mm 0; opacity: 0.7;}
+
+        .l-bubble .smartwash { font-family: 'Playfair Display', serif; font-size: 40px; font-weight: 900; color: #002b5e; line-height: 1; text-shadow: 1px 1px 0 #fff; }
+        .l-bubble .bock-wax { font-family: 'Playfair Display', serif; font-size: 26px; font-weight: 700; color: #002b5e; margin-top: 5px; }
+        
+        /* The cursive bubble gum text */
+        .l-bubble .bubble-text { 
+            font-family: 'Great Vibes', cursive; font-size: 70px; font-weight: 400; color: #ff3399; 
+            margin: 10mm 0; line-height: 1.1; 
+            text-shadow: -2px -2px 0 #fff, 2px -2px 0 #fff, -2px 2px 0 #fff, 2px 2px 0 #fff, 2px 5px 10px rgba(0,0,0,0.4); 
+            text-align: center; transform: rotate(-4deg); 
+        }
+        
+        .l-bubble .coating { font-size: 16px; font-weight: 900; color: #002b5e; text-transform: uppercase; text-align: center; letter-spacing: 1px; margin-bottom: auto;}
+        
+        .l-bubble .fragrance { background: rgba(255,255,255,0.8); color: #002b5e; padding: 4px 15px; border-radius: 15px; font-size: 14px; font-weight: 800; margin-bottom: 5mm; }
+        .l-bubble .vol { font-size: 22px; font-weight: 900; color: #e1c270; text-shadow: 1px 1px 2px #000; letter-spacing: 1px;}
+
+        /* Bubbles backdrop */
+        .l-bubble .bubble-gfx { position: absolute; border: 2px solid rgba(255,255,255,0.3); border-radius: 50%; }
+        .l-bubble .bg-1 { width: 20px; height: 20px; top: 15%; left: 10%;}
+        .l-bubble .bg-2 { width: 10px; height: 10px; top: 25%; right: 15%;}
+        .l-bubble .bg-3 { width: 30px; height: 30px; bottom: 30%; left: 20%;}
+
+
+        /* =========================================================
+           4. TRUCK CHEMISTRY (Для грузовиков)
+           ========================================================= */
+        .l-truck {
+            background: linear-gradient(135deg, #1e2530 0%, #0d1218 100%);
+            color: #fff; padding: 12mm;
+            border-left: 8mm solid #253342; /* Grey left side border */
+            display:flex; flex-direction:row; gap: 8mm;
+        }
+        .l-truck-main { flex: 1; display:flex; flex-direction:column; position: relative; z-index:2;}
+        .l-truck-side { 
+            width: 32mm; background: #fff; border-radius: 2mm; padding: 5mm 3mm; 
+            display:flex; flex-direction:column; align-items:center; gap: 4mm;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.5);
+        }
+
+        /* Warnings Side */
+        .l-truck-side .hazard { width: 22mm; height: 22mm; border: 3px solid #d32f2f; transform: rotate(45deg); display:flex; justify-content:center; align-items:center; color:#d32f2f; margin: 3mm 0; }
+        .l-truck-side .hazard-icon { transform: rotate(-45deg); font-size: 24px; font-weight: 900;}
+        .l-truck-side .bars { width: 100%; display: flex; flex-direction: column; gap: 2px; margin-top: auto;}
+        .l-truck-side .bars div { height: 2px; background: #000; width: 100%;}
+        .l-truck-side .barcode { width: 100%; height: 20mm; background: repeating-linear-gradient(90deg, #000, #000 2px, #fff 2px, #fff 4px, #000 4px, #000 5px, #fff 5px, #fff 8px); margin-top: 5px;}
+
+        /* Main Side */
+        .l-truck .brand-row { display: flex; align-items: center; border-bottom: 2px solid rgba(255,255,255,0.2); padding-bottom: 4mm; margin-bottom: 8mm; gap:10px;}
+        .l-truck .jpg { font-size: 24px; font-weight: 900; color: #f39c12; font-style: italic; margin:0;}
+        .l-truck .style { font-size: 24px; font-weight: 900; color: #fff; font-style: italic; margin:0; margin-left:-5px;}
+        .l-truck .sw-logo { background: #fff; color: #111; border-radius: 20px; padding: 2px 12px; font-weight: 900; font-size: 20px; font-style: italic; letter-spacing:-0.5px;}
+
+        .l-truck .h1 { font-family: 'Oswald', sans-serif; font-size: 40px; font-weight: 700; line-height: 1.1; margin: 0; color: #fff; text-transform: uppercase;}
+        .l-truck .h2 { font-family: 'Oswald', sans-serif; font-size: 40px; font-weight: 700; line-height: 1.1; margin: 0; color: #fff; text-transform: uppercase;}
+        .l-truck .h3 { font-family: 'Oswald', sans-serif; font-size: 30px; font-weight: 500; margin-top: 10px; color: #bdc3c7;}
+
+        .l-truck .bottom-panel { background: rgba(0,0,0,0.6); padding: 5mm; border-radius: 3mm; margin-top: auto; display:flex; gap: 10px; border: 1px solid #333;}
+        .l-truck .kg-box { background: #e0e0e0; color: #000; display:flex; flex-direction:column; justify-content:center; align-items:center; padding: 2px 10px; border-radius: 2mm;}
+        .l-truck .kg-val { font-family: 'Anton', sans-serif; font-size: 40px; margin:0; line-height:1;}
+        .l-truck .kg-lbl { font-size: 16px; font-weight: 900; margin:0;}
+
+        .l-truck .desc { display: flex; flex-direction: column; justify-content: center;}
+        .l-truck .desc-bold { color: #f39c12; font-size: 12px; font-weight: 900; text-transform:uppercase; margin-bottom: 4px;}
+        .l-truck .desc-text { color: #fff; font-size: 10px; font-weight: 500; line-height: 1.3; text-transform:uppercase;}
+        
+        .l-truck .icons { display: flex; gap: 8px; margin-top: 5px;}
+        .l-truck .icon-itm { font-size: 8px; color:#aaa; display:flex; align-items:center; gap:3px; font-weight:bold;}
+
+        .l-truck .bg-truck { position: absolute; right: -20px; bottom: 50px; opacity: 0.1; font-size: 150px; z-index: 1;}
+
+
+        /* =========================================================
+           5. PINK SHAMPOO (Розовый автошампунь)
+           ========================================================= */
+        .l-pink {
+            background: #fff;
+            padding: 8mm;
+            border: 2px solid #ddd;
+            display: flex; flex-direction:column;
+            justify-content: space-between;
+        }
+        .l-pink-inner {
+            border: 2px solid #002b5e;
+            border-radius: 5mm;
+            height: 100%; box-sizing: border-box;
+            background: linear-gradient(180deg, #fffcfc 0%, #ffe6eb 100%); /* light pink tint */
+            display:flex; flex-direction:column;
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .l-pink .top-blue { background: #002b5e; padding: 6mm 8mm; text-align: center; border-bottom: 4px solid #c09a00; display:flex; justify-content:space-between; align-items:center;}
+        .l-pink .jpg-style { font-size: 24px; font-weight: 900; color: #fff; margin:0; letter-spacing:1px; }
+        .l-pink .prof-chem { color: #c09a00; font-size: 9px; font-weight: 900; text-transform:uppercase; text-align:right;}
+        
+        .l-pink .smartwash { font-size: 42px; font-weight: 900; color: #002b5e; font-style: italic; text-align: center; margin-top: 10mm; text-shadow: 1px 1px 0 #c09a00; }
+        .l-pink .divider-gold { width: 60%; height: 2px; background: #c09a00; margin: 8mm auto; }
+
+        .l-pink .middle { text-align: center; flex:1; display:flex; flex-direction:column; align-items:center; padding: 0 10mm;}
+        .l-pink .title-ru { font-size: 38px; font-weight: 900; color: #002b5e; margin:0; line-height:1; }
+        .l-pink .title-type { font-size: 34px; font-weight: 900; color: #c09a00; margin: 5px 0 0 0; }
+        .l-pink .title-en { font-size: 18px; font-weight: 900; color: #002b5e; margin-top: 15px; }
+
+        .l-pink .bubbles-car { font-size: 50px; margin: 10mm 0; line-height: 1; opacity: 0.8;}
+
+        .l-pink .kg { background: #fff; border: 2px solid #002b5e; color: #002b5e; padding: 5px 20px; border-radius: 5mm; font-size: 35px; font-weight: 900; display:inline-block; margin-top: auto; margin-bottom: 10mm; box-shadow: 2px 2px 0 rgba(0,0,0,0.1);}
+        .l-pink .kg span { font-size: 25px;}
+
+        .l-pink .bot-blue { background: #002b5e; padding: 8mm; text-align: center; border-top: 4px solid #c09a00; color: #fff;}
+        .l-pink .high-foam { font-size: 14px; font-weight: 900; margin-bottom: 5px; color: #fff; letter-spacing:1px;}
+        .l-pink .desc { font-size: 9px; font-weight: 500; color: rgba(255,255,255,0.7); text-transform: uppercase; line-height:1.4;}
+        
+        .l-pink .premium-badge { position: absolute; bottom: 25mm; left: -2mm; background: #c09a00; border: 2px solid #002b5e; color: #002b5e; padding: 5px 10px; border-radius: 5px; font-weight: 900; font-size: 12px; transform: rotate(-5deg);box-shadow: 2px 2px 0 rgba(0,0,0,0.2);}
+
+    </style>
+</head>
+<body>
+
+    <!-- ПОДСКАЗКА ДЛЯ ПЕЧАТИ:
+         1. Нажмите Ctrl+P (Печать)
+         2. Принтер: "Сохранить как PDF"
+         3. Поля: "Нет" (None)
+         4. Масштаб: 100%
+         5. Опции: Галочка на "Фоновая графика" (Background graphics) - ОБЯЗАТЕЛЬНО!
+    -->
+
+    <!-- LABEL 1: Matte Tire Shine -->
+    <div class="label-wrapper">
+        <div class="label l-matte">
+            <div class="l-matte-content">
+                <div class="brand">
+                    <div class="jpg-style">JPG-STYLE</div>
+                    <div class="smartwash">SMARTWASH</div>
+                </div>
+
+                <div class="title-box">
+                    <h1 class="title-ru">ЧЕРНИТЕЛЬ<br>РЕЗИНЫ</h1>
+                    <div class="type">МАТОВЫЙ</div>
+                    <div class="title-en">TIRE SHINE MATTE</div>
+                </div>
+
+                <div class="footer">
+                    <div class="f-text">
+                        Natural Matte Finish<br>
+                        UV Protection
+                    </div>
+                    <div class="f-vol">10L</div>
+                    <div class="f-text right">
+                        Water Repellent<br>
+                        Professional Formula
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- LABEL 2: Glossy Tire Shine -->
+    <div class="label-wrapper">
+        <div class="label l-gloss">
+            <div class="red-panel">
+                <div class="tire-gfx"></div>
+                <div class="top-brand">
+                    <div class="jpg-style">JPG-Style</div>
+                    <div class="smartwash">SmartWash</div>
+                </div>
+                
+                <div class="title-box">
+                    <h1 class="title-ru">ЧЕРНИТЕЛЬ<br>РЕЗИНЫ</h1>
+                    <div class="white-ribbon">
+                        <div class="type">Глянцевый</div>
+                    </div>
+                    <div class="title-en">Tire Shine Gloss</div>
+                </div>
+
+                <div class="footer">
+                    <div class="f-vol">10L</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- LABEL 3: Bubble Gum Wax -->
+    <div class="label-wrapper">
+        <div class="label l-bubble">
+            <div class="gold-frame">
+                <div class="bubble-gfx bg-1"></div>
+                <div class="bubble-gfx bg-2"></div>
+                <div class="bubble-gfx bg-3"></div>
+
+                <div class="logo-img">♛</div>
+                <h1 class="jpg-style">JPG-STYLE</h1>
+                <div class="divider"></div>
+                
+                <div class="smartwash">SmartWash</div>
+                <div class="bock-wax">Body / Wax</div>
+                
+                <div class="bubble-text">Bubble Gum</div>
+                
+                <div class="coating">Protective Coating & Shine</div>
+                <div class="fragrance">Fragrance: Sweet Bubble Gum</div>
+                <div class="vol">5L | 1.32 US GAL</div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- LABEL 4: Truck Chemistry -->
+    <div class="label-wrapper">
+        <div class="label l-truck">
+            <div class="l-truck-main">
+                <div class="bg-truck">🚛</div>
+                <div class="brand-row">
+                    <div class="jpg">JPG</div><div class="style">-Style&reg;</div>
+                    <div class="sw-logo">SmartWash</div>
+                </div>
+
+                <div class="h1">АКТИВНАЯ ХИМИЯ</div>
+                <div class="h2">ДЛЯ ГРУЗОВИКОВ</div>
+                <div class="h3">TRUCK CHEMISTRY</div>
+
+                <div class="bottom-panel">
+                    <div class="kg-box">
+                        <div class="kg-val">20</div>
+                        <div class="kg-lbl">KG</div>
+                    </div>
+                    <div class="desc">
+                        <div class="desc-bold">ПРОФЕССИОНАЛЬНАЯ ФОРМУЛА / PROFESSIONAL GRADE</div>
+                        <div class="desc-text">Для тяжелых грузовиков и техники<br>For heavy trucks & equipment</div>
+                        <div class="icons">
+                            <div class="icon-itm">⚓ Heavy Duty</div>
+                            <div class="icon-itm">⚙️  Strong Cleaning</div>
+                            <div class="icon-itm">🏭 Industrial Use</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="l-truck-side">
+                <div class="hazard"><div class="hazard-icon">!</div></div>
+                <div class="hazard"><div class="hazard-icon">🔥</div></div>
+                <div class="bars">
+                    <div></div><div></div><div></div><div></div>
+                </div>
+                <div class="barcode"></div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- LABEL 5: Pink Shampoo -->
+    <div class="label-wrapper">
+        <div class="label l-pink">
+            <div class="l-pink-inner">
+                <div class="top-blue">
+                    <div class="jpg-style">JPG-Style&reg;</div>
+                    <div class="prof-chem">Professional<br>Auto Chemistry</div>
+                </div>
+                
+                <div class="smartwash">SmartWash&reg;</div>
+                <div class="divider-gold"></div>
+
+                <div class="middle">
+                    <div class="title-ru">АВТОШАМПУНЬ</div>
+                    <div class="title-type">РОЗОВЫЙ</div>
+                    
+                    <div class="bubbles-car">🚘🫧</div>
+                    
+                    <div class="title-en">PINK CONTACTLESS CAR SHAMPOO</div>
+                </div>
+
+                <div style="text-align:center;">
+                    <div class="kg">20 <span>KG</span></div>
+                </div>
+
+                <div class="premium-badge">PREMIUM<br>FORMULA</div>
+
+                <div class="bot-blue">
+                    <div class="high-foam">HIGH FOAM | SUPER CONCENTRATE</div>
+                    <div class="desc">Применять: Продавец гарантирует соответствие заявленным характеристикам при соблюдении условий хранения и использования.</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>

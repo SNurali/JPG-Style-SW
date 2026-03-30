@@ -19,14 +19,18 @@ RUN npm run build --workspace=apps/web
 FROM base AS runner
 WORKDIR /app
 ENV NODE_ENV production
+RUN apk add --no-cache dumb-init
 COPY --from=builder /app/apps/web/.next ./apps/web/.next
 COPY --from=builder /app/apps/web/public ./apps/web/public
 COPY --from=builder /app/node_modules ./node_modules
 COPY --from=builder /app/apps/web/package.json ./apps/web/package.json
 COPY --from=builder /app/package.json ./package.json
-# Shared files for build/runtime
 COPY --from=builder /app/packages/shared ./packages/shared
 
-EXPOSE 3010
-# Next.js workspace start
+EXPOSE 3000
+
+HEALTHCHECK --interval=30s --timeout=3s --start-period=5s --retries=3 \
+  CMD wget --quiet --tries=1 --spider http://localhost:3000 || exit 1
+
+ENTRYPOINT ["dumb-init", "--"]
 CMD ["npm", "run", "start", "--workspace=apps/web"]

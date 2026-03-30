@@ -257,3 +257,35 @@ export const DELIVERY_ZONES: DeliveryZone[] = [
   { id: '3', name: 'Дальние районы', price: 35000, estimatedTime: 'В тот же день' },
   { id: '4', name: 'Самовывоз', price: 0, estimatedTime: '' },
 ];
+
+// ─── Error Handling ─────────────────────────────────────
+
+export interface ApiError {
+  code: string;
+  message: string;
+  statusCode: number;
+  details?: Record<string, any>;
+}
+
+// ─── Authentication ─────────────────────────────────────
+
+export interface AuthToken {
+  accessToken: string;
+  refreshToken?: string;
+  expiresIn: number;
+}
+
+export interface AuthPayload {
+  id: string;
+  email: string;
+  role: string;
+}
+
+// ─── Utilities ──────────────────────────────────────────
+
+export interface PaginationParams {
+  page: number;
+  limit: number;
+  sortBy?: string;
+  sortOrder?: 'asc' | 'desc';
+}
