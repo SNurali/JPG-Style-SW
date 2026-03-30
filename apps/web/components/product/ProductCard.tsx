@@ -36,11 +36,9 @@ export function ProductCard({ product }: { product: Product }) {
             alt={product.name}
             className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
             loading="lazy"
-            onError={(e) => {
-              (e.target as HTMLImageElement).style.display = 'none';
-            }}
           />
-          <div className="absolute inset-0 bg-gradient-to-br from-primary-light/20 to-transparent pointer-events-none" />
+          {/* Fallback gradient when no image */}
+          <div className="absolute inset-0 bg-gradient-to-br from-accent/10 to-purple-500/10 pointer-events-none" />
 
           {/* Badges */}
           <div className="absolute top-3 left-3 flex flex-col gap-1.5 z-10">
