@@ -1,5 +1,3 @@
-version: '3.8'
-
 services:
   postgres:
     image: postgres:16-alpine
@@ -43,10 +41,17 @@ services:
       dockerfile: apps/api/Dockerfile
     container_name: smartwash_api
     restart: always
+    ports:
+      - "3011:3011"
     environment:
       - PORT=3011
       - DATABASE_URL=postgresql://${DB_USERNAME:-smartwash}:${DB_PASSWORD:-smartwash}@smartwash_postgres:5432/${DB_DATABASE:-smartwash_db}
       - NODE_ENV=production
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
     networks:
       - smartwash_net
 
@@ -58,24 +63,13 @@ services:
         - NEXT_PUBLIC_API_URL=${NEXT_PUBLIC_API_URL:-http://smartwash.uz/api}
     container_name: smartwash_web
     restart: always
+    ports:
+      - "3010:3010"
     environment:
       - PORT=3010
       - NODE_ENV=production
       - NEXT_PUBLIC_API_URL=${NEXT_PUBLIC_API_URL:-http://smartwash.uz/api}
-    networks:
-      - smartwash_net
-
-  # ─── Nginx Proxy (The "magic" gate) ───
-  proxy:
-    image: nginx:alpine
-    container_name: smartwash_proxy
-    restart: always
-    ports:
-      - "80:80"
-    volumes:
-      - ./nginx.conf:/etc/nginx/conf.d/default.conf:ro
     depends_on:
-      - web
       - api
     networks:
       - smartwash_net
@@ -83,7 +77,6 @@ services:
 volumes:
   smartwash_pgdata:
   smartwash_redisdata:
-  smartwash_uploads:
 
 networks:
   smartwash_net:
