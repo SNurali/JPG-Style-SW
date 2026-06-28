@@ -1,0 +1,20 @@
+{
+  "source": "Telegram @jpgstyle_smartwash — каталог PDF (msg52, март 2026) + посты канала",
+  "extracted": "2026-06-29",
+  "currency": "UZS",
+  "contact": "+998 50 104 00 26",
+  "positioning": "Premium auto chemistry для автомоек, детейлинга, грузового сегмента и автолюбителей",
+  "products": [
+    { "name_ru": "Автошампунь бесконтактный, розовый", "volume": "20 кг", "price": 500000, "category": "Шампуни", "note": "фирменный розовый, он же 'Пушти Пантер/Magic'; уточнить 500к vs 600к" },
+    { "name_ru": "Нано-шампунь Bubble Gum", "volume": "5 л", "price": 200000, "category": "Шампуни" },
+    { "name_ru": "Воск Bubble Gum", "volume": "5 л", "price": 200000, "category": "Воски" },
+    { "name_ru": "Чернитель резины, матовый", "volume": "10 л", "price": 140000, "category": "Чернители резины" },
+    { "name_ru": "Чернитель резины, глянцевый", "volume": "10 л", "price": 170000, "category": "Чернители резины" },
+    { "name_ru": "Активная химия для грузовых авто", "volume": "20 кг", "price": 450000, "category": "Грузовая химия" },
+    { "name_ru": "Сухой туман (ароматизатор салона)", "volume": "450 мл", "price": 90000, "category": "Ароматизаторы", "note": "разные ароматы/парфюмы" }
+  ],
+  "discrepancies": [
+    "Розовый бесконтактный шампунь 20кг: каталог март 2026 = 500000; пост 'Пушти Пантер Magic' июнь 2025 = 600000. Принято 500000 (каталог свежее) — подтвердить у Нурали."
+  ],
+  "note": "Текущие 8 товаров в магазине (Iron Remover, Microfiber Towel, LeatherCare, FreshFog Lavender, BlackMax Tire Gel, Carnauba Wax, NanoShield, Auto Shampoo) = SEED-ПЛЕЙСХОЛДЕРЫ, не реальная линейка. Заменить на этот каталог."
+}

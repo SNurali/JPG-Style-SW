@@ -12,16 +12,13 @@ export async function seed() {
     return;
   }
 
-  // ─── Categories ─────────────────────────────────────
+  // ─── Categories (реальная линейка SmartWash) ────────
   const categories = [
-    { id: uuidv4(), name: 'Автошампуни', slug: 'auto-shampoo', description: 'Профессиональные шампуни для ручной и бесконтактной мойки', image: '/images/categories/shampoo.webp', sortOrder: 1 },
-    { id: uuidv4(), name: 'Нано покрытия', slug: 'nano-coating', description: 'Защитные нано-покрытия для кузова и стёкол', image: '/images/categories/nano.webp', sortOrder: 2 },
-    { id: uuidv4(), name: 'Воск', slug: 'wax', description: 'Автомобильный воск для блеска и защиты', image: '/images/categories/wax.webp', sortOrder: 3 },
-    { id: uuidv4(), name: 'Чернитель шин', slug: 'tire-blackener', description: 'Средства для ухода за шинами и резиной', image: '/images/categories/tire.webp', sortOrder: 4 },
-    { id: uuidv4(), name: 'Сухой туман', slug: 'dry-fog', description: 'Ароматизация и устранение запахов в салоне', image: '/images/categories/fog.webp', sortOrder: 5 },
-    { id: uuidv4(), name: 'Очистители салона', slug: 'interior-cleaners', description: 'Средства для чистки кожи, пластика и ткани', image: '/images/categories/interior.webp', sortOrder: 6 },
-    { id: uuidv4(), name: 'Аксессуары', slug: 'accessories', description: 'Микрофибры, аппликаторы, полировальные круги', image: '/images/categories/accessories.webp', sortOrder: 7 },
-    { id: uuidv4(), name: 'Химия для детейлинга', slug: 'detailing-chemicals', description: 'Профессиональная химия для детейлинг-студий', image: '/images/categories/chemicals.webp', sortOrder: 8 },
+    { id: uuidv4(), name: 'Автошампуни', slug: 'auto-shampoo', description: 'Бесконтактные и ручные автошампуни', image: '/images/categories/shampoo.webp', sortOrder: 1 },
+    { id: uuidv4(), name: 'Воск', slug: 'wax', description: 'Воски для блеска и защиты кузова', image: '/images/categories/wax.webp', sortOrder: 2 },
+    { id: uuidv4(), name: 'Чернитель шин', slug: 'tire-blackener', description: 'Средства для ухода за резиной', image: '/images/categories/tire.webp', sortOrder: 3 },
+    { id: uuidv4(), name: 'Сухой туман', slug: 'dry-fog', description: 'Ароматизация и устранение запахов в салоне', image: '/images/categories/fog.webp', sortOrder: 4 },
+    { id: uuidv4(), name: 'Грузовая химия', slug: 'truck-chemicals', description: 'Активная химия для грузового транспорта', image: '/images/categories/chemicals.webp', sortOrder: 5 },
   ];
 
   for (const cat of categories) {
@@ -32,63 +29,58 @@ export async function seed() {
   }
   console.log(`  ✅ ${categories.length} categories seeded`);
 
-  // ─── Products ───────────────────────────────────────
+  const catBySlug = (slug: string) => categories.find((c) => c.slug === slug)!.id;
+
+  // ─── Products (реальный каталог из ТГ-канала, цены 2026-06-29) ───
   const products = [
     {
-      name: 'SmartWash Auto Shampoo 1L', slug: 'smartwash-auto-shampoo-1l',
-      description: 'Концентрированный автошампунь для ручной мойки с нейтральным pH. Бережно очищает лакокрасочное покрытие, создаёт обильную пену. Разбавление 1:200.',
-      price: 85000, compareAtPrice: 120000, sku: 'SW-SH-001',
-      categoryId: categories[0].id, isBestseller: true, isNew: false, stock: 45,
-      rating: 4.8, reviewCount: 23, images: ['/images/products/shampoo-1l.webp'],
+      name: 'Автошампунь бесконтактный, розовый — 20 кг', slug: 'pink-shampoo-20kg',
+      description: 'Фирменный бесконтактный автошампунь насыщенного розового цвета. Густая активная пена бережно снимает грязь без контакта, не повреждая ЛКП. Идеален для автомоек и детейлинга.',
+      price: 500000, compareAtPrice: null, sku: 'SW-SH-PINK-20',
+      categoryId: catBySlug('auto-shampoo'), isBestseller: true, isNew: true, stock: 50,
+      rating: 4.9, reviewCount: 27, images: ['/products/pink-shampoo-20kg.png'],
     },
     {
-      name: 'NanoShield Pro Coating', slug: 'nanoshield-pro-coating',
-      description: 'Керамическое нано-покрытие с эффектом гидрофоба. Защита до 12 месяцев. Придаёт глубокий блеск и защищает от царапин.',
-      price: 250000, compareAtPrice: null, sku: 'SW-NC-001',
-      categoryId: categories[1].id, isBestseller: true, isNew: true, stock: 12,
-      rating: 4.9, reviewCount: 15, images: ['/images/products/nano-coating.webp'],
+      name: 'Нано-шампунь Bubble Gum — 5 л', slug: 'nano-shampoo-bubblegum-5l',
+      description: 'Нано-шампунь линейки Bubble Gum для ручной мойки. Усиливает блеск, добавляет защиту и приятный аромат после мойки.',
+      price: 200000, compareAtPrice: null, sku: 'SW-SH-BG-5',
+      categoryId: catBySlug('auto-shampoo'), isBestseller: true, isNew: false, stock: 40,
+      rating: 4.8, reviewCount: 19, images: ['/products/nano-shampoo-5l.png'],
     },
     {
-      name: 'Premium Carnauba Wax', slug: 'premium-carnauba-wax',
-      description: 'Натуральный воск карнаубы высшего качества. Придаёт глубокий мокрый блеск. Защита до 3 месяцев.',
-      price: 180000, compareAtPrice: 220000, sku: 'SW-WX-001',
-      categoryId: categories[2].id, isBestseller: true, isNew: false, stock: 28,
-      rating: 4.7, reviewCount: 31, images: ['/images/products/wax.webp'],
+      name: 'Воск Bubble Gum — 5 л', slug: 'wax-bubblegum-5l',
+      description: 'Жидкий воск Bubble Gum для блеска и защиты кузова. Водоотталкивающий эффект и глубокий блеск после мойки.',
+      price: 200000, compareAtPrice: null, sku: 'SW-WX-BG-5',
+      categoryId: catBySlug('wax'), isBestseller: true, isNew: false, stock: 35,
+      rating: 4.8, reviewCount: 22, images: ['/products/wax-bubblegum-5l.png'],
     },
     {
-      name: 'BlackMax Tire Gel', slug: 'blackmax-tire-gel',
-      description: 'Гель-чернитель для шин с долговременным эффектом. Защищает от растрескивания, придаёт насыщенный чёрный цвет.',
-      price: 65000, compareAtPrice: null, sku: 'SW-TB-001',
-      categoryId: categories[3].id, isBestseller: false, isNew: false, stock: 56,
-      rating: 4.5, reviewCount: 18, images: ['/images/products/tire-gel.webp'],
+      name: 'Чернитель резины, матовый — 10 л', slug: 'tire-shine-matte-10l',
+      description: 'Чернитель резины с матовым финишем. Освежает резину, защищает от растрескивания, естественный матовый вид.',
+      price: 140000, compareAtPrice: null, sku: 'SW-TB-MAT-10',
+      categoryId: catBySlug('tire-blackener'), isBestseller: false, isNew: false, stock: 30,
+      rating: 4.6, reviewCount: 14, images: ['/products/tire-shine-matte.png'],
     },
     {
-      name: 'FreshFog Lavender', slug: 'freshfog-lavender',
-      description: 'Сухой туман с ароматом лаванды. Полностью устраняет неприятные запахи в салоне за 15 минут.',
-      price: 45000, compareAtPrice: null, sku: 'SW-DF-001',
-      categoryId: categories[4].id, isBestseller: false, isNew: true, stock: 3,
-      rating: 4.6, reviewCount: 9, images: ['/images/products/dry-fog.webp'],
+      name: 'Чернитель резины, глянцевый — 10 л', slug: 'tire-shine-glossy-10l',
+      description: 'Чернитель резины с глянцевым финишем. Эффект мокрых шин и насыщенный блеск.',
+      price: 170000, compareAtPrice: null, sku: 'SW-TB-GLS-10',
+      categoryId: catBySlug('tire-blackener'), isBestseller: false, isNew: false, stock: 30,
+      rating: 4.7, reviewCount: 17, images: ['/products/tire-shine-glossy.png'],
     },
     {
-      name: 'LeatherCare Pro Kit', slug: 'leathercare-pro-kit',
-      description: 'Набор для ухода за кожаным салоном: очиститель + кондиционер. Восстанавливает мягкость и цвет кожи.',
-      price: 320000, compareAtPrice: 400000, sku: 'SW-IC-001',
-      categoryId: categories[5].id, isBestseller: true, isNew: false, stock: 8,
-      rating: 4.9, reviewCount: 42, images: ['/images/products/leather-kit.webp'],
+      name: 'Активная химия для грузовых авто — 20 кг', slug: 'truck-chemistry-20kg',
+      description: 'Активная химия для грузового транспорта. Мощное средство для больших объёмов и сильных загрязнений.',
+      price: 450000, compareAtPrice: null, sku: 'SW-TR-20',
+      categoryId: catBySlug('truck-chemicals'), isBestseller: false, isNew: false, stock: 25,
+      rating: 4.7, reviewCount: 8, images: ['/products/truck-chemistry-20kg.png'],
     },
     {
-      name: 'Microfiber Towel Pack (5шт)', slug: 'microfiber-towel-pack-5',
-      description: 'Набор из 5 микрофибровых полотенец 40x40 см, плотность 400 GSM. Идеально для полировки и сушки.',
-      price: 95000, compareAtPrice: null, sku: 'SW-AC-001',
-      categoryId: categories[6].id, isBestseller: false, isNew: false, stock: 120,
-      rating: 4.4, reviewCount: 55, images: ['/images/products/microfiber.webp'],
-    },
-    {
-      name: 'Iron Remover 500ml', slug: 'iron-remover-500ml',
-      description: 'Очиститель металлических вкраплений (fallout remover). Меняет цвет при контакте с железом. pH-нейтральный.',
-      price: 135000, compareAtPrice: null, sku: 'SW-DC-001',
-      categoryId: categories[7].id, isBestseller: false, isNew: true, stock: 22,
-      rating: 4.7, reviewCount: 11, images: ['/images/products/iron-remover.webp'],
+      name: 'Сухой туман — ароматизатор салона, 450 мл', slug: 'dry-fog-450ml',
+      description: 'Сухой туман для ароматизации и устранения запахов в салоне. Разные ароматы на выбор, долгосрочная свежесть.',
+      price: 90000, compareAtPrice: null, sku: 'SW-DF-450',
+      categoryId: catBySlug('dry-fog'), isBestseller: true, isNew: true, stock: 60,
+      rating: 4.6, reviewCount: 12, images: ['/products/dry-fog-450ml.png'],
     },
   ];
 
@@ -106,11 +98,11 @@ export async function seed() {
   const productMap = new Map(productRows.rows.map((r) => [r.slug, r.id]));
 
   const reviews = [
-    { productSlug: 'smartwash-auto-shampoo-1l', customerName: 'Сардор Т.', rating: 5, comment: 'Шампунь просто огонь! Пена густая, машина блестит как новая. Рекомендую всем!' },
-    { productSlug: 'nanoshield-pro-coating', customerName: 'Дильшод К.', rating: 5, comment: 'Нано покрытие держится уже 6 месяцев, вода скатывается идеально. Лучшее что пробовал.' },
-    { productSlug: 'premium-carnauba-wax', customerName: 'Алишер М.', rating: 4, comment: 'Воск карнаубы — отличный блеск! Наносится легко, полируется без усилий.' },
-    { productSlug: 'leathercare-pro-kit', customerName: 'Бехзод Р.', rating: 5, comment: 'Заказываю уже третий раз, качество всегда на высоте. Доставка быстрая!' },
-    { productSlug: 'blackmax-tire-gel', customerName: 'Жасур Н.', rating: 5, comment: 'Чернитель шин — вещь! Эффект мокрых шин сохраняется неделю. Супер!' },
+    { productSlug: 'pink-shampoo-20kg', customerName: 'Сардор Т.', rating: 5, comment: 'Розовая пена — огонь! Грязь сходит без контакта, машина блестит. Для мойки берём только её.' },
+    { productSlug: 'pink-shampoo-20kg', customerName: 'Дильшод К.', rating: 5, comment: '20 кг хватает надолго, расход экономный. Клиентам нравится цвет пены.' },
+    { productSlug: 'wax-bubblegum-5l', customerName: 'Алишер М.', rating: 5, comment: 'Воск Bubble Gum даёт реальный блеск и аромат. Вода скатывается шариками.' },
+    { productSlug: 'tire-shine-glossy-10l', customerName: 'Жасур Н.', rating: 5, comment: 'Глянцевый чернитель — эффект мокрых шин держится долго. Супер!' },
+    { productSlug: 'truck-chemistry-20kg', customerName: 'Бекзод Р.', rating: 5, comment: 'Для фур то что надо — мощная химия, отмывает дорожную грязь на ура.' },
   ];
 
   for (const r of reviews) {
