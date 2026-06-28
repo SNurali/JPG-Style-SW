@@ -14,7 +14,7 @@ export async function seed() {
 
   // ─── Categories (реальная линейка SmartWash) ────────
   const categories = [
-    { id: uuidv4(), name: 'Автошампуни', slug: 'auto-shampoo', description: 'Бесконтактные и ручные автошампуни', image: '/images/categories/shampoo.webp', sortOrder: 1 },
+    { id: uuidv4(), name: 'Автошампуни', slug: 'auto-shampoo', description: 'Бесконтактные автошампуни для автомоек', image: '/images/categories/shampoo.webp', sortOrder: 1 },
     { id: uuidv4(), name: 'Воск', slug: 'wax', description: 'Воски для блеска и защиты кузова', image: '/images/categories/wax.webp', sortOrder: 2 },
     { id: uuidv4(), name: 'Чернитель шин', slug: 'tire-blackener', description: 'Средства для ухода за резиной', image: '/images/categories/tire.webp', sortOrder: 3 },
     { id: uuidv4(), name: 'Сухой туман', slug: 'dry-fog', description: 'Ароматизация и устранение запахов в салоне', image: '/images/categories/fog.webp', sortOrder: 4 },
@@ -31,42 +31,49 @@ export async function seed() {
 
   const catBySlug = (slug: string) => categories.find((c) => c.slug === slug)!.id;
 
-  // ─── Products (реальный каталог из ТГ-канала, цены 2026-06-29) ───
+  // ─── Products (реальный каталог SmartWash, цены 2026-06-29) ───
   const products = [
     {
-      name: 'Автошампунь бесконтактный, розовый — 20 кг', slug: 'pink-shampoo-20kg',
-      description: 'Фирменный бесконтактный автошампунь насыщенного розового цвета. Густая активная пена бережно снимает грязь без контакта, не повреждая ЛКП. Идеален для автомоек и детейлинга.',
+      name: 'Автошампунь бесконтактный, розовая пена — 20 кг', slug: 'pink-shampoo-20kg',
+      description: 'Бесконтактный автошампунь с активной розовой пеной. Густая стойкая пена, мощное отмывание в условиях ташкентской пыли, экономичный расход, безопасен для ЛКП. Для любых автомобилей.',
       price: 500000, compareAtPrice: null, sku: 'SW-SH-PINK-20',
       categoryId: catBySlug('auto-shampoo'), isBestseller: true, isNew: true, stock: 50,
       rating: 4.9, reviewCount: 27, images: ['/products/pink-shampoo-20kg.png'],
     },
     {
-      name: 'Нано-шампунь Bubble Gum — 5 л', slug: 'nano-shampoo-bubblegum-5l',
-      description: 'Нано-шампунь линейки Bubble Gum для ручной мойки. Усиливает блеск, добавляет защиту и приятный аромат после мойки.',
-      price: 200000, compareAtPrice: null, sku: 'SW-SH-BG-5',
+      name: 'Автошампунь бесконтактный, белая пена — 20 кг', slug: 'white-shampoo-20kg',
+      description: 'Бесконтактный автошампунь с густой белой пеной. Отмывает сильные загрязнения после ташкентских дорог практически с одного нанесения, экономичный расход, безопасен для лакокрасочного покрытия.',
+      price: 450000, compareAtPrice: null, sku: 'SW-SH-WHITE-20',
+      categoryId: catBySlug('auto-shampoo'), isBestseller: true, isNew: true, stock: 50,
+      rating: 4.8, reviewCount: 21, images: ['/products/white-shampoo-20kg.png'],
+    },
+    {
+      name: 'Нано-шампунь — 5 кг', slug: 'nano-shampoo-5kg',
+      description: 'Нано-шампунь для ручной мойки. Усиливает блеск, добавляет защиту и приятный аромат после мойки.',
+      price: 300000, compareAtPrice: null, sku: 'SW-SH-NANO-5',
       categoryId: catBySlug('auto-shampoo'), isBestseller: true, isNew: false, stock: 40,
       rating: 4.8, reviewCount: 19, images: ['/products/nano-shampoo-5l.png'],
     },
     {
-      name: 'Воск Bubble Gum — 5 л', slug: 'wax-bubblegum-5l',
-      description: 'Жидкий воск Bubble Gum для блеска и защиты кузова. Водоотталкивающий эффект и глубокий блеск после мойки.',
-      price: 200000, compareAtPrice: null, sku: 'SW-WX-BG-5',
+      name: 'Воск для автомойки — 5 кг', slug: 'wax-5kg',
+      description: 'Жидкий воск для блеска и защиты кузова. Водоотталкивающий эффект и глубокий блеск после мойки.',
+      price: 200000, compareAtPrice: null, sku: 'SW-WX-5',
       categoryId: catBySlug('wax'), isBestseller: true, isNew: false, stock: 35,
       rating: 4.8, reviewCount: 22, images: ['/products/wax-bubblegum-5l.png'],
     },
     {
-      name: 'Чернитель резины, матовый — 10 л', slug: 'tire-shine-matte-10l',
-      description: 'Чернитель резины с матовым финишем. Освежает резину, защищает от растрескивания, естественный матовый вид.',
-      price: 140000, compareAtPrice: null, sku: 'SW-TB-MAT-10',
-      categoryId: catBySlug('tire-blackener'), isBestseller: false, isNew: false, stock: 30,
-      rating: 4.6, reviewCount: 14, images: ['/products/tire-shine-matte.png'],
+      name: 'Чернитель резины — 10 л', slug: 'tire-shine-10l',
+      description: 'Чернитель резины: глубокий насыщенный «мокрый» чёрный цвет, держится 7–10 дней. Не оставляет жирных следов на пластике и дисках.',
+      price: 150000, compareAtPrice: null, sku: 'SW-TB-10',
+      categoryId: catBySlug('tire-blackener'), isBestseller: true, isNew: false, stock: 40,
+      rating: 4.7, reviewCount: 17, images: ['/products/tire-shine-glossy.png'],
     },
     {
-      name: 'Чернитель резины, глянцевый — 10 л', slug: 'tire-shine-glossy-10l',
-      description: 'Чернитель резины с глянцевым финишем. Эффект мокрых шин и насыщенный блеск.',
-      price: 170000, compareAtPrice: null, sku: 'SW-TB-GLS-10',
-      categoryId: catBySlug('tire-blackener'), isBestseller: false, isNew: false, stock: 30,
-      rating: 4.7, reviewCount: 17, images: ['/products/tire-shine-glossy.png'],
+      name: 'Сухой туман — ароматизатор салона, 450 мл', slug: 'dry-fog-450ml',
+      description: 'Сухой туман для ароматизации и устранения запахов в салоне. Разные ароматы на выбор, долгосрочная свежесть.',
+      price: 100000, compareAtPrice: null, sku: 'SW-DF-450',
+      categoryId: catBySlug('dry-fog'), isBestseller: true, isNew: true, stock: 60,
+      rating: 4.6, reviewCount: 12, images: ['/products/dry-fog-450ml.png'],
     },
     {
       name: 'Активная химия для грузовых авто — 20 кг', slug: 'truck-chemistry-20kg',
@@ -74,13 +81,6 @@ export async function seed() {
       price: 450000, compareAtPrice: null, sku: 'SW-TR-20',
       categoryId: catBySlug('truck-chemicals'), isBestseller: false, isNew: false, stock: 25,
       rating: 4.7, reviewCount: 8, images: ['/products/truck-chemistry-20kg.png'],
-    },
-    {
-      name: 'Сухой туман — ароматизатор салона, 450 мл', slug: 'dry-fog-450ml',
-      description: 'Сухой туман для ароматизации и устранения запахов в салоне. Разные ароматы на выбор, долгосрочная свежесть.',
-      price: 90000, compareAtPrice: null, sku: 'SW-DF-450',
-      categoryId: catBySlug('dry-fog'), isBestseller: true, isNew: true, stock: 60,
-      rating: 4.6, reviewCount: 12, images: ['/products/dry-fog-450ml.png'],
     },
   ];
 
@@ -99,10 +99,10 @@ export async function seed() {
 
   const reviews = [
     { productSlug: 'pink-shampoo-20kg', customerName: 'Сардор Т.', rating: 5, comment: 'Розовая пена — огонь! Грязь сходит без контакта, машина блестит. Для мойки берём только её.' },
-    { productSlug: 'pink-shampoo-20kg', customerName: 'Дильшод К.', rating: 5, comment: '20 кг хватает надолго, расход экономный. Клиентам нравится цвет пены.' },
-    { productSlug: 'wax-bubblegum-5l', customerName: 'Алишер М.', rating: 5, comment: 'Воск Bubble Gum даёт реальный блеск и аромат. Вода скатывается шариками.' },
-    { productSlug: 'tire-shine-glossy-10l', customerName: 'Жасур Н.', rating: 5, comment: 'Глянцевый чернитель — эффект мокрых шин держится долго. Супер!' },
-    { productSlug: 'truck-chemistry-20kg', customerName: 'Бекзод Р.', rating: 5, comment: 'Для фур то что надо — мощная химия, отмывает дорожную грязь на ура.' },
+    { productSlug: 'white-shampoo-20kg', customerName: 'Дильшод К.', rating: 5, comment: 'Белая пена отмывает ташкентскую пыль на ура, расход экономный. Берём канистрами.' },
+    { productSlug: 'tire-shine-10l', customerName: 'Жасур Н.', rating: 5, comment: 'Чернитель — эффект мокрых шин держится больше недели. Клиенты доплачивают с радостью.' },
+    { productSlug: 'wax-5kg', customerName: 'Алишер М.', rating: 5, comment: 'Воск даёт реальный блеск, вода скатывается шариками. Средний чек подрос.' },
+    { productSlug: 'truck-chemistry-20kg', customerName: 'Бекзод Р.', rating: 5, comment: 'Для фур то что надо — мощная химия, отмывает дорожную грязь.' },
   ];
 
   for (const r of reviews) {
