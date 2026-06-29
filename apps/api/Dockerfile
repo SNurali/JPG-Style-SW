@@ -6,6 +6,8 @@ WORKDIR /app
 COPY package.json package-lock.json* ./
 COPY apps/api/package.json ./apps/api/
 COPY packages/shared/package.json ./packages/shared/
+ENV PLAYWRIGHT_SKIP_BROWSER_DOWNLOAD=1
+ENV CYPRESS_INSTALL_BINARY=0
 RUN --mount=type=cache,target=/root/.npm \
     npm ci
 
