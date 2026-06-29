@@ -35,7 +35,7 @@ COPY --from=builder /app/packages/shared ./packages/shared
 EXPOSE 3000
 
 HEALTHCHECK --interval=30s --timeout=3s --start-period=5s --retries=3 \
-  CMD wget --quiet --tries=1 --spider http://localhost:3000 || exit 1
+  CMD wget --quiet --tries=1 --spider http://localhost:3010 || exit 1
 
 ENTRYPOINT ["dumb-init", "--"]
 CMD ["npm", "run", "start", "--workspace=apps/web"]

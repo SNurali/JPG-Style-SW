@@ -31,7 +31,7 @@ COPY --from=builder /app/apps/api/src/db/schema.sql ./apps/api/dist/db/schema.sq
 EXPOSE 4000
 
 HEALTHCHECK --interval=30s --timeout=3s --start-period=5s --retries=3 \
-  CMD node -e "require('http').get('http://localhost:4000/health', (r) => {if (r.statusCode !== 200) throw new Error(r.statusCode)})" || exit 1
+  CMD node -e "require('http').get('http://localhost:3011/api/health', (r) => {if (r.statusCode !== 200) throw new Error(r.statusCode)})" || exit 1
 
 ENTRYPOINT ["dumb-init", "--"]
 CMD ["node", "apps/api/dist/main.js"]
