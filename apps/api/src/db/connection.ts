@@ -68,10 +68,30 @@ export async function initializeDatabase(): Promise<void> {
       await pool.query(schema);
       console.log('✅ Schema applied successfully');
     }
+
+    await runMigrations();
   } catch (err) {
     console.error('❌ Database initialization failed:', err);
     throw err;
   }
+}
+
+/**
+ * Idempotent migrations applied on every startup (safe to re-run).
+ * Customer auth: password/google login columns on the existing customers table.
+ */
+export async function runMigrations(): Promise<void> {
+  await pool.query(`
+    ALTER TABLE customers ADD COLUMN IF NOT EXISTS password_hash VARCHAR(500);
+    ALTER TABLE customers ADD COLUMN IF NOT EXISTS google_id     VARCHAR(255);
+    ALTER TABLE customers ADD COLUMN IF NOT EXISTS name           VARCHAR(200);
+    ALTER TABLE customers ALTER COLUMN phone DROP NOT NULL;
+    CREATE UNIQUE INDEX IF NOT EXISTS idx_customers_email_unique
+      ON customers (lower(email)) WHERE email IS NOT NULL;
+    CREATE UNIQUE INDEX IF NOT EXISTS idx_customers_google_unique
+      ON customers (google_id) WHERE google_id IS NOT NULL;
+  `);
+  console.log('✅ Migrations applied (customer auth columns)');
 }
 
 /**

@@ -2,10 +2,11 @@ import { Router, Request, Response } from 'express';
 import { isDbAvailable } from '../main';
 import { fallbackData } from '../data/fallback';
 import { telegramService } from '../services/telegram.service';
+import { attachCustomer } from '../middleware/auth';
 
 export const ordersRouter = Router();
 
-ordersRouter.post('/', async (req: Request, res: Response) => {
+ordersRouter.post('/', attachCustomer, async (req: Request, res: Response) => {
   try {
     const { customerName, customerPhone, items, deliveryAddress, deliveryZone, deliveryFee, paymentMethod, notes, discountCode, location } = req.body;
 
@@ -20,11 +21,24 @@ ordersRouter.post('/', async (req: Request, res: Response) => {
       const { orderRepository } = await import('../repositories/order.repository');
       const { discountRepository } = await import('../repositories/discount.repository');
 
-      const [firstName, ...lastParts] = customerName.trim().split(' ');
-      const customer = await customerRepository.findOrCreate({
-        firstName, lastName: lastParts.join(' '), phone: customerPhone,
-        address: deliveryAddress, zone: deliveryZone,
-      });
+      // Logged-in customer → link order to their account; guest → find/create by phone.
+      let customer;
+      if (req.customer) {
+        customer = await customerRepository.findById(req.customer.id);
+        if (customer) {
+          // keep phone fresh if the saved profile has none
+          if (!customer.phone && customerPhone) {
+            await customerRepository.updateProfile(customer.id, { phone: customerPhone });
+          }
+        }
+      }
+      if (!customer) {
+        const [firstName, ...lastParts] = customerName.trim().split(' ');
+        customer = await customerRepository.findOrCreate({
+          firstName, lastName: lastParts.join(' '), phone: customerPhone,
+          address: deliveryAddress, zone: deliveryZone,
+        });
+      }
 
       let subtotal = 0;
       const orderItems = [];

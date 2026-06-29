@@ -1,15 +1,17 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { useCart } from '@/lib/cart-context';
 import { useLanguage } from '@/lib/i18n';
+import { useAuth } from '@/lib/auth';
 import { formatPrice } from '@/lib/data';
 import { createOrder, validateDiscount } from '@/lib/api';
 
 export default function CheckoutPage() {
   const { items, totalPrice, clearCart } = useCart();
   const { t } = useLanguage();
+  const { user } = useAuth();
   const [selectedZoneId, setSelectedZoneId] = useState('1');
   const [selectedPaymentId, setSelectedPaymentId] = useState('cash');
   const [orderPlaced, setOrderPlaced] = useState(false);
@@ -33,6 +35,18 @@ export default function CheckoutPage() {
 
   const [location, setLocation] = useState<{lat: number, lng: number} | null>(null);
   const [locationLoading, setLocationLoading] = useState(false);
+
+  // Prefill from logged-in profile (guest checkout still fully works)
+  useEffect(() => {
+    if (!user) return;
+    const [firstName, ...lastParts] = (user.name || '').trim().split(' ');
+    setForm((f) => ({
+      ...f,
+      firstName: f.firstName || firstName || '',
+      lastName: f.lastName || lastParts.join(' '),
+      phone: f.phone || user.phone || '',
+    }));
+  }, [user]);
 
   // Delivery zones using translations
   const deliveryZones = [

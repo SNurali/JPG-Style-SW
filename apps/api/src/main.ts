@@ -9,6 +9,7 @@ import { categoriesRouter } from './routes/categories';
 import { ordersRouter } from './routes/orders';
 import { reviewsRouter } from './routes/reviews';
 import { adminRouter } from './routes/admin';
+import { authRouter } from './routes/auth';
 import { uploadRouter } from './routes/upload';
 
 const app = express();
@@ -49,6 +50,9 @@ app.use('/api/products', productsRouter);
 app.use('/api/categories', categoriesRouter);
 app.use('/api/orders', ordersRouter);
 app.use('/api/reviews', reviewsRouter);
+
+// Customer auth (storefront)
+app.use('/api/auth', authRouter);
 
 // Admin routes
 app.use('/api/admin', adminRouter);

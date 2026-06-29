@@ -11,10 +11,18 @@ export interface AdminPayload {
   role: string;
 }
 
+export interface CustomerPayload {
+  id: string;
+  email: string | null;
+  name: string;
+  type: 'customer';
+}
+
 declare global {
   namespace Express {
     interface Request {
       admin?: AdminPayload;
+      customer?: CustomerPayload;
     }
   }
 }
@@ -44,6 +52,50 @@ export function requireAdmin(req: Request, res: Response, next: NextFunction) {
   } catch {
     return res.status(401).json({ error: 'Invalid or expired token' });
   }
+}
+
+// ─── Customer auth (storefront) ─────────────────────────
+
+export function generateCustomerToken(payload: CustomerPayload): string {
+  return jwt.sign(payload, JWT_SECRET, { expiresIn: JWT_EXPIRES_IN } as jwt.SignOptions);
+}
+
+export function verifyCustomerToken(token: string): CustomerPayload {
+  const decoded = jwt.verify(token, JWT_SECRET) as CustomerPayload;
+  if (decoded.type !== 'customer') throw new Error('Not a customer token');
+  return decoded;
+}
+
+/**
+ * Middleware: require valid customer JWT token.
+ */
+export function requireCustomer(req: Request, res: Response, next: NextFunction) {
+  const authHeader = req.headers.authorization;
+  if (!authHeader || !authHeader.startsWith('Bearer ')) {
+    return res.status(401).json({ error: 'Требуется вход' });
+  }
+  try {
+    req.customer = verifyCustomerToken(authHeader.slice(7));
+    next();
+  } catch {
+    return res.status(401).json({ error: 'Сессия истекла, войдите снова' });
+  }
+}
+
+/**
+ * Middleware: attach customer if a valid token is present, but never reject.
+ * Used for guest-friendly endpoints like checkout.
+ */
+export function attachCustomer(req: Request, _res: Response, next: NextFunction) {
+  const authHeader = req.headers.authorization;
+  if (authHeader && authHeader.startsWith('Bearer ')) {
+    try {
+      req.customer = verifyCustomerToken(authHeader.slice(7));
+    } catch {
+      /* ignore invalid token — proceed as guest */
+    }
+  }
+  next();
 }
 
 /**

@@ -6,6 +6,7 @@ import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import { useCart } from '@/lib/cart-context';
 import { useLanguage } from '@/lib/i18n';
+import { useAuth } from '@/lib/auth';
 import { searchProducts } from '@/lib/api';
 import type { Product } from 'shared/types';
 
@@ -83,6 +84,7 @@ export function Header() {
   const [isSearching, setIsSearching] = useState(false);
   const searchRef = useRef<HTMLDivElement>(null);
   const { totalItems } = useCart();
+  const { user } = useAuth();
   const [isBumping, setIsBumping] = useState(false);
   const isFirstRender = useRef(true);
   const { language, setLanguage, t } = useLanguage();
@@ -198,6 +200,19 @@ export function Header() {
               </svg>
             </button>
 
+            {/* Account / Login */}
+            <Link
+              href={user ? '/account' : '/login'}
+              className={`header-action-btn relative ${user ? '!text-accent' : ''}`}
+              aria-label={user ? 'Личный кабинет' : 'Войти'}
+              id="account-button"
+              title={user ? (user.name || 'Кабинет') : 'Войти'}
+            >
+              <svg className="w-[18px] h-[18px]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+              </svg>
+            </Link>
+
             {/* Cart */}
             <Link
               href="/cart"
@@ -301,6 +316,7 @@ export function Header() {
               <Link href="/categories" onClick={() => setMobileMenuOpen(false)} className="mobile-nav-link">{t('nav.catalog')}</Link>
               <Link href="/#bestsellers" onClick={() => setMobileMenuOpen(false)} className="mobile-nav-link">{t('nav.bestsellers')}</Link>
               <Link href="/#reviews" onClick={() => setMobileMenuOpen(false)} className="mobile-nav-link">{t('nav.reviews')}</Link>
+              <Link href={user ? '/account' : '/login'} onClick={() => setMobileMenuOpen(false)} className="mobile-nav-link">{user ? 'Личный кабинет' : 'Войти / Регистрация'}</Link>
             </nav>
           </div>
         )}

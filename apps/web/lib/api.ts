@@ -18,6 +18,13 @@ async function request<T>(path: string, options?: RequestInit): Promise<T> {
   return res.json();
 }
 
+/** Authorization header from the stored customer token (if any). */
+export function authHeaders(): Record<string, string> {
+  if (typeof window === 'undefined') return {};
+  const t = localStorage.getItem('sw-customer-token');
+  return t ? { Authorization: `Bearer ${t}` } : {};
+}
+
 // ─── Products ───────────────────────────────────────────
 
 export async function fetchProducts(params?: {
@@ -79,7 +86,34 @@ export async function createOrder(data: {
   return request<any>('/api/orders', {
     method: 'POST',
     body: JSON.stringify(data),
+    headers: authHeaders(),
   });
+}
+
+// ─── Customer auth ──────────────────────────────────────
+
+export async function registerCustomer(data: { name: string; email: string; phone?: string; password: string }) {
+  return request<any>('/api/auth/register', { method: 'POST', body: JSON.stringify(data) });
+}
+
+export async function loginCustomer(data: { email: string; password: string }) {
+  return request<any>('/api/auth/login', { method: 'POST', body: JSON.stringify(data) });
+}
+
+export async function googleLoginCustomer(idToken: string) {
+  return request<any>('/api/auth/google', { method: 'POST', body: JSON.stringify({ idToken }) });
+}
+
+export async function fetchMe() {
+  return request<any>('/api/auth/me', { headers: authHeaders() });
+}
+
+export async function fetchMyOrders() {
+  return request<any>('/api/auth/orders', { headers: authHeaders() });
+}
+
+export async function updateMyProfile(data: { name?: string; phone?: string }) {
+  return request<any>('/api/auth/profile', { method: 'PATCH', body: JSON.stringify(data), headers: authHeaders() });
 }
 
 export async function fetchOrderStatus(orderNumber: string) {
