@@ -49,7 +49,7 @@ export default function LoginPage() {
           <div>
             <label className="block text-sm text-text-muted mb-1">Пароль</label>
             <input type="password" required value={password} onChange={(e) => setPassword(e.target.value)}
-              className="input-field" placeholder="••••••••" />
+              className="input-field" placeholder="••••••••" autoComplete="current-password" />
           </div>
           <button type="submit" disabled={loading}
             className={`btn-primary w-full ${loading ? 'opacity-70' : ''}`}>

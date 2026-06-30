@@ -59,11 +59,11 @@ export default function SettingsPage() {
           <h2 className="font-heading font-semibold text-white mb-4">🔐 Сменить пароль</h2>
           <div className="space-y-3">
             <input type="password" placeholder="Текущий пароль" value={passwords.current}
-              onChange={(e) => setPasswords({ ...passwords, current: e.target.value })} className="input-field" />
+              onChange={(e) => setPasswords({ ...passwords, current: e.target.value })} className="input-field" autoComplete="current-password" />
             <input type="password" placeholder="Новый пароль" value={passwords.newPass}
-              onChange={(e) => setPasswords({ ...passwords, newPass: e.target.value })} className="input-field" />
+              onChange={(e) => setPasswords({ ...passwords, newPass: e.target.value })} className="input-field" autoComplete="new-password" />
             <input type="password" placeholder="Подтвердите пароль" value={passwords.confirm}
-              onChange={(e) => setPasswords({ ...passwords, confirm: e.target.value })} className="input-field" />
+              onChange={(e) => setPasswords({ ...passwords, confirm: e.target.value })} className="input-field" autoComplete="new-password" />
             {msg && <p className={`text-sm ${msg.startsWith('✅') ? 'text-green-400' : 'text-danger'}`}>{msg}</p>}
             <button onClick={handleChangePassword} disabled={changingPassword}
               className={`btn-primary ${changingPassword ? 'opacity-70' : ''}`}>

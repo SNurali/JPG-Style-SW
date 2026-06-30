@@ -58,7 +58,7 @@ export default function RegisterPage() {
           </div>
           <div>
             <label className="block text-sm text-text-muted mb-1">Пароль</label>
-            <input type="password" required minLength={6} value={form.password} onChange={set('password')} className="input-field" placeholder="минимум 6 символов" />
+            <input type="password" required minLength={6} value={form.password} onChange={set('password')} className="input-field" placeholder="минимум 6 символов" autoComplete="new-password" />
           </div>
           <button type="submit" disabled={loading} className={`btn-primary w-full ${loading ? 'opacity-70' : ''}`}>
             {loading ? 'Создаём...' : 'Зарегистрироваться'}

@@ -20,7 +20,7 @@ let dbAvailable = false;
 export function isDbAvailable() { return dbAvailable; }
 
 // Middleware
-app.use(helmet({ crossOriginResourcePolicy: false }));
+app.use(helmet({ crossOriginResourcePolicy: false, crossOriginOpenerPolicy: false }));
 app.use(cors({ origin: ['http://localhost:3000', 'http://localhost:3001'] }));
 app.use(express.json({ limit: '10mb' }));
 app.use('/uploads', express.static('uploads'));

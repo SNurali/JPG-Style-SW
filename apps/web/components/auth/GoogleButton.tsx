@@ -17,13 +17,15 @@ const CLIENT_ID = process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID || '';
  */
 export function GoogleButton({ onCredential, onError }: { onCredential: (idToken: string) => void; onError?: (msg: string) => void }) {
   const ref = useRef<HTMLDivElement>(null);
+  const initialized = useRef(false);
   const [ready, setReady] = useState(false);
 
   useEffect(() => {
     if (!CLIENT_ID) return;
     const id = 'google-gsi';
     function init() {
-      if (!window.google || !ref.current) return;
+      if (!window.google || !ref.current || initialized.current) return;
+      initialized.current = true;
       window.google.accounts.id.initialize({
         client_id: CLIENT_ID,
         callback: (resp: any) => {
@@ -42,6 +44,7 @@ export function GoogleButton({ onCredential, onError }: { onCredential: (idToken
     s.async = true; s.defer = true; s.id = id;
     s.onload = init;
     document.body.appendChild(s);
+    return () => { initialized.current = false; };
   }, [onCredential, onError]);
 
   if (!CLIENT_ID) {
