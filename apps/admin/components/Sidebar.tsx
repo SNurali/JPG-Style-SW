@@ -6,15 +6,15 @@ import { usePathname } from 'next/navigation';
 import { useAuth } from '@/lib/auth';
 
 const navItems = [
-  { href: '/', label: 'Дашборд', icon: '📊' },
-  { href: '/products', label: 'Товары', icon: '📦' },
-  { href: '/categories', label: 'Категории', icon: '📁' },
-  { href: '/orders', label: 'Заказы', icon: '🛒' },
-  { href: '/customers', label: 'Клиенты', icon: '👥' },
-  { href: '/reviews', label: 'Отзывы', icon: '⭐' },
-  { href: '/discounts', label: 'Скидки', icon: '🏷️' },
-  { href: '/analytics', label: 'Аналитика', icon: '📈' },
-  { href: '/settings', label: 'Настройки', icon: '⚙️' },
+  { href: '/admin/', label: 'Дашборд', icon: '📊' },
+  { href: '/admin/products', label: 'Товары', icon: '📦' },
+  { href: '/admin/categories', label: 'Категории', icon: '📁' },
+  { href: '/admin/orders', label: 'Заказы', icon: '🛒' },
+  { href: '/admin/customers', label: 'Клиенты', icon: '👥' },
+  { href: '/admin/reviews', label: 'Отзывы', icon: '⭐' },
+  { href: '/admin/discounts', label: 'Скидки', icon: '🏷️' },
+  { href: '/admin/analytics', label: 'Аналитика', icon: '📈' },
+  { href: '/admin/settings', label: 'Настройки', icon: '⚙️' },
 ];
 
 export function Sidebar() {
@@ -40,7 +40,7 @@ export function Sidebar() {
       {/* Navigation */}
       <nav className="flex-1 py-4 px-2 space-y-1 overflow-y-auto">
         {navItems.map((item) => {
-          const isActive = pathname === item.href || (item.href !== '/' && pathname.startsWith(item.href));
+          const isActive = pathname === item.href || (item.href !== '/admin/' && pathname.startsWith(item.href));
           return (
             <Link
               key={item.href}
