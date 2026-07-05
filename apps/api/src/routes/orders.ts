@@ -14,7 +14,10 @@ ordersRouter.post('/', attachCustomer, async (req: Request, res: Response) => {
       return res.status(400).json({ error: 'Missing required fields: customerName, customerPhone, items' });
     }
 
-    if (isDbAvailable()) {
+    // Check if product IDs are UUIDs (DB) or numeric strings (fallback)
+    const hasUuidIds = items.some((i: any) => /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(i.productId));
+
+    if (isDbAvailable() && hasUuidIds) {
       // Full DB flow
       const { customerRepository } = await import('../repositories/customer.repository');
       const { productRepository } = await import('../repositories/product.repository');
