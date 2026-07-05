@@ -43,7 +43,13 @@ ordersRouter.post('/', attachCustomer, async (req: Request, res: Response) => {
       let subtotal = 0;
       const orderItems = [];
       for (const item of items) {
-        const product = await productRepository.findById(item.productId);
+        let product = null;
+        try {
+          product = await productRepository.findById(item.productId);
+        } catch {
+          // UUID parse error → try fallback data (numeric IDs from frontend)
+          product = fallbackData.getProductById(item.productId);
+        }
         if (!product) return res.status(400).json({ error: `Product not found: ${item.productId}` });
         if (product.stock < item.quantity) return res.status(400).json({ error: `Insufficient stock for ${product.name}` });
         const totalPrice = product.price * item.quantity;
