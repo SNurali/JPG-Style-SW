@@ -77,7 +77,7 @@ export default function ProductsPage() {
     try {
       const formData = new FormData();
       formData.append('image', file);
-      const res = await fetch('http://localhost:4001/api/upload/product', {
+      const res = await fetch('/api/upload/product', {
         method: 'POST',
         headers: { Authorization: `Bearer ${token}` },
         body: formData,
@@ -202,7 +202,7 @@ export default function ProductsPage() {
             <div className="flex flex-wrap gap-3 mb-3">
               {form.images.map((img, i) => (
                 <div key={i} className="relative w-24 h-24 rounded-lg overflow-hidden border border-white/10 group">
-                  <img src={`http://localhost:4001${img}`} alt="" className="w-full h-full object-cover" />
+                  <img src={`${img}`} alt="" className="w-full h-full object-cover" />
                   <button
                     onClick={() => removeImage(i)}
                     className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 flex items-center justify-center text-danger text-xl transition-opacity"
@@ -258,7 +258,7 @@ export default function ProductsPage() {
                 <tr key={p.id} className="hover:bg-white/[0.02]">
                   <td className="p-4">
                     {p.images?.[0] ? (
-                      <img src={`http://localhost:4001${p.images[0]}`} alt="" className="w-12 h-12 rounded-lg object-cover" />
+                      <img src={`${p.images[0]}`} alt="" className="w-12 h-12 rounded-lg object-cover" />
                     ) : (
                       <div className="w-12 h-12 rounded-lg bg-primary-light flex items-center justify-center text-lg">📦</div>
                     )}

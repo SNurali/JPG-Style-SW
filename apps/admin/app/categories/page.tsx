@@ -49,7 +49,7 @@ export default function CategoriesPage() {
     try {
       const formData = new FormData();
       formData.append('image', file);
-      const res = await fetch('http://localhost:4001/api/upload/category', {
+      const res = await fetch('/api/upload/category', {
         method: 'POST', headers: { Authorization: `Bearer ${token}` }, body: formData,
       });
       const data = await res.json();
@@ -107,7 +107,7 @@ export default function CategoriesPage() {
             <div>
               <label className="block text-sm text-text-muted mb-1">Изображение</label>
               <div className="flex items-center gap-3">
-                {form.image && <img src={`http://localhost:4001${form.image}`} alt="" className="w-12 h-12 rounded-lg object-cover" />}
+                {form.image && <img src={`${form.image}`} alt="" className="w-12 h-12 rounded-lg object-cover" />}
                 <label className={`btn-secondary text-xs cursor-pointer ${uploadingImage ? 'opacity-50' : ''}`}>
                   {uploadingImage ? '⏳ Загрузка...' : '📷 Загрузить'}
                   <input type="file" accept="image/*" className="hidden" onChange={handleUploadImage} disabled={uploadingImage} />
@@ -136,7 +136,7 @@ export default function CategoriesPage() {
           <div key={cat.id} className="glass-card p-5 hover:border-accent/30 transition-colors cursor-pointer" onClick={() => handleEdit(cat)}>
             <div className="flex items-start justify-between mb-3">
               {cat.image ? (
-                <img src={`http://localhost:4001${cat.image}`} alt="" className="w-14 h-14 rounded-lg object-cover" />
+                <img src={`${cat.image}`} alt="" className="w-14 h-14 rounded-lg object-cover" />
               ) : (
                 <div className="w-14 h-14 rounded-lg bg-primary-light flex items-center justify-center text-2xl">📁</div>
               )}
