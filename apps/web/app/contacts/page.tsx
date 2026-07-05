@@ -1,4 +1,11 @@
+import type { Metadata } from 'next';
 import React from 'react';
+
+export const metadata: Metadata = {
+  title: 'Контакты — связаться с JPG Style SmartWash | Ташкент',
+  description: 'Свяжитесь с JPG Style SmartWash: ☎ +998 99 030 99 86, +998 50 104 00 26. Telegram: @JPGSTYLE_SMARTWASH. Ташкент, Узбекистан. Пн-Пт 09:00-19:00, Сб 10:00-17:00.',
+  alternates: { canonical: 'https://smartwash.uz/contacts' },
+};
 
 export default function ContactsPage() {
   return (

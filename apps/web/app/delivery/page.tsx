@@ -1,4 +1,11 @@
+import type { Metadata } from 'next';
 import React from 'react';
+
+export const metadata: Metadata = {
+  title: 'Доставка — условия и сроки доставки автохимии | Ташкент',
+  description: 'Доставка автохимии SmartWash по Ташкенту в день заказа. Бесплатная доставка от 500 000 сум. Курьерская доставка и самовывоз. Доставка в регионы Узбекистана.',
+  alternates: { canonical: 'https://smartwash.uz/delivery' },
+};
 
 export default function DeliveryPage() {
   return (

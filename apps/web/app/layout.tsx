@@ -6,25 +6,67 @@ import { ChatBot } from '@/components/chat/ChatBot';
 import { CartProvider } from '@/lib/cart-context';
 import { LanguageProvider } from '@/lib/i18n';
 import { AuthProvider } from '@/lib/auth';
+import { organizationJsonLd, localBusinessJsonLd } from '@/lib/seo';
 
 export const metadata: Metadata = {
-  title: 'JPG Style SmartWash — Premium Auto Care Products',
+  metadataBase: new URL('https://smartwash.uz'),
+  title: {
+    default: 'JPG Style SmartWash — Профессиональная автохимия премиум-класса | Ташкент',
+    template: '%s | JPG Style SmartWash',
+  },
   description:
-    'Professional automotive detailing products. Auto shampoo, nano coatings, wax, tire care, and accessories. Premium quality for car enthusiasts.',
-  keywords: 'auto detailing, car care, auto shampoo, nano coating, wax, car wash, Tashkent',
+    'Купить профессиональную автохимию в Ташкенте: автошампуни, активная пена, нано-покрытия, воски, чернители шин. Доставка в день заказа. ☎ +998 99 030 99 86',
+  keywords:
+    'автохимия Ташкент, автошампунь, активная пена, нано покрытие, воск для авто, чернитель шин, детейлинг, SmartWash, профессиональная автохимия, купить автохимию Узбекистан',
   manifest: '/manifest.json',
   themeColor: '#0f0f23',
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: { index: true, follow: true },
+  },
   openGraph: {
-    title: 'JPG Style SmartWash — Premium Auto Care Products',
-    description: 'Professional automotive detailing products for car enthusiasts.',
+    title: 'JPG Style SmartWash — Профессиональная автохимия премиум-класса',
+    description:
+      'Купить профессиональную автохимию в Ташкенте: автошампуни, нано-покрытия, воски, чернители. Доставка в день заказа.',
     type: 'website',
     locale: 'ru_RU',
+    alternateLocale: ['uz_UZ', 'en_US'],
+    url: 'https://smartwash.uz',
+    siteName: 'JPG Style SmartWash',
+    images: [
+      {
+        url: '/icon-512.png',
+        width: 512,
+        height: 512,
+        alt: 'JPG Style SmartWash — Professional Auto Care',
+      },
+    ],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'JPG Style SmartWash — Профессиональная автохимия',
+    description: 'Автошампуни, нано-покрытия, воски, чернители. Доставка по Ташкенту в день заказа.',
+    images: ['/icon-512.png'],
+  },
+  alternates: {
+    canonical: 'https://smartwash.uz',
   },
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="ru" className="dark">
+      <head>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationJsonLd()) }}
+        />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(localBusinessJsonLd()) }}
+        />
+      </head>
       <body className="bg-surface text-text-main min-h-screen flex flex-col">
         <LanguageProvider>
           <AuthProvider>

@@ -1,56 +1,67 @@
-'use client';
-
-import React from 'react';
+import type { Metadata } from 'next';
 import Link from 'next/link';
 import { categories, getProductsByCategory, getCategoryBySlug } from '@/lib/data';
-import { ProductCard } from '@/components/product/ProductCard';
-import { useLanguage } from '@/lib/i18n';
+import { categoryJsonLd, breadcrumbJsonLd } from '@/lib/seo';
+import { CategoryPageClient } from './CategoryPageClient';
+
+export async function generateStaticParams() {
+  return categories.map((c) => ({ slug: c.slug }));
+}
+
+export async function generateMetadata({ params }: { params: { slug: string } }): Promise<Metadata> {
+  const category = getCategoryBySlug(params.slug);
+  if (!category) return { title: 'Категория не найдена' };
+
+  const count = getProductsByCategory(params.slug).length;
+  const title = `${category.name} — купить профессиональную автохимию в Ташкенте`;
+  const description = `${category.description}. ${count} товаров в наличии. ✓ Доставка в день заказа ✓ Оптом и в розницу. JPG Style SmartWash.`;
+
+  return {
+    title,
+    description,
+    keywords: `${category.name}, купить ${category.name.toLowerCase()}, автохимия Ташкент, SmartWash, профессиональная автохимия`,
+    openGraph: {
+      title,
+      description,
+      type: 'website',
+      images: [{ url: category.image, width: 400, height: 300, alt: category.name }],
+    },
+    alternates: {
+      canonical: `https://smartwash.uz/categories/${category.slug}`,
+    },
+  };
+}
 
 export default function CategoryPage({ params }: { params: { slug: string } }) {
   const category = getCategoryBySlug(params.slug);
   const categoryProducts = getProductsByCategory(params.slug);
-  const { t } = useLanguage();
 
   if (!category) {
     return (
       <div className="max-w-7xl mx-auto px-4 py-20 text-center">
-        <h1 className="section-title mb-4">{t('category.notFound')}</h1>
-        <Link href="/categories" className="btn-primary">{t('category.all')}</Link>
+        <h1 className="section-title mb-4">Категория не найдена</h1>
+        <Link href="/categories" className="btn-primary">Все категории</Link>
       </div>
     );
   }
 
+  const breadcrumbs = [
+    { name: 'Главная', url: 'https://smartwash.uz' },
+    { name: 'Каталог', url: 'https://smartwash.uz/categories' },
+    { name: category.name, url: `https://smartwash.uz/categories/${category.slug}` },
+  ];
+
   return (
-    <div className="max-w-7xl mx-auto px-4 sm:px-6 py-10">
-      {/* Breadcrumb */}
-      <nav className="text-sm text-text-muted mb-8">
-        <Link href="/" className="hover:text-accent transition-colors">{t('nav.home')}</Link>
-        <span className="mx-2">/</span>
-        <Link href="/categories" className="hover:text-accent transition-colors">{t('nav.catalog')}</Link>
-        <span className="mx-2">/</span>
-        <span className="text-white">{t(`cat.${category.slug}`)}</span>
-      </nav>
-
-      {/* Category header */}
-      <div className="glass-card p-8 mb-8">
-        <h1 className="section-title mb-2">{t(`cat.${category.slug}`)}</h1>
-        <p className="text-text-muted">{t(`catDesc.${category.slug}`)}</p>
-        <p className="text-sm text-accent mt-2">{categoryProducts.length} {t('catalog.itemsCount')}</p>
-      </div>
-
-      {/* Products grid */}
-      {categoryProducts.length > 0 ? (
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-6">
-          {categoryProducts.map((product) => (
-            <ProductCard key={product.id} product={product} />
-          ))}
-        </div>
-      ) : (
-        <div className="text-center py-20">
-          <p className="text-text-muted text-lg mb-4">{t('category.comingSoon')}</p>
-          <Link href="/categories" className="btn-primary">{t('category.all')}</Link>
-        </div>
-      )}
-    </div>
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(categoryJsonLd(category, categoryProducts.length)) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd(breadcrumbs)) }}
+      />
+      <CategoryPageClient category={category} categoryProducts={categoryProducts} />
+    </>
   );
 }

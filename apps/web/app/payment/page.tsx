@@ -1,4 +1,11 @@
+import type { Metadata } from 'next';
 import React from 'react';
+
+export const metadata: Metadata = {
+  title: 'Оплата — способы оплаты заказа | JPG Style SmartWash',
+  description: 'Способы оплаты в JPG Style SmartWash: Click, Payme, наличные при получении. Безопасная оплата заказа автохимии в Ташкенте.',
+  alternates: { canonical: 'https://smartwash.uz/payment' },
+};
 
 export default function PaymentPage() {
   return (

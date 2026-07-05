@@ -1,4 +1,11 @@
+import type { Metadata } from 'next';
 import React from 'react';
+
+export const metadata: Metadata = {
+  title: 'О нас — JPG Style SmartWash | Профессиональная автохимия из Узбекистана',
+  description: 'JPG Style SmartWash — производитель профессиональной автохимии премиум-класса в Узбекистане. Собственное производство, контроль качества, доступные цены от 22 500 сум. Доставка по Ташкенту.',
+  alternates: { canonical: 'https://smartwash.uz/about' },
+};
 
 export default function AboutPage() {
   return (
