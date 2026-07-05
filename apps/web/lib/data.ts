@@ -133,7 +133,7 @@ export const products: Product[] = [
   {
     id: '7', name: 'Чернитель резины Матовый 10 л', slug: 'tire-shine-matte-10l',
     description: 'Чернитель шин с натуральным матовым финишем. Естественный вид без лишнего блеска. UV-защита.',
-    price: 130000,
+    price: 150000,
     image: '/products/tire-shine-matte.webp',
     images: ['/products/tire-shine-matte.webp'],
     category: 'Чернитель резины', categorySlug: 'tire-shine',
