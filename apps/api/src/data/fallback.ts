@@ -24,7 +24,7 @@ const products = [
   {
     id: '2', name: 'Pink Panther / Magic Active Foam 20 кг', slug: 'pink-panther-20kg',
     description: 'Премиальная розовая активная пена для превосходной очистки. Высокая пенообразующая способность. Безопасна для лакокрасочных покрытий.',
-    price: 600000, compareAtPrice: null, sku: 'SW-PP-20',
+    price: 550000, compareAtPrice: null, sku: 'SW-PP-20',
     categoryId: '2', categoryName: 'Активная пена', categorySlug: 'active-foam',
     isBestseller: true, isNew: true, isActive: true, stock: 15,
     rating: 4.8, reviewCount: 32,
@@ -74,7 +74,7 @@ const products = [
   {
     id: '7', name: 'Чернитель резины Матовый 10 л', slug: 'tire-shine-matte-10l',
     description: 'Чернитель шин с натуральным матовым финишем. Естественный вид без лишнего блеска. UV-защита.',
-    price: 130000, compareAtPrice: null, sku: 'SW-TM-10',
+    price: 150000, compareAtPrice: null, sku: 'SW-TM-10',
     categoryId: '6', categoryName: 'Чернитель резины', categorySlug: 'tire-shine',
     isBestseller: false, isNew: false, isActive: true, stock: 45,
     rating: 4.5, reviewCount: 15,

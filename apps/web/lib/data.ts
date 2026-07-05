@@ -88,7 +88,7 @@ export const products: Product[] = [
   {
     id: '2', name: 'Pink Panther / Magic Active Foam 20 кг', slug: 'pink-panther-20kg',
     description: 'Премиальная розовая активная пена. Высокая пенообразующая способность. Безопасна для ЛКП. Самая мощная пена в линейке SmartWash.',
-    price: 600000,
+    price: 550000,
     image: '/products/pink-panther-20kg.webp',
     images: ['/products/pink-panther-20kg.webp'],
     category: 'Активная пена', categorySlug: 'active-foam',
