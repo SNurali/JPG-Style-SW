@@ -147,6 +147,9 @@ ${order.notes ? `📝 <b>Комментарий:</b> ${escapeHtml(order.notes)}`
                 { text: '✅ Подтвердить', callback_data: `confirm_${order.orderNumber}` },
                 { text: '❌ Отменить', callback_data: `cancel_${order.orderNumber}` },
               ],
+              [
+                { text: '📋 Открыть в админке', url: `https://smartwash.uz/admin/orders?search=${order.orderNumber}` },
+              ],
             ],
           },
         }),
