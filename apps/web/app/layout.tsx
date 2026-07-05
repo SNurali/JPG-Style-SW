@@ -36,10 +36,10 @@ export const metadata: Metadata = {
     siteName: 'JPG Style SmartWash',
     images: [
       {
-        url: '/icon-512.png',
-        width: 512,
-        height: 512,
-        alt: 'JPG Style SmartWash — Professional Auto Care',
+        url: '/og-image.jpg',
+        width: 1200,
+        height: 630,
+        alt: 'JPG Style SmartWash — Профессиональная автохимия премиум-класса в Ташкенте',
       },
     ],
   },
@@ -47,7 +47,7 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     title: 'JPG Style SmartWash — Профессиональная автохимия',
     description: 'Автошампуни, нано-покрытия, воски, чернители. Доставка по Ташкенту в день заказа.',
-    images: ['/icon-512.png'],
+    images: ['/og-image.jpg'],
   },
   alternates: {
     canonical: 'https://smartwash.uz',

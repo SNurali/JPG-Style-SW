@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  width: 1200px;
+  height: 630px;
+  background: linear-gradient(135deg, #0f0f23 0%, #1a1a2e 40%, #16213e 70%, #0f0f23 100%);
+  font-family: 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  position: relative;
+}
+.blob1 {
+  position: absolute;
+  width: 400px;
+  height: 400px;
+  background: radial-gradient(circle, rgba(67, 97, 238, 0.15) 0%, transparent 70%);
+  top: -100px;
+  right: -50px;
+  border-radius: 50%;
+}
+.blob2 {
+  position: absolute;
+  width: 300px;
+  height: 300px;
+  background: radial-gradient(circle, rgba(131, 56, 236, 0.1) 0%, transparent 70%);
+  bottom: -50px;
+  left: 50px;
+  border-radius: 50%;
+}
+.container {
+  display: flex;
+  align-items: center;
+  gap: 60px;
+  padding: 0 80px;
+  position: relative;
+  z-index: 1;
+}
+.logo-block {
+  flex-shrink: 0;
+}
+.monogram {
+  width: 160px;
+  height: 160px;
+  border-radius: 32px;
+  background: linear-gradient(135deg, rgba(67, 97, 238, 0.15), rgba(67, 97, 238, 0.05));
+  border: 2px solid rgba(67, 97, 238, 0.3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+.monogram svg {
+  width: 120px;
+  height: 120px;
+}
+.text-block {
+  flex: 1;
+}
+.brand-sub {
+  font-size: 18px;
+  letter-spacing: 6px;
+  color: rgba(255,255,255,0.5);
+  text-transform: uppercase;
+  margin-bottom: 8px;
+}
+.brand-main {
+  font-size: 64px;
+  font-weight: 800;
+  letter-spacing: -2px;
+  background: linear-gradient(180deg, #ffffff 0%, #b8b8b8 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  line-height: 1.1;
+  margin-bottom: 20px;
+}
+.tagline {
+  font-size: 24px;
+  color: rgba(255,255,255,0.7);
+  line-height: 1.4;
+  max-width: 550px;
+}
+.accent-bar {
+  width: 80px;
+  height: 4px;
+  background: linear-gradient(90deg, #4361ee, #3a56d4);
+  border-radius: 2px;
+  margin-bottom: 16px;
+}
+.badges {
+  display: flex;
+  gap: 12px;
+  margin-top: 24px;
+}
+.badge {
+  padding: 8px 16px;
+  border-radius: 20px;
+  background: rgba(67, 97, 238, 0.1);
+  border: 1px solid rgba(67, 97, 238, 0.25);
+  color: rgba(255,255,255,0.8);
+  font-size: 14px;
+  font-weight: 500;
+}
+.url {
+  position: absolute;
+  bottom: 30px;
+  right: 80px;
+  font-size: 16px;
+  color: rgba(255,255,255,0.4);
+  letter-spacing: 1px;
+}
+</style>
+</head>
+<body>
+  <div class="blob1"></div>
+  <div class="blob2"></div>
+  <div class="container">
+    <div class="logo-block">
+      <div class="monogram">
+        <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <linearGradient id="chrome" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stop-color="#ffffff" />
+              <stop offset="40%" stop-color="#e8e8e8" />
+              <stop offset="60%" stop-color="#d0d0d0" />
+              <stop offset="100%" stop-color="#b8b8b8" />
+            </linearGradient>
+            <linearGradient id="accent" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0%" stop-color="#4361ee" />
+              <stop offset="100%" stop-color="#3a56d4" />
+            </linearGradient>
+          </defs>
+          <rect x="1" y="1" width="46" height="46" rx="11" fill="url(#accent)" fillOpacity="0.1" />
+          <rect x="1" y="1" width="46" height="46" rx="11" stroke="url(#accent)" strokeWidth="1.2" strokeOpacity="0.35" />
+          <text x="8" y="35" fontFamily="Inter, Helvetica Neue, Arial, sans-serif" fontWeight="800" fontSize="27" fill="url(#chrome)" letterSpacing="-1">SW</text>
+        </svg>
+      </div>
+    </div>
+    <div class="text-block">
+      <div class="accent-bar"></div>
+      <div class="brand-sub">JPG STYLE</div>
+      <div class="brand-main">SMARTWASH</div>
+      <div class="tagline">Профессиональная автохимия премиум-класса в Ташкенте</div>
+      <div class="badges">
+        <div class="badge">Автошампуни</div>
+        <div class="badge">Нано-покрытия</div>
+        <div class="badge">Воски</div>
+        <div class="badge">Чернители</div>
+      </div>
+    </div>
+  </div>
+  <div class="url">smartwash.uz</div>
+</body>
+</html>
