@@ -9,7 +9,13 @@ export const reviewRepository = {
     return result.rows.map(mapReviewRow);
   },
 
-  async create(data: { productId: string; customerId?: string; customerName: string; rating: number; comment: string }) {
+  async create(data: {
+    productId: string;
+    customerId?: string;
+    customerName: string;
+    rating: number;
+    comment: string;
+  }) {
     const result = await query(
       `INSERT INTO reviews (product_id, customer_id, customer_name, rating, comment, is_approved)
        VALUES ($1, $2, $3, $4, $5, FALSE) RETURNING *`,
@@ -19,10 +25,9 @@ export const reviewRepository = {
   },
 
   async approve(id: string) {
-    const result = await query(
-      `UPDATE reviews SET is_approved = TRUE WHERE id = $1 RETURNING *`,
-      [id]
-    );
+    const result = await query(`UPDATE reviews SET is_approved = TRUE WHERE id = $1 RETURNING *`, [
+      id,
+    ]);
     if (result.rows[0]) {
       // Update product rating
       const productId = result.rows[0].product_id;

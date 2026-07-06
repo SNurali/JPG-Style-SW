@@ -18,6 +18,7 @@ HDD Fixer — Service Center Management System
 ## Требования
 
 ### Минимальные требования
+
 - **OS**: Linux (Ubuntu 20.04+, Debian 11+)
 - **CPU**: 2 cores
 - **RAM**: 4 GB
@@ -27,6 +28,7 @@ HDD Fixer — Service Center Management System
 - **Docker Compose**: 2.x+
 
 ### Проверка установленных компонентов
+
 ```bash
 node --version          # v20.x.x
 npm --version           # 10.x.x
@@ -54,15 +56,16 @@ npm run dev:all
 
 ### Сервисы локально
 
-| Сервис | URL | Порт |
-|--------|-----|------|
-| Frontend Web | http://localhost:3003 | 3003 |
-| Backend API | http://localhost:3004 | 3004 |
+| Сервис       | URL                            | Порт |
+| ------------ | ------------------------------ | ---- |
+| Frontend Web | http://localhost:3003          | 3003 |
+| Backend API  | http://localhost:3004          | 3004 |
 | Swagger Docs | http://localhost:3004/api/docs | 3004 |
-| PostgreSQL | localhost | 5432 |
-| Redis | localhost | 6379 |
+| PostgreSQL   | localhost                      | 5432 |
+| Redis        | localhost                      | 6379 |
 
 ### Остановка локальной среды
+
 ```bash
 # Остановить всё (Ctrl+C в терминале)
 # Остановить Docker контейнеры

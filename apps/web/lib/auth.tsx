@@ -17,7 +17,12 @@ interface AuthContextType {
   token: string | null;
   isLoading: boolean;
   login: (email: string, password: string) => Promise<void>;
-  register: (data: { name: string; email: string; phone?: string; password: string }) => Promise<void>;
+  register: (data: {
+    name: string;
+    email: string;
+    phone?: string;
+    password: string;
+  }) => Promise<void>;
   loginWithGoogle: (idToken: string) => Promise<void>;
   logout: () => void;
   setUser: (u: CustomerUser) => void;
@@ -47,7 +52,11 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     const u = localStorage.getItem(USER_KEY);
     if (t && u && !isExpired(t)) {
       setToken(t);
-      try { setUserState(JSON.parse(u)); } catch {}
+      try {
+        setUserState(JSON.parse(u));
+      } catch {
+        /* corrupted stored user, ignore */
+      }
     } else {
       localStorage.removeItem(TOKEN_KEY);
       localStorage.removeItem(USER_KEY);
@@ -62,20 +71,29 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     localStorage.setItem(USER_KEY, JSON.stringify(u));
   }, []);
 
-  const login = useCallback(async (email: string, password: string) => {
-    const { data } = await loginCustomer({ email, password });
-    persist(data.token, data.user);
-  }, [persist]);
+  const login = useCallback(
+    async (email: string, password: string) => {
+      const { data } = await loginCustomer({ email, password });
+      persist(data.token, data.user);
+    },
+    [persist]
+  );
 
-  const register = useCallback(async (d: { name: string; email: string; phone?: string; password: string }) => {
-    const { data } = await registerCustomer(d);
-    persist(data.token, data.user);
-  }, [persist]);
+  const register = useCallback(
+    async (d: { name: string; email: string; phone?: string; password: string }) => {
+      const { data } = await registerCustomer(d);
+      persist(data.token, data.user);
+    },
+    [persist]
+  );
 
-  const loginWithGoogle = useCallback(async (idToken: string) => {
-    const { data } = await googleLoginCustomer(idToken);
-    persist(data.token, data.user);
-  }, [persist]);
+  const loginWithGoogle = useCallback(
+    async (idToken: string) => {
+      const { data } = await googleLoginCustomer(idToken);
+      persist(data.token, data.user);
+    },
+    [persist]
+  );
 
   const logout = useCallback(() => {
     setToken(null);
@@ -90,7 +108,9 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   }, []);
 
   return (
-    <AuthContext.Provider value={{ user, token, isLoading, login, register, loginWithGoogle, logout, setUser }}>
+    <AuthContext.Provider
+      value={{ user, token, isLoading, login, register, loginWithGoogle, logout, setUser }}
+    >
       {children}
     </AuthContext.Provider>
   );

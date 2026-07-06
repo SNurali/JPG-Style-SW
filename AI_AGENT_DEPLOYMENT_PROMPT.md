@@ -1,9 +1,11 @@
 # Промт для AI агента - Деплой JPG Style SmartWash на VPS
 
 ## Задача
+
 Подключиться к VPS серверу и развернуть проект JPG Style SmartWash с использованием подготовленных скриптов и конфигурации.
 
 ## Информация о сервере
+
 - **IP адрес (WireGuard):** 172.16.252.32
 - **Внешний IP:** 195.158.24.137
 - **SSH User:** yoyo
@@ -14,6 +16,7 @@
 ## Шаги деплоя
 
 ### 1. Подключение к серверу
+
 ```bash
 # Включить WireGuard VPN (если нужно)
 sudo wg-quick up wg0
@@ -23,6 +26,7 @@ ssh yoyo@172.16.252.32
 ```
 
 ### 2. Первичная настройка (если первый раз)
+
 ```bash
 cd /home/yoyo
 git clone https://github.com/SNurali/JPG-Style-SW.git jpg-style-smartwash
@@ -33,6 +37,7 @@ sudo bash setup-production.sh
 ```
 
 ### 3. Обновление и деплой (если уже установлено)
+
 ```bash
 cd /home/yoyo/jpg-style-smartwash
 
@@ -51,6 +56,7 @@ docker compose -f docker-compose.prod.yml ps
 ```
 
 ### 4. Проверка здоровья
+
 ```bash
 # Frontend
 curl -s http://localhost:3000 | head -5
@@ -88,6 +94,7 @@ docker compose -f docker-compose.prod.yml ps
 ## Переменные окружения (.env.prod)
 
 Скрипт `setup-production.sh` автоматически создаст `.env.prod` с:
+
 - Безопасными паролями для БД (сгенерированные через openssl)
 - JWT секретами
 - Правильными портами (3000 для web, 4000 для API)
@@ -95,14 +102,14 @@ docker compose -f docker-compose.prod.yml ps
 
 ## Порты на сервере
 
-| Порт | Сервис | Статус |
-|------|--------|--------|
-| 80 | Nginx | Общий |
-| 443 | Nginx SSL | Общий |
-| 3000 | Frontend | ✅ SmartWash |
-| 4000 | API | ✅ SmartWash |
+| Порт | Сервис     | Статус       |
+| ---- | ---------- | ------------ |
+| 80   | Nginx      | Общий        |
+| 443  | Nginx SSL  | Общий        |
+| 3000 | Frontend   | ✅ SmartWash |
+| 4000 | API        | ✅ SmartWash |
 | 5432 | PostgreSQL | ✅ SmartWash |
-| 6379 | Redis | ✅ SmartWash |
+| 6379 | Redis      | ✅ SmartWash |
 
 ## Что проверить после деплоя
 
@@ -149,6 +156,7 @@ docker compose -f docker-compose.prod.yml up -d --build
 ## Результат
 
 После успешного деплоя:
+
 - Frontend работает на http://195.158.24.137:3000
 - API работает на http://195.158.24.137:4000
 - PostgreSQL доступна на localhost:5432
@@ -158,6 +166,7 @@ docker compose -f docker-compose.prod.yml up -d --build
 ## Документация
 
 Полная документация доступна в файлах:
+
 - `DEPLOYMENT_GUIDE_FULL.md` - полное руководство
 - `DEPLOYMENT_CHECKLIST.md` - чек-лист перед деплоем
 - `DEPLOY_README.md` - быстрый старт

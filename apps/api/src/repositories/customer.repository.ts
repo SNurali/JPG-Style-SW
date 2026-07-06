@@ -5,7 +5,13 @@ export const customerRepository = {
    * Find or create a customer by phone number.
    * Upserts: creates if not found, returns existing if found.
    */
-  async findOrCreate(data: { firstName: string; lastName?: string; phone: string; address?: string; zone?: string }) {
+  async findOrCreate(data: {
+    firstName: string;
+    lastName?: string;
+    phone: string;
+    address?: string;
+    zone?: string;
+  }) {
     // Try to find existing
     let result = await query(`SELECT * FROM customers WHERE phone = $1`, [data.phone]);
 
@@ -15,7 +21,9 @@ export const customerRepository = {
       // Update name if empty
       if (!customer.first_name && data.firstName) {
         await query(`UPDATE customers SET first_name = $1, last_name = $2 WHERE id = $3`, [
-          data.firstName, data.lastName || '', customer.id,
+          data.firstName,
+          data.lastName || '',
+          customer.id,
         ]);
       }
 
@@ -25,11 +33,16 @@ export const customerRepository = {
         const exists = addresses.some((a: any) => a.address === data.address);
         if (!exists) {
           addresses.push({ address: data.address, zone: data.zone || '' });
-          await query(`UPDATE customers SET addresses = $1 WHERE id = $2`, [JSON.stringify(addresses), customer.id]);
+          await query(`UPDATE customers SET addresses = $1 WHERE id = $2`, [
+            JSON.stringify(addresses),
+            customer.id,
+          ]);
         }
       }
 
-      return mapCustomerRow((await query(`SELECT * FROM customers WHERE id = $1`, [customer.id])).rows[0]);
+      return mapCustomerRow(
+        (await query(`SELECT * FROM customers WHERE id = $1`, [customer.id])).rows[0]
+      );
     }
 
     // Create new
@@ -49,7 +62,9 @@ export const customerRepository = {
   // ─── Auth (storefront customers) ──────────────────────
 
   async findByEmail(email: string) {
-    const result = await query(`SELECT * FROM customers WHERE lower(email) = lower($1) LIMIT 1`, [email]);
+    const result = await query(`SELECT * FROM customers WHERE lower(email) = lower($1) LIMIT 1`, [
+      email,
+    ]);
     return result.rows[0] || null;
   },
 
@@ -64,12 +79,24 @@ export const customerRepository = {
   },
 
   /** Create a customer with email+password credentials. */
-  async createWithPassword(data: { name: string; email: string; phone?: string; passwordHash: string }) {
+  async createWithPassword(data: {
+    name: string;
+    email: string;
+    phone?: string;
+    passwordHash: string;
+  }) {
     const [firstName, ...lastParts] = data.name.trim().split(' ');
     const result = await query(
       `INSERT INTO customers (first_name, last_name, name, email, phone, password_hash)
        VALUES ($1, $2, $3, $4, $5, $6) RETURNING *`,
-      [firstName, lastParts.join(' '), data.name.trim(), data.email.toLowerCase(), data.phone || null, data.passwordHash]
+      [
+        firstName,
+        lastParts.join(' '),
+        data.name.trim(),
+        data.email.toLowerCase(),
+        data.phone || null,
+        data.passwordHash,
+      ]
     );
     return mapCustomerRow(result.rows[0]);
   },
@@ -81,7 +108,10 @@ export const customerRepository = {
 
     const existingByEmail = data.email ? await this.findByEmail(data.email) : null;
     if (existingByEmail) {
-      const upd = await query(`UPDATE customers SET google_id = $1 WHERE id = $2 RETURNING *`, [data.googleId, existingByEmail.id]);
+      const upd = await query(`UPDATE customers SET google_id = $1 WHERE id = $2 RETURNING *`, [
+        data.googleId,
+        existingByEmail.id,
+      ]);
       return mapCustomerRow(upd.rows[0]);
     }
 
@@ -89,7 +119,13 @@ export const customerRepository = {
     const result = await query(
       `INSERT INTO customers (first_name, last_name, name, email, google_id)
        VALUES ($1, $2, $3, $4, $5) RETURNING *`,
-      [firstName, lastParts.join(' '), data.name.trim(), data.email ? data.email.toLowerCase() : null, data.googleId]
+      [
+        firstName,
+        lastParts.join(' '),
+        data.name.trim(),
+        data.email ? data.email.toLowerCase() : null,
+        data.googleId,
+      ]
     );
     return mapCustomerRow(result.rows[0]);
   },
@@ -101,14 +137,23 @@ export const customerRepository = {
     let idx = 1;
     if (data.name !== undefined) {
       const [firstName, ...lastParts] = data.name.trim().split(' ');
-      fields.push(`first_name = $${idx++}`); params.push(firstName);
-      fields.push(`last_name = $${idx++}`); params.push(lastParts.join(' '));
-      fields.push(`name = $${idx++}`); params.push(data.name.trim());
+      fields.push(`first_name = $${idx++}`);
+      params.push(firstName);
+      fields.push(`last_name = $${idx++}`);
+      params.push(lastParts.join(' '));
+      fields.push(`name = $${idx++}`);
+      params.push(data.name.trim());
     }
-    if (data.phone !== undefined) { fields.push(`phone = $${idx++}`); params.push(data.phone || null); }
+    if (data.phone !== undefined) {
+      fields.push(`phone = $${idx++}`);
+      params.push(data.phone || null);
+    }
     if (fields.length === 0) return this.findById(id);
     params.push(id);
-    const result = await query(`UPDATE customers SET ${fields.join(', ')} WHERE id = $${idx} RETURNING *`, params);
+    const result = await query(
+      `UPDATE customers SET ${fields.join(', ')} WHERE id = $${idx} RETURNING *`,
+      params
+    );
     return result.rows[0] ? mapCustomerRow(result.rows[0]) : null;
   },
 
@@ -140,7 +185,9 @@ export const customerRepository = {
     let idx = 1;
 
     if (search) {
-      conditions.push(`(phone ILIKE $${idx} OR first_name ILIKE $${idx} OR last_name ILIKE $${idx})`);
+      conditions.push(
+        `(phone ILIKE $${idx} OR first_name ILIKE $${idx} OR last_name ILIKE $${idx})`
+      );
       params.push(`%${search}%`);
       idx++;
     }

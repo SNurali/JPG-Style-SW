@@ -1,7 +1,8 @@
 import { Pool, PoolClient } from 'pg';
 
 const pool = new Pool({
-  connectionString: process.env.DATABASE_URL || 'postgresql://smartwash:smartwash@localhost:5433/smartwash',
+  connectionString:
+    process.env.DATABASE_URL || 'postgresql://smartwash:smartwash@localhost:5433/smartwash',
   max: 20,
   idleTimeoutMillis: 30_000,
   connectionTimeoutMillis: 5_000,
@@ -14,11 +15,14 @@ pool.on('error', (err) => {
 /**
  * Execute a query against the database.
  */
-export async function query<T = any>(text: string, params?: any[]): Promise<{ rows: T[]; rowCount: number | null }> {
+export async function query<T = any>(
+  text: string,
+  params?: any[]
+): Promise<{ rows: T[]; rowCount: number | null }> {
   const result = await pool.query(text, params);
   return {
     rows: result.rows as T[],
-    rowCount: result.rowCount
+    rowCount: result.rowCount,
   };
 }
 

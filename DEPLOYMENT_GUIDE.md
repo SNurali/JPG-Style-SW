@@ -3,12 +3,14 @@
 ## ✅ Production Deployment (Docker Compose)
 
 ### Ports
+
 - **API:** 3004
 - **Web:** 3003
 
 ---
 
 ## 📍 Access URLs (example)
+
 ```
 https://hddfix.uz/v1/health
 https://hddfix.uz/api/docs
@@ -18,6 +20,7 @@ https://hddfix.uz/
 ---
 
 ## 🔑 Initial Admin (via seed)
+
 Seed creates default users. Change passwords after first login.
 
 ---
@@ -25,6 +28,7 @@ Seed creates default users. Change passwords after first login.
 ## 🛠️ Management Commands
 
 ### Start/Restart Services:
+
 ```bash
 # Docker Compose (prod)
 docker compose -f docker-compose.prod.yml up -d --build
@@ -33,12 +37,14 @@ docker compose -f docker-compose.prod.yml down
 ```
 
 ### Logs:
+
 ```bash
 # Docker logs
 docker compose -f docker-compose.prod.yml logs -f
 ```
 
 ### Quick Start Script:
+
 ```bash
 cd /home/yoyo/nodir_hdd_fixer
 ./start.sh
@@ -47,6 +53,7 @@ cd /home/yoyo/nodir_hdd_fixer
 ---
 
 ## 🔐 Firewall Status
+
 ```
 Port 80/tcp  - ALLOW (HTTP)
 Port 443/tcp - ALLOW (HTTPS)
@@ -55,11 +62,13 @@ Port 443/tcp - ALLOW (HTTPS)
 ---
 
 ## 📁 Project Location
+
 ```
 /home/yoyo/nodir_hdd_fixer/
 ```
 
 ### Structure:
+
 ```
 ├── apps/api          # NestJS Backend (port 3004)
 ├── apps/web          # Next.js Frontend (port 3003)
@@ -73,16 +82,19 @@ Port 443/tcp - ALLOW (HTTPS)
 ## ⚙️ Configuration Files
 
 ### Nginx Config:
+
 ```
 /etc/nginx/sites-available/hdd-fixer
 ```
 
 ### Systemd Service:
+
 ```
 /etc/systemd/system/hdd-fixer-api.service
 ```
 
 ### Environment:
+
 ```
 /path/to/nodir_hdd_fixer/.env.production
 /path/to/nodir_hdd_fixer/.env.prod   # generated for Docker Compose
@@ -97,6 +109,7 @@ To use a custom domain:
 1. **Buy a domain** (e.g., hdd-fixer.uz)
 
 2. **Add DNS A-record:**
+
    ```
    Type: A
    Name: @
@@ -105,13 +118,16 @@ To use a custom domain:
    ```
 
 3. **Update Nginx config:**
+
    ```bash
    sudo nano /etc/nginx/sites-available/hdd-fixer
    ```
+
    Change: `server_name 195.158.24.137 _;`
    To: `server_name hdd-fixer.uz www.hdd-fixer.uz;`
 
 4. **Update .env:**
+
    ```env
    APP_URL=https://hdd-fixer.uz
    WEB_URL=https://hdd-fixer.uz
@@ -119,6 +135,7 @@ To use a custom domain:
    ```
 
 5. **Restart services:**
+
    ```bash
    sudo systemctl restart nginx
    sudo systemctl restart hdd-fixer-api
@@ -134,14 +151,14 @@ To use a custom domain:
 
 ## 🧪 API Endpoints
 
-| Endpoint | Description |
-|----------|-------------|
-| `GET /v1/health` | Health check |
-| `GET /api/docs` | Swagger documentation |
-| `POST /v1/auth/login` | Login |
-| `POST /v1/auth/register` | Register |
-| `GET /v1/orders` | Get orders |
-| `POST /v1/orders` | Create order |
+| Endpoint                 | Description           |
+| ------------------------ | --------------------- |
+| `GET /v1/health`         | Health check          |
+| `GET /api/docs`          | Swagger documentation |
+| `POST /v1/auth/login`    | Login                 |
+| `POST /v1/auth/register` | Register              |
+| `GET /v1/orders`         | Get orders            |
+| `POST /v1/orders`        | Create order          |
 
 ---
 
@@ -180,24 +197,28 @@ journalctl -u hdd-fixer-api -f
 ## 🆘 Troubleshooting
 
 ### API not responding:
+
 ```bash
 sudo systemctl status hdd-fixer-api
 sudo journalctl -u hdd-fixer-api -n 50
 ```
 
 ### Nginx errors:
+
 ```bash
 sudo nginx -t
 sudo tail -f /var/log/nginx/hdd-fixer-error.log
 ```
 
 ### Database connection issues:
+
 ```bash
 docker-compose ps
 docker-compose logs postgres
 ```
 
 ### Port already in use:
+
 ```bash
 sudo lsof -i :3004
 sudo kill -9 <PID>

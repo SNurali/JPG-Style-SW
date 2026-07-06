@@ -23,7 +23,9 @@ export function Sidebar() {
   const [collapsed, setCollapsed] = useState(false);
 
   return (
-    <aside className={`fixed left-0 top-0 h-screen bg-primary border-r border-white/5 transition-all duration-300 z-40 ${collapsed ? 'w-16' : 'w-60'} flex flex-col`}>
+    <aside
+      className={`fixed left-0 top-0 h-screen bg-primary border-r border-white/5 transition-all duration-300 z-40 ${collapsed ? 'w-16' : 'w-60'} flex flex-col`}
+    >
       {/* Header */}
       <div className="h-16 flex items-center justify-between px-4 border-b border-white/5">
         {!collapsed && (
@@ -40,7 +42,8 @@ export function Sidebar() {
       {/* Navigation */}
       <nav className="flex-1 py-4 px-2 space-y-1 overflow-y-auto">
         {navItems.map((item) => {
-          const isActive = pathname === item.href || (item.href !== '/admin/' && pathname.startsWith(item.href));
+          const isActive =
+            pathname === item.href || (item.href !== '/admin/' && pathname.startsWith(item.href));
           return (
             <Link
               key={item.href}
@@ -67,10 +70,14 @@ export function Sidebar() {
               <p className="text-sm font-medium text-white truncate">{user?.name}</p>
               <p className="text-xs text-text-muted truncate">{user?.email}</p>
             </div>
-            <button onClick={logout} className="btn-icon text-sm flex-shrink-0" title="Выйти">🚪</button>
+            <button onClick={logout} className="btn-icon text-sm flex-shrink-0" title="Выйти">
+              🚪
+            </button>
           </div>
         ) : (
-          <button onClick={logout} className="btn-icon w-full text-sm" title="Выйти">🚪</button>
+          <button onClick={logout} className="btn-icon w-full text-sm" title="Выйти">
+            🚪
+          </button>
         )}
       </div>
     </aside>

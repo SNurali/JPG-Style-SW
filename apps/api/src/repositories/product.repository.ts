@@ -105,7 +105,19 @@ export const productRepository = {
       `INSERT INTO products (name, slug, description, price, compare_at_price, sku, category_id, is_bestseller, is_new, stock, images)
        VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11)
        RETURNING *`,
-      [data.name, data.slug, data.description, data.price, data.compareAtPrice || null, data.sku, data.categoryId, data.isBestseller || false, data.isNew || false, data.stock || 0, JSON.stringify(data.images || [])]
+      [
+        data.name,
+        data.slug,
+        data.description,
+        data.price,
+        data.compareAtPrice || null,
+        data.sku,
+        data.categoryId,
+        data.isBestseller || false,
+        data.isNew || false,
+        data.stock || 0,
+        JSON.stringify(data.images || []),
+      ]
     );
     return mapProductRow(result.rows[0]);
   },
@@ -116,10 +128,19 @@ export const productRepository = {
     let idx = 1;
 
     const fieldMap: Record<string, string> = {
-      name: 'name', slug: 'slug', description: 'description', price: 'price',
-      compareAtPrice: 'compare_at_price', sku: 'sku', categoryId: 'category_id',
-      isBestseller: 'is_bestseller', isNew: 'is_new', isActive: 'is_active',
-      stock: 'stock', rating: 'rating', reviewCount: 'review_count',
+      name: 'name',
+      slug: 'slug',
+      description: 'description',
+      price: 'price',
+      compareAtPrice: 'compare_at_price',
+      sku: 'sku',
+      categoryId: 'category_id',
+      isBestseller: 'is_bestseller',
+      isNew: 'is_new',
+      isActive: 'is_active',
+      stock: 'stock',
+      rating: 'rating',
+      reviewCount: 'review_count',
     };
 
     for (const [key, col] of Object.entries(fieldMap)) {
@@ -145,7 +166,10 @@ export const productRepository = {
   },
 
   async updateStock(id: string, quantityChange: number, reason: string, referenceId?: string) {
-    await query(`UPDATE products SET stock = GREATEST(0, stock + $1) WHERE id = $2`, [quantityChange, id]);
+    await query(`UPDATE products SET stock = GREATEST(0, stock + $1) WHERE id = $2`, [
+      quantityChange,
+      id,
+    ]);
     await query(
       `INSERT INTO inventory_log (product_id, quantity_change, reason, reference_id) VALUES ($1, $2, $3, $4)`,
       [id, quantityChange, reason, referenceId || null]

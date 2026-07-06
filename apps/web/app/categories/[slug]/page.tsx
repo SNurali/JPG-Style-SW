@@ -8,7 +8,11 @@ export async function generateStaticParams() {
   return categories.map((c) => ({ slug: c.slug }));
 }
 
-export async function generateMetadata({ params }: { params: { slug: string } }): Promise<Metadata> {
+export async function generateMetadata({
+  params,
+}: {
+  params: { slug: string };
+}): Promise<Metadata> {
   const category = getCategoryBySlug(params.slug);
   if (!category) return { title: 'Категория не найдена' };
 
@@ -40,7 +44,9 @@ export default function CategoryPage({ params }: { params: { slug: string } }) {
     return (
       <div className="max-w-7xl mx-auto px-4 py-20 text-center">
         <h1 className="section-title mb-4">Категория не найдена</h1>
-        <Link href="/categories" className="btn-primary">Все категории</Link>
+        <Link href="/categories" className="btn-primary">
+          Все категории
+        </Link>
       </div>
     );
   }
@@ -55,7 +61,9 @@ export default function CategoryPage({ params }: { params: { slug: string } }) {
     <>
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(categoryJsonLd(category, categoryProducts.length)) }}
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(categoryJsonLd(category, categoryProducts.length)),
+        }}
       />
       <script
         type="application/ld+json"

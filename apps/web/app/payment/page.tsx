@@ -3,7 +3,8 @@ import React from 'react';
 
 export const metadata: Metadata = {
   title: 'Оплата — способы оплаты заказа | JPG Style SmartWash',
-  description: 'Способы оплаты в JPG Style SmartWash: Click, Payme, наличные при получении. Безопасная оплата заказа автохимии в Ташкенте.',
+  description:
+    'Способы оплаты в JPG Style SmartWash: Click, Payme, наличные при получении. Безопасная оплата заказа автохимии в Ташкенте.',
   alternates: { canonical: 'https://smartwash.uz/payment' },
 };
 
@@ -33,13 +34,16 @@ export default function PaymentPage() {
 
           <h2 className="font-heading text-xl font-semibold text-white">Безопасность</h2>
           <p>
-            Все онлайн-платежи проходят через защищённые каналы. Мы не храним данные
-            ваших банковских карт — обработка платежей осуществляется напрямую через
-            платёжные системы Click и Payme.
+            Все онлайн-платежи проходят через защищённые каналы. Мы не храним данные ваших
+            банковских карт — обработка платежей осуществляется напрямую через платёжные системы
+            Click и Payme.
           </p>
 
           <p className="text-sm text-text-muted">
-            По вопросам оплаты: <a href="tel:+998501040026" className="text-accent hover:underline">+998 50 104 00 26</a>
+            По вопросам оплаты:{' '}
+            <a href="tel:+998501040026" className="text-accent hover:underline">
+              +998 50 104 00 26
+            </a>
           </p>
         </div>
       </div>

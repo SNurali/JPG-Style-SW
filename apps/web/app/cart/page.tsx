@@ -16,7 +16,9 @@ export default function CartPage() {
         <div className="text-6xl mb-6">🛒</div>
         <h1 className="section-title mb-4">{t('cart.empty')}</h1>
         <p className="text-text-muted mb-8">{t('cart.emptyHint')}</p>
-        <Link href="/categories" className="btn-primary">{t('hero.goToCatalog')}</Link>
+        <Link href="/categories" className="btn-primary">
+          {t('hero.goToCatalog')}
+        </Link>
       </div>
     );
   }
@@ -25,13 +27,17 @@ export default function CartPage() {
     <div className="max-w-7xl mx-auto px-4 sm:px-6 py-10">
       {/* Breadcrumb */}
       <nav className="text-sm text-text-muted mb-8">
-        <Link href="/" className="hover:text-accent transition-colors">{t('nav.home')}</Link>
+        <Link href="/" className="hover:text-accent transition-colors">
+          {t('nav.home')}
+        </Link>
         <span className="mx-2">/</span>
         <span className="text-white">{t('cart.title')}</span>
       </nav>
 
       <div className="flex items-center justify-between mb-8">
-        <h1 className="section-title">{t('cart.title')} ({totalItems})</h1>
+        <h1 className="section-title">
+          {t('cart.title')} ({totalItems})
+        </h1>
         <button onClick={clearCart} className="text-sm text-danger hover:underline">
           {t('cart.clear')}
         </button>
@@ -44,20 +50,22 @@ export default function CartPage() {
             <div key={item.id} className="glass-card p-4 flex gap-4">
               {/* Product image */}
               <div className="w-20 h-20 sm:w-24 sm:h-24 rounded-lg overflow-hidden flex-shrink-0 bg-primary-light">
-                <img
-                  src={item.image}
-                  alt={item.name}
-                  className="w-full h-full object-cover"
-                />
+                <img src={item.image} alt={item.name} className="w-full h-full object-cover" />
               </div>
 
               {/* Info */}
               <div className="flex-1 min-w-0">
-                <h3 className="font-heading font-semibold text-white text-sm mb-1 truncate">{item.name}</h3>
+                <h3 className="font-heading font-semibold text-white text-sm mb-1 truncate">
+                  {item.name}
+                </h3>
                 <div className="flex items-center gap-2 mb-3">
-                  <span className="text-white font-semibold">{formatPrice(item.price, t('currency'))}</span>
+                  <span className="text-white font-semibold">
+                    {formatPrice(item.price, t('currency'))}
+                  </span>
                   {item.compareAtPrice && (
-                    <span className="text-xs text-text-muted line-through">{formatPrice(item.compareAtPrice, t('currency'))}</span>
+                    <span className="text-xs text-text-muted line-through">
+                      {formatPrice(item.compareAtPrice, t('currency'))}
+                    </span>
                   )}
                 </div>
 
@@ -70,7 +78,9 @@ export default function CartPage() {
                     >
                       −
                     </button>
-                    <span className="px-3 py-1.5 text-sm font-medium text-white">{item.quantity}</span>
+                    <span className="px-3 py-1.5 text-sm font-medium text-white">
+                      {item.quantity}
+                    </span>
                     <button
                       onClick={() => updateQuantity(item.id, item.quantity + 1)}
                       className="px-3 py-1.5 text-text-muted hover:text-white transition-colors text-sm"
@@ -91,7 +101,9 @@ export default function CartPage() {
 
               {/* Item total */}
               <div className="text-right hidden sm:block">
-                <span className="font-heading font-bold text-white">{formatPrice(item.price * item.quantity, t('currency'))}</span>
+                <span className="font-heading font-bold text-white">
+                  {formatPrice(item.price * item.quantity, t('currency'))}
+                </span>
               </div>
             </div>
           ))}
@@ -104,7 +116,9 @@ export default function CartPage() {
 
             <div className="space-y-3 mb-6">
               <div className="flex justify-between text-sm">
-                <span className="text-text-muted">{t('cart.items')} ({totalItems})</span>
+                <span className="text-text-muted">
+                  {t('cart.items')} ({totalItems})
+                </span>
                 <span className="text-white">{formatPrice(totalPrice, t('currency'))}</span>
               </div>
               <div className="flex justify-between text-sm">
@@ -113,7 +127,9 @@ export default function CartPage() {
               </div>
               <div className="border-t border-white/5 pt-3 flex justify-between">
                 <span className="font-semibold text-white">{t('cart.total')}</span>
-                <span className="font-heading font-bold text-white text-xl">{formatPrice(totalPrice, t('currency'))}</span>
+                <span className="font-heading font-bold text-white text-xl">
+                  {formatPrice(totalPrice, t('currency'))}
+                </span>
               </div>
             </div>
 
@@ -121,7 +137,10 @@ export default function CartPage() {
               {t('cart.checkout')}
             </Link>
 
-            <Link href="/categories" className="block text-center text-sm text-accent hover:underline mt-4">
+            <Link
+              href="/categories"
+              className="block text-center text-sm text-accent hover:underline mt-4"
+            >
               {t('cart.continueShopping')}
             </Link>
           </div>

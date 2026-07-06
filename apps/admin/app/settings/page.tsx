@@ -19,12 +19,18 @@ export default function SettingsPage() {
     try {
       await api('/api/admin/change-password', {
         method: 'POST',
-        body: JSON.stringify({ currentPassword: passwords.current, newPassword: passwords.newPass }),
+        body: JSON.stringify({
+          currentPassword: passwords.current,
+          newPassword: passwords.newPass,
+        }),
       });
       setMsg('✅ Пароль успешно изменён');
       setPasswords({ current: '', newPass: '', confirm: '' });
-    } catch (err: any) { setMsg(`❌ ${err.message}`); }
-    finally { setChangingPassword(false); }
+    } catch (err: any) {
+      setMsg(`❌ ${err.message}`);
+    } finally {
+      setChangingPassword(false);
+    }
   };
 
   return (
@@ -49,7 +55,9 @@ export default function SettingsPage() {
             </div>
             <div className="flex justify-between">
               <span className="text-text-muted text-sm">Роль</span>
-              <span className="badge bg-accent/20 text-accent">{user?.role === 'superadmin' ? 'Суперадмин' : 'Админ'}</span>
+              <span className="badge bg-accent/20 text-accent">
+                {user?.role === 'superadmin' ? 'Суперадмин' : 'Админ'}
+              </span>
             </div>
           </div>
         </div>
@@ -58,15 +66,40 @@ export default function SettingsPage() {
         <div className="glass-card p-6">
           <h2 className="font-heading font-semibold text-white mb-4">🔐 Сменить пароль</h2>
           <div className="space-y-3">
-            <input type="password" placeholder="Текущий пароль" value={passwords.current}
-              onChange={(e) => setPasswords({ ...passwords, current: e.target.value })} className="input-field" autoComplete="current-password" />
-            <input type="password" placeholder="Новый пароль" value={passwords.newPass}
-              onChange={(e) => setPasswords({ ...passwords, newPass: e.target.value })} className="input-field" autoComplete="new-password" />
-            <input type="password" placeholder="Подтвердите пароль" value={passwords.confirm}
-              onChange={(e) => setPasswords({ ...passwords, confirm: e.target.value })} className="input-field" autoComplete="new-password" />
-            {msg && <p className={`text-sm ${msg.startsWith('✅') ? 'text-green-400' : 'text-danger'}`}>{msg}</p>}
-            <button onClick={handleChangePassword} disabled={changingPassword}
-              className={`btn-primary ${changingPassword ? 'opacity-70' : ''}`}>
+            <input
+              type="password"
+              placeholder="Текущий пароль"
+              value={passwords.current}
+              onChange={(e) => setPasswords({ ...passwords, current: e.target.value })}
+              className="input-field"
+              autoComplete="current-password"
+            />
+            <input
+              type="password"
+              placeholder="Новый пароль"
+              value={passwords.newPass}
+              onChange={(e) => setPasswords({ ...passwords, newPass: e.target.value })}
+              className="input-field"
+              autoComplete="new-password"
+            />
+            <input
+              type="password"
+              placeholder="Подтвердите пароль"
+              value={passwords.confirm}
+              onChange={(e) => setPasswords({ ...passwords, confirm: e.target.value })}
+              className="input-field"
+              autoComplete="new-password"
+            />
+            {msg && (
+              <p className={`text-sm ${msg.startsWith('✅') ? 'text-green-400' : 'text-danger'}`}>
+                {msg}
+              </p>
+            )}
+            <button
+              onClick={handleChangePassword}
+              disabled={changingPassword}
+              className={`btn-primary ${changingPassword ? 'opacity-70' : ''}`}
+            >
               {changingPassword ? '⏳ Сменяем...' : 'Сменить пароль'}
             </button>
           </div>
@@ -74,11 +107,20 @@ export default function SettingsPage() {
 
         {/* Contact info */}
         <div className="glass-card p-6">
-          <h2 className="font-heading font-semibold text-white mb-4">📱 Контактная информация магазина</h2>
+          <h2 className="font-heading font-semibold text-white mb-4">
+            📱 Контактная информация магазина
+          </h2>
           <div className="space-y-3 text-sm">
             <div className="flex justify-between">
               <span className="text-text-muted">Telegram</span>
-              <a href="https://t.me/JPGSTYLE_SMARTWASH" target="_blank" className="text-accent hover:underline">@JPGSTYLE_SMARTWASH</a>
+              <a
+                href="https://t.me/JPGSTYLE_SMARTWASH"
+                target="_blank"
+                className="text-accent hover:underline"
+                rel="noreferrer"
+              >
+                @JPGSTYLE_SMARTWASH
+              </a>
             </div>
             <div className="flex justify-between">
               <span className="text-text-muted">Телефон 1</span>

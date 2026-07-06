@@ -21,7 +21,8 @@ reviewsRouter.get('/:productId', async (req: Request, res: Response) => {
 reviewsRouter.post('/', async (req: Request, res: Response) => {
   try {
     const { productId, customerName, rating, comment } = req.body;
-    if (!productId || !customerName || !rating || !comment) return res.status(400).json({ error: 'Missing required fields' });
+    if (!productId || !customerName || !rating || !comment)
+      return res.status(400).json({ error: 'Missing required fields' });
     if (rating < 1 || rating > 5) return res.status(400).json({ error: 'Rating must be 1-5' });
 
     if (isDbAvailable()) {

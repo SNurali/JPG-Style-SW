@@ -12,7 +12,9 @@ export default function CategoriesPage() {
     <div className="max-w-7xl mx-auto px-4 sm:px-6 py-10">
       {/* Breadcrumb */}
       <nav className="text-sm text-text-muted mb-8">
-        <Link href="/" className="hover:text-accent transition-colors">{t('nav.home')}</Link>
+        <Link href="/" className="hover:text-accent transition-colors">
+          {t('nav.home')}
+        </Link>
         <span className="mx-2">/</span>
         <span className="text-white">{t('nav.catalog')}</span>
       </nav>
@@ -41,7 +43,9 @@ export default function CategoriesPage() {
                 {t(`cat.${cat.slug}`)}
               </h2>
               <p className="text-sm text-text-muted mb-2">{t(`catDesc.${cat.slug}`)}</p>
-              <span className="text-xs text-accent">{cat.productCount} {t('catalog.itemsCount')} →</span>
+              <span className="text-xs text-accent">
+                {cat.productCount} {t('catalog.itemsCount')} →
+              </span>
             </div>
           </Link>
         ))}

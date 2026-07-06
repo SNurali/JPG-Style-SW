@@ -10,7 +10,7 @@ export const uploadRouter = Router();
 const uploadDir = path.join(process.cwd(), 'uploads');
 const productsDir = path.join(uploadDir, 'products');
 const categoriesDir = path.join(uploadDir, 'categories');
-[uploadDir, productsDir, categoriesDir].forEach(dir => {
+[uploadDir, productsDir, categoriesDir].forEach((dir) => {
   if (!fs.existsSync(dir)) fs.mkdirSync(dir, { recursive: true });
 });
 
@@ -35,19 +35,29 @@ const upload = multer({
 });
 
 // POST /api/upload/product — upload product image
-uploadRouter.post('/product', requireAdmin, upload.single('image'), (req: Request, res: Response) => {
-  if (!req.file) return res.status(400).json({ error: 'No file uploaded' });
-  const url = `/uploads/products/${req.file.filename}`;
-  res.json({ data: { url, filename: req.file.filename } });
-});
+uploadRouter.post(
+  '/product',
+  requireAdmin,
+  upload.single('image'),
+  (req: Request, res: Response) => {
+    if (!req.file) return res.status(400).json({ error: 'No file uploaded' });
+    const url = `/uploads/products/${req.file.filename}`;
+    res.json({ data: { url, filename: req.file.filename } });
+  }
+);
 
 // POST /api/upload/products — upload multiple product images
-uploadRouter.post('/products', requireAdmin, upload.array('images', 5), (req: Request, res: Response) => {
-  const files = req.files as Express.Multer.File[];
-  if (!files || files.length === 0) return res.status(400).json({ error: 'No files uploaded' });
-  const urls = files.map(f => `/uploads/products/${f.filename}`);
-  res.json({ data: { urls } });
-});
+uploadRouter.post(
+  '/products',
+  requireAdmin,
+  upload.array('images', 5),
+  (req: Request, res: Response) => {
+    const files = req.files as Express.Multer.File[];
+    if (!files || files.length === 0) return res.status(400).json({ error: 'No files uploaded' });
+    const urls = files.map((f) => `/uploads/products/${f.filename}`);
+    res.json({ data: { urls } });
+  }
+);
 
 // POST /api/upload/category — upload category image
 const catStorage = multer.diskStorage({
@@ -59,11 +69,16 @@ const catStorage = multer.diskStorage({
 });
 const catUpload = multer({ storage: catStorage, limits: { fileSize: 10 * 1024 * 1024 } });
 
-uploadRouter.post('/category', requireAdmin, catUpload.single('image'), (req: Request, res: Response) => {
-  if (!req.file) return res.status(400).json({ error: 'No file uploaded' });
-  const url = `/uploads/categories/${req.file.filename}`;
-  res.json({ data: { url, filename: req.file.filename } });
-});
+uploadRouter.post(
+  '/category',
+  requireAdmin,
+  catUpload.single('image'),
+  (req: Request, res: Response) => {
+    if (!req.file) return res.status(400).json({ error: 'No file uploaded' });
+    const url = `/uploads/categories/${req.file.filename}`;
+    res.json({ data: { url, filename: req.file.filename } });
+  }
+);
 
 // DELETE /api/upload — delete a file
 uploadRouter.delete('/', requireAdmin, (req: Request, res: Response) => {

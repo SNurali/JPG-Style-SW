@@ -33,7 +33,7 @@ export default function CheckoutPage() {
     notes: '',
   });
 
-  const [location, setLocation] = useState<{lat: number, lng: number} | null>(null);
+  const [location, setLocation] = useState<{ lat: number; lng: number } | null>(null);
   const [locationLoading, setLocationLoading] = useState(false);
 
   // Prefill from logged-in profile (guest checkout still fully works)
@@ -63,12 +63,12 @@ export default function CheckoutPage() {
     { id: 'payme', name: 'Payme', icon: '📱' },
   ];
 
-  const selectedZone = deliveryZones.find(z => z.id === selectedZoneId) || deliveryZones[0];
+  const selectedZone = deliveryZones.find((z) => z.id === selectedZoneId) || deliveryZones[0];
 
   const handleGetLocation = () => {
     if (!navigator.geolocation) {
-       alert(t('geo.notSupported'));
-       return;
+      alert(t('geo.notSupported'));
+      return;
     }
     setLocationLoading(true);
     navigator.geolocation.getCurrentPosition(
@@ -137,7 +137,9 @@ export default function CheckoutPage() {
         <div className="text-6xl mb-6">🛒</div>
         <h1 className="section-title mb-4">{t('cart.empty')}</h1>
         <p className="text-text-muted mb-8">{t('checkout.emptyHint')}</p>
-        <Link href="/categories" className="btn-primary">{t('hero.goToCatalog')}</Link>
+        <Link href="/categories" className="btn-primary">
+          {t('hero.goToCatalog')}
+        </Link>
       </div>
     );
   }
@@ -150,11 +152,11 @@ export default function CheckoutPage() {
           <h1 className="section-title mb-4">{t('order.placed')}</h1>
           <p className="text-text-muted mb-2">{t('order.number')}</p>
           <p className="font-heading text-3xl font-bold text-accent mb-6">{orderNumber}</p>
-          <p className="text-text-muted mb-8">
-            {t('order.contactSoon')}
-          </p>
+          <p className="text-text-muted mb-8">{t('order.contactSoon')}</p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Link href="/" className="btn-primary">{t('order.toHome')}</Link>
+            <Link href="/" className="btn-primary">
+              {t('order.toHome')}
+            </Link>
             <a
               href="https://t.me/JPGSTYLE_SMARTWASH"
               target="_blank"
@@ -162,7 +164,7 @@ export default function CheckoutPage() {
               className="btn-secondary flex items-center justify-center gap-2"
             >
               <svg className="w-4 h-4" viewBox="0 0 24 24" fill="currentColor">
-                <path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.562 8.161c-.18 1.897-.962 6.502-1.359 8.627-.168.9-.5 1.201-.82 1.23-.697.064-1.226-.461-1.901-.903-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.248-.024c-.106.024-1.793 1.14-5.062 3.345-.479.329-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.831-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635.099-.002.321.023.465.141.12.098.153.228.168.327.016.099.035.323.02.498z"/>
+                <path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.562 8.161c-.18 1.897-.962 6.502-1.359 8.627-.168.9-.5 1.201-.82 1.23-.697.064-1.226-.461-1.901-.903-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.248-.024c-.106.024-1.793 1.14-5.062 3.345-.479.329-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.831-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635.099-.002.321.023.465.141.12.098.153.228.168.327.016.099.035.323.02.498z" />
               </svg>
               {t('order.writeTelegram')}
             </a>
@@ -179,9 +181,13 @@ export default function CheckoutPage() {
     <div className="max-w-7xl mx-auto px-4 sm:px-6 py-10">
       {/* Breadcrumb */}
       <nav className="text-sm text-text-muted mb-8">
-        <Link href="/" className="hover:text-accent transition-colors">{t('nav.home')}</Link>
+        <Link href="/" className="hover:text-accent transition-colors">
+          {t('nav.home')}
+        </Link>
         <span className="mx-2">/</span>
-        <Link href="/cart" className="hover:text-accent transition-colors">{t('cart.title')}</Link>
+        <Link href="/cart" className="hover:text-accent transition-colors">
+          {t('cart.title')}
+        </Link>
         <span className="mx-2">/</span>
         <span className="text-white">{t('checkout.title')}</span>
       </nav>
@@ -200,10 +206,14 @@ export default function CheckoutPage() {
           <div className="lg:col-span-2 space-y-6">
             {/* Contact info */}
             <div className="glass-card p-6">
-              <h3 className="font-heading font-semibold text-white mb-4">📋 {t('checkout.contact')}</h3>
+              <h3 className="font-heading font-semibold text-white mb-4">
+                📋 {t('checkout.contact')}
+              </h3>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
-                  <label className="block text-sm text-text-muted mb-1">{t('checkout.firstName')} *</label>
+                  <label className="block text-sm text-text-muted mb-1">
+                    {t('checkout.firstName')} *
+                  </label>
                   <input
                     type="text"
                     required
@@ -214,7 +224,9 @@ export default function CheckoutPage() {
                   />
                 </div>
                 <div>
-                  <label className="block text-sm text-text-muted mb-1">{t('checkout.lastName')}</label>
+                  <label className="block text-sm text-text-muted mb-1">
+                    {t('checkout.lastName')}
+                  </label>
                   <input
                     type="text"
                     value={form.lastName}
@@ -224,7 +236,9 @@ export default function CheckoutPage() {
                   />
                 </div>
                 <div className="sm:col-span-2">
-                  <label className="block text-sm text-text-muted mb-1">{t('checkout.phone')} *</label>
+                  <label className="block text-sm text-text-muted mb-1">
+                    {t('checkout.phone')} *
+                  </label>
                   <input
                     type="tel"
                     required
@@ -239,13 +253,17 @@ export default function CheckoutPage() {
 
             {/* Delivery */}
             <div className="glass-card p-6">
-              <h3 className="font-heading font-semibold text-white mb-4">🚚 {t('delivery.title')}</h3>
+              <h3 className="font-heading font-semibold text-white mb-4">
+                🚚 {t('delivery.title')}
+              </h3>
               <div className="space-y-3 mb-4">
                 {deliveryZones.map((zone) => (
                   <label
                     key={zone.id}
                     className={`flex items-center gap-4 p-4 rounded-card border cursor-pointer transition-all ${
-                      selectedZoneId === zone.id ? 'border-accent bg-accent/5' : 'border-white/5 hover:border-white/10'
+                      selectedZoneId === zone.id
+                        ? 'border-accent bg-accent/5'
+                        : 'border-white/5 hover:border-white/10'
                     }`}
                   >
                     <input
@@ -257,10 +275,16 @@ export default function CheckoutPage() {
                     />
                     <div className="flex-1">
                       <span className="text-white text-sm font-medium">{t(zone.nameKey)}</span>
-                      {zone.timeKey && <span className="text-xs text-text-muted ml-2">({t(zone.timeKey)})</span>}
+                      {zone.timeKey && (
+                        <span className="text-xs text-text-muted ml-2">({t(zone.timeKey)})</span>
+                      )}
                     </div>
                     <span className="text-white font-semibold text-sm">
-                      {zone.price === 0 ? (zone.id === '5' ? t('delivery.free') : t('delivery.btsTime')) : formatPrice(zone.price, t('currency'))}
+                      {zone.price === 0
+                        ? zone.id === '5'
+                          ? t('delivery.free')
+                          : t('delivery.btsTime')
+                        : formatPrice(zone.price, t('currency'))}
                     </span>
                   </label>
                 ))}
@@ -268,7 +292,9 @@ export default function CheckoutPage() {
 
               {selectedZoneId !== '5' && (
                 <div>
-                  <label className="block text-sm text-text-muted mb-1">{t('delivery.address')} *</label>
+                  <label className="block text-sm text-text-muted mb-1">
+                    {t('delivery.address')} *
+                  </label>
                   <input
                     type="text"
                     required={selectedZoneId !== '5'}
@@ -293,7 +319,11 @@ export default function CheckoutPage() {
                       disabled={locationLoading}
                       className="btn-secondary text-xs px-3 py-1.5"
                     >
-                      {locationLoading ? t('delivery.locationLoading') : location ? t('delivery.locationRefresh') : t('delivery.locationShare')}
+                      {locationLoading
+                        ? t('delivery.locationLoading')
+                        : location
+                          ? t('delivery.locationRefresh')
+                          : t('delivery.locationShare')}
                     </button>
                   </div>
                 </div>
@@ -302,13 +332,17 @@ export default function CheckoutPage() {
 
             {/* Payment */}
             <div className="glass-card p-6">
-              <h3 className="font-heading font-semibold text-white mb-4">💳 {t('payment.title')}</h3>
+              <h3 className="font-heading font-semibold text-white mb-4">
+                💳 {t('payment.title')}
+              </h3>
               <div className="space-y-3">
                 {paymentMethods.map((method) => (
                   <label
                     key={method.id}
                     className={`flex items-center gap-4 p-4 rounded-card border cursor-pointer transition-all ${
-                      selectedPaymentId === method.id ? 'border-accent bg-accent/5' : 'border-white/5 hover:border-white/10'
+                      selectedPaymentId === method.id
+                        ? 'border-accent bg-accent/5'
+                        : 'border-white/5 hover:border-white/10'
                     }`}
                   >
                     <input
@@ -334,7 +368,11 @@ export default function CheckoutPage() {
                 <input
                   type="text"
                   value={discountCode}
-                  onChange={(e) => { setDiscountCode(e.target.value); setDiscountApplied(false); setDiscountError(''); }}
+                  onChange={(e) => {
+                    setDiscountCode(e.target.value);
+                    setDiscountApplied(false);
+                    setDiscountError('');
+                  }}
                   className="input-field flex-1"
                   placeholder={t('promo.placeholder')}
                   disabled={discountApplied}
@@ -349,7 +387,11 @@ export default function CheckoutPage() {
                 </button>
               </div>
               {discountError && <p className="text-sm text-danger mt-2">{discountError}</p>}
-              {discountApplied && <p className="text-sm text-green-400 mt-2">{t('promo.discount')}: -{formatPrice(discountAmount, t('currency'))}</p>}
+              {discountApplied && (
+                <p className="text-sm text-green-400 mt-2">
+                  {t('promo.discount')}: -{formatPrice(discountAmount, t('currency'))}
+                </p>
+              )}
             </div>
 
             {/* Notes */}
@@ -375,7 +417,9 @@ export default function CheckoutPage() {
                     <span className="text-text-muted truncate flex-1 mr-2">
                       {item.name} × {item.quantity}
                     </span>
-                    <span className="text-white flex-shrink-0">{formatPrice(item.price * item.quantity, t('currency'))}</span>
+                    <span className="text-white flex-shrink-0">
+                      {formatPrice(item.price * item.quantity, t('currency'))}
+                    </span>
                   </div>
                 ))}
               </div>
@@ -388,18 +432,24 @@ export default function CheckoutPage() {
                 {discountApplied && discountAmount > 0 && (
                   <div className="flex justify-between text-sm">
                     <span className="text-green-400">{t('promo.discount')}</span>
-                    <span className="text-green-400">-{formatPrice(discountAmount, t('currency'))}</span>
+                    <span className="text-green-400">
+                      -{formatPrice(discountAmount, t('currency'))}
+                    </span>
                   </div>
                 )}
                 <div className="flex justify-between text-sm">
                   <span className="text-text-muted">{t('delivery.title')}</span>
                   <span className="text-white">
-                    {deliveryPrice === 0 ? t('delivery.free') : formatPrice(deliveryPrice, t('currency'))}
+                    {deliveryPrice === 0
+                      ? t('delivery.free')
+                      : formatPrice(deliveryPrice, t('currency'))}
                   </span>
                 </div>
                 <div className="border-t border-white/5 pt-3 flex justify-between">
                   <span className="font-semibold text-white">{t('cart.total')}</span>
-                  <span className="font-heading font-bold text-white text-xl">{formatPrice(grandTotal, t('currency'))}</span>
+                  <span className="font-heading font-bold text-white text-xl">
+                    {formatPrice(grandTotal, t('currency'))}
+                  </span>
                 </div>
               </div>
 
@@ -411,9 +461,7 @@ export default function CheckoutPage() {
                 {isSubmitting ? t('order.processing') : t('order.confirm')}
               </button>
 
-              <p className="text-xs text-text-muted text-center mt-4">
-                {t('order.terms')}
-              </p>
+              <p className="text-xs text-text-muted text-center mt-4">{t('order.terms')}</p>
             </div>
           </div>
         </div>

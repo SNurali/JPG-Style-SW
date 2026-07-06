@@ -92,7 +92,12 @@ export async function createOrder(data: {
 
 // ─── Customer auth ──────────────────────────────────────
 
-export async function registerCustomer(data: { name: string; email: string; phone?: string; password: string }) {
+export async function registerCustomer(data: {
+  name: string;
+  email: string;
+  phone?: string;
+  password: string;
+}) {
   return request<any>('/api/auth/register', { method: 'POST', body: JSON.stringify(data) });
 }
 
@@ -113,7 +118,11 @@ export async function fetchMyOrders() {
 }
 
 export async function updateMyProfile(data: { name?: string; phone?: string }) {
-  return request<any>('/api/auth/profile', { method: 'PATCH', body: JSON.stringify(data), headers: authHeaders() });
+  return request<any>('/api/auth/profile', {
+    method: 'PATCH',
+    body: JSON.stringify(data),
+    headers: authHeaders(),
+  });
 }
 
 export async function fetchOrderStatus(orderNumber: string) {

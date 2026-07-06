@@ -46,7 +46,8 @@ export const metadata: Metadata = {
   twitter: {
     card: 'summary_large_image',
     title: 'JPG Style SmartWash — Профессиональная автохимия',
-    description: 'Автошампуни, нано-покрытия, воски, чернители. Доставка по Ташкенту в день заказа.',
+    description:
+      'Автошампуни, нано-покрытия, воски, чернители. Доставка по Ташкенту в день заказа.',
     images: ['/og-image.jpg'],
   },
   alternates: {

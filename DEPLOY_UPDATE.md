@@ -12,6 +12,7 @@ cd /path/to/nodir_hdd_fixer
 ```
 
 **Что делает скрипт:**
+
 - ✅ Обновляет код из Git
 - ✅ Останавливает Docker контейнеры
 - ✅ Очищает кэш Next.js и Turbo
@@ -30,6 +31,7 @@ cd /path/to/nodir_hdd_fixer
 ```
 
 **Что делает скрипт:**
+
 - ✅ Обновляет код из Git
 - ✅ Останавливает PM2 процессы
 - ✅ Очищает кэш
@@ -109,6 +111,7 @@ pm2 status
 ## 📊 Мониторинг
 
 ### Docker логи
+
 ```bash
 # Все логи
 docker compose -f docker-compose.prod.yml logs -f
@@ -121,6 +124,7 @@ docker compose -f docker-compose.prod.yml logs -f api
 ```
 
 ### PM2 логи
+
 ```bash
 # Все логи
 pm2 logs
@@ -139,12 +143,14 @@ pm2 flush
 ### Логотип не обновился после развёртывания
 
 1. Проверьте что код обновился:
+
 ```bash
 git log -n 1
 grep -r "RECOVERY.UZ" apps/web/src/components/logo.tsx
 ```
 
 2. Очистите кэш Next.js вручную:
+
 ```bash
 rm -rf apps/web/.next
 docker compose -f docker-compose.prod.yml restart web
@@ -180,6 +186,6 @@ docker compose -f docker-compose.prod.yml up -d web
 
 ## 📝 Changelog развёртывания
 
-| Версия | Дата | Изменения |
-|--------|------|-----------|
-| 1.0 | 13.03.2026 | Логотип RECOVERY.UZ, установка пароля админом |
+| Версия | Дата       | Изменения                                     |
+| ------ | ---------- | --------------------------------------------- |
+| 1.0    | 13.03.2026 | Логотип RECOVERY.UZ, установка пароля админом |

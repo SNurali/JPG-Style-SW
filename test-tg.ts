@@ -25,8 +25,8 @@ async function testIt() {
   const token = getBotToken();
   const chatId = getChatId();
 
-  console.log("Token:", token ? 'Found' : 'Missing');
-  console.log("ChatId:", chatId ? 'Found' : 'Missing');
+  console.log('Token:', token ? 'Found' : 'Missing');
+  console.log('ChatId:', chatId ? 'Found' : 'Missing');
 
   const message = `🆕 <b>Новый заказ!</b>
 
@@ -54,13 +54,13 @@ async function testIt() {
       body: JSON.stringify({
         chat_id: chatId,
         text: message,
-        parse_mode: 'HTML'
+        parse_mode: 'HTML',
       }),
     });
     const data = await res.json();
-    console.log("Response:", data);
+    console.log('Response:', data);
   } catch (err) {
-    console.error("Error:", err);
+    console.error('Error:', err);
   }
 }
 

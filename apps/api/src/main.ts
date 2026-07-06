@@ -17,7 +17,9 @@ const PORT = process.env.PORT || 4001;
 
 // Track DB mode
 let dbAvailable = false;
-export function isDbAvailable() { return dbAvailable; }
+export function isDbAvailable() {
+  return dbAvailable;
+}
 
 // Middleware
 app.use(helmet({ crossOriginResourcePolicy: false, crossOriginOpenerPolicy: false }));
@@ -72,7 +74,7 @@ async function start() {
     await seed();
     dbAvailable = true;
     console.log('✅ Running with PostgreSQL');
-  } catch (err) {
+  } catch {
     console.warn('⚠️  PostgreSQL unavailable — running with in-memory fallback data');
     console.warn('   To enable DB: set DATABASE_URL env variable or start PostgreSQL on port 5432');
     dbAvailable = false;

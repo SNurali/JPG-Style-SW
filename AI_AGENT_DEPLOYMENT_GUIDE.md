@@ -9,6 +9,7 @@
 ## 📋 Что нужно знать
 
 ### Информация о сервере
+
 ```
 IP адрес (WireGuard):  172.16.252.32
 Внешний IP:            195.158.24.137
@@ -19,11 +20,11 @@ SSH User:              yoyo
 
 ### Доступные скрипты
 
-| Скрипт | Назначение |
-|--------|-----------|
-| `quick-deploy.sh` | Интерактивный деплой (рекомендуется для агента) |
-| `deploy.sh` | Продвинутый деплой с логами и откатом |
-| `setup-production.sh` | Первичная настройка production окружения |
+| Скрипт                | Назначение                                      |
+| --------------------- | ----------------------------------------------- |
+| `quick-deploy.sh`     | Интерактивный деплой (рекомендуется для агента) |
+| `deploy.sh`           | Продвинутый деплой с логами и откатом           |
+| `setup-production.sh` | Первичная настройка production окружения        |
 
 ---
 
@@ -42,6 +43,7 @@ SSH User:              yoyo
 ```
 
 **Преимущества:**
+
 - Интерактивный выбор режима
 - Автоматическая проверка SSH доступа
 - Красивый вывод с цветами
@@ -52,11 +54,13 @@ SSH User:              yoyo
 ## 🔧 Способ 2: Прямое подключение и деплой
 
 ### Шаг 1: Подключиться к серверу
+
 ```bash
 ssh yoyo@172.16.252.32
 ```
 
 ### Шаг 2: Первичная настройка (если первый раз)
+
 ```bash
 cd /home/yoyo
 git clone https://github.com/SNurali/JPG-Style-SW.git jpg-style-smartwash
@@ -65,6 +69,7 @@ sudo bash setup-production.sh
 ```
 
 ### Шаг 3: Обновление и деплой (если уже установлено)
+
 ```bash
 cd /home/yoyo/jpg-style-smartwash
 git pull origin main
@@ -96,6 +101,7 @@ docker compose -f docker-compose.prod.yml ps
 ```
 
 **Ожидаемый результат:**
+
 ```
 NAME                 STATUS
 smartwash_web        Up (healthy)
@@ -109,6 +115,7 @@ smartwash_redis      Up (healthy)
 ## 🔍 Мониторинг и логирование
 
 ### Просмотр логов
+
 ```bash
 # Все логи
 docker compose -f docker-compose.prod.yml logs -f
@@ -122,11 +129,13 @@ docker compose -f docker-compose.prod.yml logs --tail=100 api
 ```
 
 ### Использование ресурсов
+
 ```bash
 docker stats smartwash_web smartwash_api smartwash_postgres smartwash_redis
 ```
 
 ### Статус контейнеров
+
 ```bash
 docker compose -f docker-compose.prod.yml ps
 ```
@@ -136,6 +145,7 @@ docker compose -f docker-compose.prod.yml ps
 ## 🆘 Troubleshooting
 
 ### Контейнеры не запускаются
+
 ```bash
 # Проверить логи
 docker compose -f docker-compose.prod.yml logs
@@ -149,6 +159,7 @@ docker compose -f docker-compose.prod.yml up -d --build
 ```
 
 ### Ошибка подключения к БД
+
 ```bash
 # Перезагрузить PostgreSQL
 docker compose -f docker-compose.prod.yml restart postgres
@@ -158,6 +169,7 @@ docker compose -f docker-compose.prod.yml logs postgres
 ```
 
 ### Откат на предыдущую версию
+
 ```bash
 cd /home/yoyo/jpg-style-smartwash
 
@@ -176,27 +188,30 @@ docker compose -f docker-compose.prod.yml up -d --build
 
 ## 📊 Информация о портах
 
-| Порт | Сервис | Статус |
-|------|--------|--------|
-| 3000 | Frontend | ✅ SmartWash |
-| 4000 | API | ✅ SmartWash |
+| Порт | Сервис     | Статус       |
+| ---- | ---------- | ------------ |
+| 3000 | Frontend   | ✅ SmartWash |
+| 4000 | API        | ✅ SmartWash |
 | 5432 | PostgreSQL | ✅ SmartWash |
-| 6379 | Redis | ✅ SmartWash |
+| 6379 | Redis      | ✅ SmartWash |
 
 ---
 
 ## 🔐 Безопасность
 
 ### Переменные окружения
+
 - Все секреты хранятся в `.env.prod`
 - Пароли генерируются автоматически через `openssl`
 - Файл `.env.prod` не в git (в `.gitignore`)
 
 ### SSH доступ
+
 - Используется SSH ключ для подключения
 - Пароли не используются
 
 ### Docker
+
 - Контейнеры запускаются с ограничениями ресурсов
 - Healthchecks для автоматического перезапуска
 - Volumes для персистентных данных
@@ -206,6 +221,7 @@ docker compose -f docker-compose.prod.yml up -d --build
 ## 📚 Полная документация
 
 Для более подробной информации смотри:
+
 - `DEPLOYMENT_GUIDE_FULL.md` - полное руководство (15+ страниц)
 - `DEPLOYMENT_CHECKLIST.md` - чек-лист перед деплоем
 - `DEPLOY_README.md` - быстрый старт
@@ -238,6 +254,7 @@ ssh yoyo@172.16.252.32 "curl -s http://localhost:4000/health > /dev/null && echo
 ## 💡 Советы для агента
 
 1. **Всегда проверяй SSH доступ перед деплоем**
+
    ```bash
    ssh -o ConnectTimeout=5 yoyo@172.16.252.32 "echo 'OK'"
    ```
@@ -245,16 +262,19 @@ ssh yoyo@172.16.252.32 "curl -s http://localhost:4000/health > /dev/null && echo
 2. **Используй `set -e` в bash скриптах** - остановит выполнение при ошибке
 
 3. **Проверяй логи после деплоя**
+
    ```bash
    docker compose -f docker-compose.prod.yml logs --tail=50
    ```
 
 4. **Жди 30 секунд после запуска контейнеров**
+
    ```bash
    sleep 30
    ```
 
 5. **Всегда проверяй здоровье сервисов**
+
    ```bash
    docker compose -f docker-compose.prod.yml ps
    ```

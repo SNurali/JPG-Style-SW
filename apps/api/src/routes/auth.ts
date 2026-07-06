@@ -24,7 +24,14 @@ const ProfileSchema = z.object({
 });
 
 function publicCustomer(c: any) {
-  return { id: c.id, name: c.name, email: c.email, phone: c.phone, googleLinked: c.googleLinked, hasPassword: c.hasPassword };
+  return {
+    id: c.id,
+    name: c.name,
+    email: c.email,
+    phone: c.phone,
+    googleLinked: c.googleLinked,
+    hasPassword: c.hasPassword,
+  };
 }
 
 function dbGuard(res: Response): boolean {
@@ -51,11 +58,22 @@ authRouter.post('/register', async (req: Request, res: Response) => {
       return res.status(409).json({ error: 'Этот телефон уже используется' });
     }
     const passwordHash = await bcrypt.hash(password, 10);
-    const customer = await customerRepository.createWithPassword({ name, email, phone: phone || undefined, passwordHash });
-    const token = generateCustomerToken({ id: customer.id, email: customer.email, name: customer.name, type: 'customer' });
+    const customer = await customerRepository.createWithPassword({
+      name,
+      email,
+      phone: phone || undefined,
+      passwordHash,
+    });
+    const token = generateCustomerToken({
+      id: customer.id,
+      email: customer.email,
+      name: customer.name,
+      type: 'customer',
+    });
     res.status(201).json({ data: { token, user: publicCustomer(customer) } });
   } catch (err: any) {
-    if (err.code === '23505') return res.status(409).json({ error: 'Email или телефон уже заняты' });
+    if (err.code === '23505')
+      return res.status(409).json({ error: 'Email или телефон уже заняты' });
     console.error('Register error:', err);
     res.status(500).json({ error: 'Внутренняя ошибка сервера' });
   }
@@ -71,12 +89,18 @@ authRouter.post('/login', async (req: Request, res: Response) => {
 
     const { customerRepository } = await import('../repositories/customer.repository');
     const row = await customerRepository.findByEmail(email);
-    if (!row || !row.password_hash) return res.status(401).json({ error: 'Неверный email или пароль' });
+    if (!row || !row.password_hash)
+      return res.status(401).json({ error: 'Неверный email или пароль' });
     const valid = await bcrypt.compare(password, row.password_hash);
     if (!valid) return res.status(401).json({ error: 'Неверный email или пароль' });
 
     const customer = await customerRepository.findById(row.id);
-    const token = generateCustomerToken({ id: customer!.id, email: customer!.email, name: customer!.name, type: 'customer' });
+    const token = generateCustomerToken({
+      id: customer!.id,
+      email: customer!.email,
+      name: customer!.name,
+      type: 'customer',
+    });
     res.json({ data: { token, user: publicCustomer(customer) } });
   } catch (err) {
     console.error('Login error:', err);
@@ -91,7 +115,9 @@ authRouter.post('/google', async (req: Request, res: Response) => {
     const { idToken } = req.body;
     if (!idToken) return res.status(400).json({ error: 'idToken обязателен' });
 
-    const resp = await fetch(`https://oauth2.googleapis.com/tokeninfo?id_token=${encodeURIComponent(idToken)}`);
+    const resp = await fetch(
+      `https://oauth2.googleapis.com/tokeninfo?id_token=${encodeURIComponent(idToken)}`
+    );
     if (!resp.ok) return res.status(401).json({ error: 'Google-токен недействителен' });
     const info: any = await resp.json();
 
@@ -107,7 +133,12 @@ authRouter.post('/google', async (req: Request, res: Response) => {
       email: info.email || '',
       name: info.name || info.email || 'Клиент',
     });
-    const token = generateCustomerToken({ id: customer.id, email: customer.email, name: customer.name, type: 'customer' });
+    const token = generateCustomerToken({
+      id: customer.id,
+      email: customer.email,
+      name: customer.name,
+      type: 'customer',
+    });
     res.json({ data: { token, user: publicCustomer(customer) } });
   } catch (err) {
     console.error('Google auth error:', err);
@@ -139,7 +170,8 @@ authRouter.patch('/profile', requireCustomer, async (req: Request, res: Response
     const customer = await customerRepository.updateProfile(req.customer!.id, parsed.data);
     res.json({ data: publicCustomer(customer) });
   } catch (err: any) {
-    if (err.code === '23505') return res.status(409).json({ error: 'Этот телефон уже используется' });
+    if (err.code === '23505')
+      return res.status(409).json({ error: 'Этот телефон уже используется' });
     console.error('Profile update error:', err);
     res.status(500).json({ error: 'Внутренняя ошибка сервера' });
   }

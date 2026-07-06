@@ -32,7 +32,9 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
     if (saved) {
       try {
         setItems(JSON.parse(saved));
-      } catch {}
+      } catch {
+        /* corrupted stored cart, ignore */
+      }
     }
   }, []);
 
@@ -45,9 +47,7 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
     setItems((prev) => {
       const existing = prev.find((i) => i.id === item.id);
       if (existing) {
-        return prev.map((i) =>
-          i.id === item.id ? { ...i, quantity: i.quantity + quantity } : i
-        );
+        return prev.map((i) => (i.id === item.id ? { ...i, quantity: i.quantity + quantity } : i));
       }
       return [...prev, { ...item, quantity }];
     });

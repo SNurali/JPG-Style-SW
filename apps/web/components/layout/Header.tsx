@@ -2,7 +2,6 @@
 
 import React, { useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
-import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import { useCart } from '@/lib/cart-context';
 import { useLanguage } from '@/lib/i18n';
@@ -21,7 +20,12 @@ function LogoFull({ className = '' }: { className?: string }) {
     <div className={`logo-wrapper ${className}`}>
       {/* SW Monogram */}
       <div className="logo-monogram" aria-hidden="true">
-        <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-10 h-10">
+        <svg
+          viewBox="0 0 48 48"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+          className="w-10 h-10"
+        >
           <defs>
             <linearGradient id="hdr-chrome" x1="0" y1="0" x2="0" y2="1">
               <stop offset="0%" stopColor="#ffffff" />
@@ -34,9 +38,36 @@ function LogoFull({ className = '' }: { className?: string }) {
               <stop offset="100%" stopColor="#3a56d4" />
             </linearGradient>
           </defs>
-          <rect x="1" y="1" width="46" height="46" rx="11" fill="url(#hdr-accent)" fillOpacity="0.1" />
-          <rect x="1" y="1" width="46" height="46" rx="11" stroke="url(#hdr-accent)" strokeWidth="1.2" strokeOpacity="0.35" />
-          <text x="8" y="35" fontFamily="Inter, Helvetica Neue, Arial, sans-serif" fontWeight="800" fontSize="27" fill="url(#hdr-chrome)" letterSpacing="-1">SW</text>
+          <rect
+            x="1"
+            y="1"
+            width="46"
+            height="46"
+            rx="11"
+            fill="url(#hdr-accent)"
+            fillOpacity="0.1"
+          />
+          <rect
+            x="1"
+            y="1"
+            width="46"
+            height="46"
+            rx="11"
+            stroke="url(#hdr-accent)"
+            strokeWidth="1.2"
+            strokeOpacity="0.35"
+          />
+          <text
+            x="8"
+            y="35"
+            fontFamily="Inter, Helvetica Neue, Arial, sans-serif"
+            fontWeight="800"
+            fontSize="27"
+            fill="url(#hdr-chrome)"
+            letterSpacing="-1"
+          >
+            SW
+          </text>
         </svg>
       </div>
 
@@ -66,9 +97,36 @@ function LogoIcon({ className = '' }: { className?: string }) {
             <stop offset="100%" stopColor="#3a56d4" />
           </linearGradient>
         </defs>
-        <rect x="1" y="1" width="46" height="46" rx="11" fill="url(#hdr-accent-m)" fillOpacity="0.1" />
-        <rect x="1" y="1" width="46" height="46" rx="11" stroke="url(#hdr-accent-m)" strokeWidth="1.2" strokeOpacity="0.35" />
-        <text x="8" y="35" fontFamily="Inter, Helvetica Neue, Arial, sans-serif" fontWeight="800" fontSize="27" fill="url(#hdr-chrome-m)" letterSpacing="-1">SW</text>
+        <rect
+          x="1"
+          y="1"
+          width="46"
+          height="46"
+          rx="11"
+          fill="url(#hdr-accent-m)"
+          fillOpacity="0.1"
+        />
+        <rect
+          x="1"
+          y="1"
+          width="46"
+          height="46"
+          rx="11"
+          stroke="url(#hdr-accent-m)"
+          strokeWidth="1.2"
+          strokeOpacity="0.35"
+        />
+        <text
+          x="8"
+          y="35"
+          fontFamily="Inter, Helvetica Neue, Arial, sans-serif"
+          fontWeight="800"
+          fontSize="27"
+          fill="url(#hdr-chrome-m)"
+          letterSpacing="-1"
+        >
+          SW
+        </text>
       </svg>
     </div>
   );
@@ -119,8 +177,8 @@ export function Header() {
         setSearchResults([]);
       }
     }
-    document.addEventListener("mousedown", handleClickOutside);
-    return () => document.removeEventListener("mousedown", handleClickOutside);
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => document.removeEventListener('mousedown', handleClickOutside);
   }, []);
 
   // Debounced search
@@ -132,7 +190,7 @@ export function Header() {
           const results = await searchProducts(searchQuery);
           setSearchResults(results.data || results || []);
         } catch (error) {
-          console.error("Search failed:", error);
+          console.error('Search failed:', error);
           setSearchResults([]);
         } finally {
           setIsSearching(false);
@@ -153,7 +211,10 @@ export function Header() {
   };
 
   return (
-    <header id="site-header" className={`sticky top-0 z-50 header-glass border-b border-white/[0.06] transition-all duration-300 ${scrolled ? 'scrolled' : ''}`}>
+    <header
+      id="site-header"
+      className={`sticky top-0 z-50 header-glass border-b border-white/[0.06] transition-all duration-300 ${scrolled ? 'scrolled' : ''}`}
+    >
       <div className="max-w-7xl mx-auto px-6 lg:px-10">
         <div className="flex items-center justify-between h-[72px]">
           {/* ─── Logo ─── */}
@@ -166,25 +227,74 @@ export function Header() {
 
           {/* ─── Desktop Nav ─── */}
           <nav className="hidden md:flex items-center gap-1" id="header-nav">
-            <Link href="/" className="nav-link">{t('nav.home')}</Link>
-            <Link href="/categories" className="nav-link">{t('nav.catalog')}</Link>
-            <Link href="/#bestsellers" className="nav-link">{t('nav.bestsellers')}</Link>
-            <Link href="/#reviews" className="nav-link">{t('nav.reviews')}</Link>
+            <Link href="/" className="nav-link">
+              {t('nav.home')}
+            </Link>
+            <Link href="/categories" className="nav-link">
+              {t('nav.catalog')}
+            </Link>
+            <Link href="/#bestsellers" className="nav-link">
+              {t('nav.bestsellers')}
+            </Link>
+            <Link href="/#reviews" className="nav-link">
+              {t('nav.reviews')}
+            </Link>
           </nav>
 
           {/* ─── Actions ─── */}
           <div className="flex items-center gap-1 sm:gap-2">
             {/* Language Switcher */}
             <div className="relative group/lang" id="lang-switcher">
-              <button className="header-action-btn text-xs font-semibold tracking-wide uppercase gap-1" aria-label="Select language">
-                {language === 'ru' ? 'RU' : language === 'uz' ? 'UZ' : language === 'uz-cy' ? 'ЎЗ' : 'EN'}
-                <svg className="w-3 h-3 opacity-40" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" /></svg>
+              <button
+                className="header-action-btn text-xs font-semibold tracking-wide uppercase gap-1"
+                aria-label="Select language"
+              >
+                {language === 'ru'
+                  ? 'RU'
+                  : language === 'uz'
+                    ? 'UZ'
+                    : language === 'uz-cy'
+                      ? 'ЎЗ'
+                      : 'EN'}
+                <svg
+                  className="w-3 h-3 opacity-40"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M19 9l-7 7-7-7"
+                  />
+                </svg>
               </button>
               <div className="absolute top-full right-0 mt-2 w-36 bg-[#16182a] border border-white/[0.08] rounded-xl shadow-2xl overflow-hidden opacity-0 invisible group-hover/lang:opacity-100 group-hover/lang:visible transition-all duration-200 backdrop-blur-xl">
-                <button onClick={() => setLanguage('ru')} className={`w-full text-left px-4 py-2.5 text-sm hover:bg-white/[0.04] transition-colors ${language === 'ru' ? 'text-accent' : 'text-text-main'}`}>🇷🇺 Русский</button>
-                <button onClick={() => setLanguage('uz')} className={`w-full text-left px-4 py-2.5 text-sm hover:bg-white/[0.04] transition-colors ${language === 'uz' ? 'text-accent' : 'text-text-main'}`}>🇺🇿 O&apos;zbekcha</button>
-                <button onClick={() => setLanguage('uz-cy')} className={`w-full text-left px-4 py-2.5 text-sm hover:bg-white/[0.04] transition-colors ${language === 'uz-cy' ? 'text-accent' : 'text-text-main'}`}>🇺🇿 Ўзбекча</button>
-                <button onClick={() => setLanguage('en')} className={`w-full text-left px-4 py-2.5 text-sm hover:bg-white/[0.04] transition-colors ${language === 'en' ? 'text-accent' : 'text-text-main'}`}>🇬🇧 English</button>
+                <button
+                  onClick={() => setLanguage('ru')}
+                  className={`w-full text-left px-4 py-2.5 text-sm hover:bg-white/[0.04] transition-colors ${language === 'ru' ? 'text-accent' : 'text-text-main'}`}
+                >
+                  🇷🇺 Русский
+                </button>
+                <button
+                  onClick={() => setLanguage('uz')}
+                  className={`w-full text-left px-4 py-2.5 text-sm hover:bg-white/[0.04] transition-colors ${language === 'uz' ? 'text-accent' : 'text-text-main'}`}
+                >
+                  🇺🇿 O&apos;zbekcha
+                </button>
+                <button
+                  onClick={() => setLanguage('uz-cy')}
+                  className={`w-full text-left px-4 py-2.5 text-sm hover:bg-white/[0.04] transition-colors ${language === 'uz-cy' ? 'text-accent' : 'text-text-main'}`}
+                >
+                  🇺🇿 Ўзбекча
+                </button>
+                <button
+                  onClick={() => setLanguage('en')}
+                  className={`w-full text-left px-4 py-2.5 text-sm hover:bg-white/[0.04] transition-colors ${language === 'en' ? 'text-accent' : 'text-text-main'}`}
+                >
+                  🇬🇧 English
+                </button>
               </div>
             </div>
 
@@ -195,8 +305,18 @@ export function Header() {
               aria-label="Search"
               id="search-toggle"
             >
-              <svg className="w-[18px] h-[18px]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+              <svg
+                className="w-[18px] h-[18px]"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
+                />
               </svg>
             </button>
 
@@ -206,10 +326,20 @@ export function Header() {
               className={`header-action-btn relative ${user ? '!text-accent' : ''}`}
               aria-label={user ? 'Личный кабинет' : 'Войти'}
               id="account-button"
-              title={user ? (user.name || 'Кабинет') : 'Войти'}
+              title={user ? user.name || 'Кабинет' : 'Войти'}
             >
-              <svg className="w-[18px] h-[18px]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+              <svg
+                className="w-[18px] h-[18px]"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"
+                />
               </svg>
             </Link>
 
@@ -219,11 +349,23 @@ export function Header() {
               className={`header-action-btn relative ${isBumping ? 'scale-110 !text-accent' : ''}`}
               id="cart-button"
             >
-              <svg className="w-[18px] h-[18px]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
+              <svg
+                className="w-[18px] h-[18px]"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"
+                />
               </svg>
               {totalItems > 0 && (
-                <span className={`absolute -top-0.5 -right-0.5 w-[18px] h-[18px] bg-accent rounded-full text-[9px] font-bold text-white flex items-center justify-center ring-2 ring-[#0f0f23] transition-transform ${isBumping ? 'scale-125' : 'scale-100'}`}>
+                <span
+                  className={`absolute -top-0.5 -right-0.5 w-[18px] h-[18px] bg-accent rounded-full text-[9px] font-bold text-white flex items-center justify-center ring-2 ring-[#0f0f23] transition-transform ${isBumping ? 'scale-125' : 'scale-100'}`}
+                >
                   {totalItems}
                 </span>
               )}
@@ -236,11 +378,26 @@ export function Header() {
               aria-label="Menu"
               id="mobile-menu-toggle"
             >
-              <svg className="w-[18px] h-[18px]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <svg
+                className="w-[18px] h-[18px]"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
                 {mobileMenuOpen ? (
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M6 18L18 6M6 6l12 12"
+                  />
                 ) : (
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M4 6h16M4 12h16M4 18h16"
+                  />
                 )}
               </svg>
             </button>
@@ -280,16 +437,24 @@ export function Header() {
                         >
                           <div className="w-12 h-12 bg-surface-lighter rounded-lg flex-shrink-0 relative overflow-hidden">
                             {product.images?.[0] ? (
-                              <img src={product.images[0]} alt={product.name} className="object-cover w-full h-full" />
+                              <img
+                                src={product.images[0]}
+                                alt={product.name}
+                                className="object-cover w-full h-full"
+                              />
                             ) : (
                               <div className="w-full h-full gradient-accent opacity-20"></div>
                             )}
                           </div>
                           <div className="min-w-0 flex-1">
-                            <h4 className="text-white text-sm font-medium truncate">{product.name}</h4>
+                            <h4 className="text-white text-sm font-medium truncate">
+                              {product.name}
+                            </h4>
                             <div className="flex items-center gap-2 mt-1">
                               <span className="text-xs text-text-muted">{product.sku}</span>
-                              <span className="text-accent text-xs font-bold">{product.price.toLocaleString()} сўм</span>
+                              <span className="text-accent text-xs font-bold">
+                                {product.price.toLocaleString()} сўм
+                              </span>
                             </div>
                           </div>
                         </button>
@@ -312,11 +477,37 @@ export function Header() {
         {mobileMenuOpen && (
           <div className="md:hidden pb-5 animate-slide-up border-t border-white/[0.06] pt-4">
             <nav className="flex flex-col gap-1">
-              <Link href="/" onClick={() => setMobileMenuOpen(false)} className="mobile-nav-link">{t('nav.home')}</Link>
-              <Link href="/categories" onClick={() => setMobileMenuOpen(false)} className="mobile-nav-link">{t('nav.catalog')}</Link>
-              <Link href="/#bestsellers" onClick={() => setMobileMenuOpen(false)} className="mobile-nav-link">{t('nav.bestsellers')}</Link>
-              <Link href="/#reviews" onClick={() => setMobileMenuOpen(false)} className="mobile-nav-link">{t('nav.reviews')}</Link>
-              <Link href={user ? '/account' : '/login'} onClick={() => setMobileMenuOpen(false)} className="mobile-nav-link">{user ? 'Личный кабинет' : 'Войти / Регистрация'}</Link>
+              <Link href="/" onClick={() => setMobileMenuOpen(false)} className="mobile-nav-link">
+                {t('nav.home')}
+              </Link>
+              <Link
+                href="/categories"
+                onClick={() => setMobileMenuOpen(false)}
+                className="mobile-nav-link"
+              >
+                {t('nav.catalog')}
+              </Link>
+              <Link
+                href="/#bestsellers"
+                onClick={() => setMobileMenuOpen(false)}
+                className="mobile-nav-link"
+              >
+                {t('nav.bestsellers')}
+              </Link>
+              <Link
+                href="/#reviews"
+                onClick={() => setMobileMenuOpen(false)}
+                className="mobile-nav-link"
+              >
+                {t('nav.reviews')}
+              </Link>
+              <Link
+                href={user ? '/account' : '/login'}
+                onClick={() => setMobileMenuOpen(false)}
+                className="mobile-nav-link"
+              >
+                {user ? 'Личный кабинет' : 'Войти / Регистрация'}
+              </Link>
             </nav>
           </div>
         )}

@@ -28,7 +28,13 @@ export const categoryRepository = {
     return result.rows[0] ? mapCategoryRow(result.rows[0]) : null;
   },
 
-  async create(data: { name: string; slug: string; description: string; image?: string; sortOrder?: number }) {
+  async create(data: {
+    name: string;
+    slug: string;
+    description: string;
+    image?: string;
+    sortOrder?: number;
+  }) {
     const result = await query(
       `INSERT INTO categories (name, slug, description, image, sort_order)
        VALUES ($1, $2, $3, $4, $5) RETURNING *`,
@@ -42,12 +48,30 @@ export const categoryRepository = {
     const params: any[] = [];
     let idx = 1;
 
-    if (data.name !== undefined) { fields.push(`name = $${idx++}`); params.push(data.name); }
-    if (data.slug !== undefined) { fields.push(`slug = $${idx++}`); params.push(data.slug); }
-    if (data.description !== undefined) { fields.push(`description = $${idx++}`); params.push(data.description); }
-    if (data.image !== undefined) { fields.push(`image = $${idx++}`); params.push(data.image); }
-    if (data.sortOrder !== undefined) { fields.push(`sort_order = $${idx++}`); params.push(data.sortOrder); }
-    if (data.isActive !== undefined) { fields.push(`is_active = $${idx++}`); params.push(data.isActive); }
+    if (data.name !== undefined) {
+      fields.push(`name = $${idx++}`);
+      params.push(data.name);
+    }
+    if (data.slug !== undefined) {
+      fields.push(`slug = $${idx++}`);
+      params.push(data.slug);
+    }
+    if (data.description !== undefined) {
+      fields.push(`description = $${idx++}`);
+      params.push(data.description);
+    }
+    if (data.image !== undefined) {
+      fields.push(`image = $${idx++}`);
+      params.push(data.image);
+    }
+    if (data.sortOrder !== undefined) {
+      fields.push(`sort_order = $${idx++}`);
+      params.push(data.sortOrder);
+    }
+    if (data.isActive !== undefined) {
+      fields.push(`is_active = $${idx++}`);
+      params.push(data.isActive);
+    }
 
     if (fields.length === 0) return null;
 

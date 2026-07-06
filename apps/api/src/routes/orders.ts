@@ -8,14 +8,29 @@ export const ordersRouter = Router();
 
 ordersRouter.post('/', attachCustomer, async (req: Request, res: Response) => {
   try {
-    const { customerName, customerPhone, items, deliveryAddress, deliveryZone, deliveryFee, paymentMethod, notes, discountCode, location } = req.body;
+    const {
+      customerName,
+      customerPhone,
+      items,
+      deliveryAddress,
+      deliveryZone,
+      deliveryFee,
+      paymentMethod,
+      notes,
+      discountCode,
+      location,
+    } = req.body;
 
     if (!customerName || !customerPhone || !items || !Array.isArray(items) || items.length === 0) {
-      return res.status(400).json({ error: 'Missing required fields: customerName, customerPhone, items' });
+      return res
+        .status(400)
+        .json({ error: 'Missing required fields: customerName, customerPhone, items' });
     }
 
     // Check if product IDs are UUIDs (DB) or numeric strings (fallback)
-    const hasUuidIds = items.some((i: any) => /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(i.productId));
+    const hasUuidIds = items.some((i: any) =>
+      /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(i.productId)
+    );
 
     if (isDbAvailable() && hasUuidIds) {
       // Full DB flow
@@ -38,8 +53,11 @@ ordersRouter.post('/', attachCustomer, async (req: Request, res: Response) => {
       if (!customer) {
         const [firstName, ...lastParts] = customerName.trim().split(' ');
         customer = await customerRepository.findOrCreate({
-          firstName, lastName: lastParts.join(' '), phone: customerPhone,
-          address: deliveryAddress, zone: deliveryZone,
+          firstName,
+          lastName: lastParts.join(' '),
+          phone: customerPhone,
+          address: deliveryAddress,
+          zone: deliveryZone,
         });
       }
 
@@ -53,11 +71,20 @@ ordersRouter.post('/', attachCustomer, async (req: Request, res: Response) => {
           // UUID parse error → try fallback data (numeric IDs from frontend)
           product = fallbackData.getProductById(item.productId);
         }
-        if (!product) return res.status(400).json({ error: `Product not found: ${item.productId}` });
-        if (product.stock < item.quantity) return res.status(400).json({ error: `Insufficient stock for ${product.name}` });
+        if (!product)
+          return res.status(400).json({ error: `Product not found: ${item.productId}` });
+        if (product.stock < item.quantity)
+          return res.status(400).json({ error: `Insufficient stock for ${product.name}` });
         const totalPrice = product.price * item.quantity;
         subtotal += totalPrice;
-        orderItems.push({ productId: product.id, productName: product.name, productImage: product.image, quantity: item.quantity, unitPrice: product.price, totalPrice });
+        orderItems.push({
+          productId: product.id,
+          productName: product.name,
+          productImage: product.image,
+          quantity: item.quantity,
+          unitPrice: product.price,
+          totalPrice,
+        });
       }
 
       let discountAmount = 0;
@@ -68,13 +95,41 @@ ordersRouter.post('/', attachCustomer, async (req: Request, res: Response) => {
       }
 
       const total = subtotal - discountAmount + (deliveryFee || 0);
-      const order = await orderRepository.create({ customerId: customer.id, items: orderItems, subtotal, discountAmount, deliveryFee: deliveryFee || 0, total, deliveryAddress: deliveryAddress || '', deliveryZone: deliveryZone || '', paymentMethod: paymentMethod || 'cash', notes: notes || '', discountCode });
+      const order = await orderRepository.create({
+        customerId: customer.id,
+        items: orderItems,
+        subtotal,
+        discountAmount,
+        deliveryFee: deliveryFee || 0,
+        total,
+        deliveryAddress: deliveryAddress || '',
+        deliveryZone: deliveryZone || '',
+        paymentMethod: paymentMethod || 'cash',
+        notes: notes || '',
+        discountCode,
+      });
       if (discountCode) await discountRepository.use(discountCode);
 
-      const msgId = await telegramService.sendOrderNotification({ orderNumber: order.orderNumber, customerName, customerPhone, items: orderItems, subtotal, discountAmount, deliveryFee: deliveryFee || 0, total, deliveryAddress: deliveryAddress || '', deliveryZone: deliveryZone || '', paymentMethod: paymentMethod || 'cash', notes: notes || '', location });
+      const msgId = await telegramService.sendOrderNotification({
+        orderNumber: order.orderNumber,
+        customerName,
+        customerPhone,
+        items: orderItems,
+        subtotal,
+        discountAmount,
+        deliveryFee: deliveryFee || 0,
+        total,
+        deliveryAddress: deliveryAddress || '',
+        deliveryZone: deliveryZone || '',
+        paymentMethod: paymentMethod || 'cash',
+        notes: notes || '',
+        location,
+      });
       if (msgId) await orderRepository.updateTelegramMsgId(order.id, msgId);
 
-      return res.status(201).json({ data: { orderNumber: order.orderNumber, status: order.status, total: order.total } });
+      return res.status(201).json({
+        data: { orderNumber: order.orderNumber, status: order.status, total: order.total },
+      });
     }
 
     // Fallback: in-memory
@@ -85,15 +140,51 @@ ordersRouter.post('/', attachCustomer, async (req: Request, res: Response) => {
       if (!product) return res.status(400).json({ error: `Product not found: ${item.productId}` });
       const totalPrice = product.price * item.quantity;
       subtotal += totalPrice;
-      orderItems.push({ productId: product.id, productName: product.name, quantity: item.quantity, unitPrice: product.price, totalPrice });
+      orderItems.push({
+        productId: product.id,
+        productName: product.name,
+        quantity: item.quantity,
+        unitPrice: product.price,
+        totalPrice,
+      });
     }
     const total = subtotal + (deliveryFee || 0);
-    const order = fallbackData.createOrder({ customerName, customerPhone, items: orderItems, subtotal, discountAmount: 0, deliveryFee: deliveryFee || 0, total, deliveryAddress, deliveryZone, paymentMethod, notes });
+    const order = fallbackData.createOrder({
+      customerName,
+      customerPhone,
+      items: orderItems,
+      subtotal,
+      discountAmount: 0,
+      deliveryFee: deliveryFee || 0,
+      total,
+      deliveryAddress,
+      deliveryZone,
+      paymentMethod,
+      notes,
+    });
 
-    await telegramService.sendOrderNotification({ orderNumber: order.orderNumber, customerName, customerPhone, items: orderItems, subtotal, discountAmount: 0, deliveryFee: deliveryFee || 0, total, deliveryAddress: deliveryAddress || '', deliveryZone: deliveryZone || '', paymentMethod: paymentMethod || 'cash', notes: notes || '', location });
+    await telegramService.sendOrderNotification({
+      orderNumber: order.orderNumber,
+      customerName,
+      customerPhone,
+      items: orderItems,
+      subtotal,
+      discountAmount: 0,
+      deliveryFee: deliveryFee || 0,
+      total,
+      deliveryAddress: deliveryAddress || '',
+      deliveryZone: deliveryZone || '',
+      paymentMethod: paymentMethod || 'cash',
+      notes: notes || '',
+      location,
+    });
 
-    console.log(`📦 New order (fallback): ${order.orderNumber} | ${customerName} | Total: ${total}`);
-    res.status(201).json({ data: { orderNumber: order.orderNumber, status: order.status, total: order.total } });
+    console.log(
+      `📦 New order (fallback): ${order.orderNumber} | ${customerName} | Total: ${total}`
+    );
+    res
+      .status(201)
+      .json({ data: { orderNumber: order.orderNumber, status: order.status, total: order.total } });
   } catch (err) {
     console.error('Create order error:', err);
     res.status(500).json({ error: 'Internal server error' });
@@ -106,11 +197,27 @@ ordersRouter.get('/:orderNumber/status', async (req: Request, res: Response) => 
       const { orderRepository } = await import('../repositories/order.repository');
       const order = await orderRepository.findByOrderNumber(req.params.orderNumber);
       if (!order) return res.status(404).json({ error: 'Order not found' });
-      return res.json({ data: { orderNumber: order.orderNumber, status: order.status, paymentStatus: order.paymentStatus, total: order.total, createdAt: order.createdAt } });
+      return res.json({
+        data: {
+          orderNumber: order.orderNumber,
+          status: order.status,
+          paymentStatus: order.paymentStatus,
+          total: order.total,
+          createdAt: order.createdAt,
+        },
+      });
     }
     const order = fallbackData.getOrderByNumber(req.params.orderNumber);
     if (!order) return res.status(404).json({ error: 'Order not found' });
-    res.json({ data: { orderNumber: order.orderNumber, status: order.status, paymentStatus: order.paymentStatus, total: order.total, createdAt: order.createdAt } });
+    res.json({
+      data: {
+        orderNumber: order.orderNumber,
+        status: order.status,
+        paymentStatus: order.paymentStatus,
+        total: order.total,
+        createdAt: order.createdAt,
+      },
+    });
   } catch (err) {
     console.error('Order status error:', err);
     res.status(500).json({ error: 'Internal server error' });
@@ -129,7 +236,13 @@ ordersRouter.post('/discounts/validate', async (req: Request, res: Response) => 
     // Fallback: fake WELCOME10 discount
     if (code.toUpperCase() === 'WELCOME10') {
       const discountAmount = Math.round((orderTotal || 0) * 0.1);
-      return res.json({ data: { valid: true, discountAmount, discount: { code: 'WELCOME10', type: 'percentage', value: 10 } } });
+      return res.json({
+        data: {
+          valid: true,
+          discountAmount,
+          discount: { code: 'WELCOME10', type: 'percentage', value: 10 },
+        },
+      });
     }
     res.json({ data: { valid: false, error: 'Промокод недействителен' } });
   } catch (err) {

@@ -2,7 +2,12 @@
 
 import React, { createContext, useContext, useState, useEffect, useCallback } from 'react';
 
-interface AdminUser { id: string; email: string; name: string; role: string; }
+interface AdminUser {
+  id: string;
+  email: string;
+  name: string;
+  role: string;
+}
 interface AuthContextType {
   user: AdminUser | null;
   token: string | null;

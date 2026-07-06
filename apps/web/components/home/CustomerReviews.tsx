@@ -30,12 +30,11 @@ export function CustomerReviews() {
       </motion.div>
 
       <div className="max-w-3xl mx-auto">
-        <motion.div
-          className="glass-card review-card p-8 sm:p-10 relative"
-          layout
-        >
+        <motion.div className="glass-card review-card p-8 sm:p-10 relative" layout>
           {/* Decorative quote */}
-          <div className="absolute top-6 right-8 text-7xl font-heading text-accent/10 select-none pointer-events-none">"</div>
+          <div className="absolute top-6 right-8 text-7xl font-heading text-accent/10 select-none pointer-events-none">
+            &quot;
+          </div>
 
           <AnimatePresence mode="wait">
             <motion.div
@@ -64,7 +63,7 @@ export function CustomerReviews() {
 
               {/* Quote */}
               <p className="text-white text-lg mb-6 leading-relaxed italic">
-                "{reviews[activeIndex].comment}"
+                &quot;{reviews[activeIndex].comment}&quot;
               </p>
 
               {/* Author */}
@@ -78,7 +77,9 @@ export function CustomerReviews() {
                   {reviews[activeIndex].customerName.charAt(0)}
                 </motion.div>
                 <div>
-                  <p className="font-semibold text-white text-sm">{reviews[activeIndex].customerName}</p>
+                  <p className="font-semibold text-white text-sm">
+                    {reviews[activeIndex].customerName}
+                  </p>
                   <p className="text-xs text-text-muted">{reviews[activeIndex].productName}</p>
                 </div>
               </div>

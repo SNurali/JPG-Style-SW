@@ -8,6 +8,7 @@
 **API:** http://hddfix.uz:3004/
 
 ### Последний коммит на GitHub
+
 ```
 2e5cf68 fix: add migration to sync empty client data from users table
 ```
@@ -31,32 +32,38 @@
 ## Команды для обновления на сервере
 
 ### 1. Перейти в директорию проекта
+
 ```bash
 cd /path/to/nodir_hdd_fixer
 ```
 
 ### 2. Остановить текущие контейнеры
+
 ```bash
 docker compose -f docker-compose.prod.yml down
 ```
 
 ### 3. Получить последние изменения
+
 ```bash
 git fetch origin
 git reset --hard origin/main
 ```
 
 ### 4. Пересобрать и запустить (ВАЖНО: --build!)
+
 ```bash
 docker compose -f docker-compose.prod.yml up -d --build
 ```
 
 ### 5. Применить миграцию для исправления пустых данных клиентов
+
 ```bash
 docker compose -f docker-compose.prod.yml exec api sh -c "node ./node_modules/typeorm/cli.js migration:run -d ./apps/api/dist/database/data-source.js"
 ```
 
 ### 6. Проверить здоровье сервисов
+
 ```bash
 # API Health
 curl http://localhost:3004/v1/health
@@ -69,6 +76,7 @@ curl http://hddfix.uz:3004/v1/health  # Должно вернуть {"status":"o
 ```
 
 ### 6. Проверить логи
+
 ```bash
 docker compose -f docker-compose.prod.yml logs -f
 ```
@@ -120,22 +128,22 @@ NODE_ENV=production
 
 ## Порты (Docker Compose prod)
 
-| Сервис | Внешний порт | Внутренний порт |
-|--------|--------------|-----------------|
-| PostgreSQL | 5436 | 5432 |
-| Redis | 6380 | 6379 |
-| API | 3004 | 3004 |
-| Web | 3003 | 3003 |
+| Сервис     | Внешний порт | Внутренний порт |
+| ---------- | ------------ | --------------- |
+| PostgreSQL | 5436         | 5432            |
+| Redis      | 6380         | 6379            |
+| API        | 3004         | 3004            |
+| Web        | 3003         | 3003            |
 
 ---
 
 ## Volumes (для сохранения данных)
 
-| Volume | Назначение |
-|--------|------------|
-| pgdata_prod | База данных PostgreSQL |
-| redisdata_prod | Данные Redis |
-| uploads_prod | Загруженные файлы (аватары) |
+| Volume         | Назначение                  |
+| -------------- | --------------------------- |
+| pgdata_prod    | База данных PostgreSQL      |
+| redisdata_prod | Данные Redis                |
+| uploads_prod   | Загруженные файлы (аватары) |
 
 ---
 

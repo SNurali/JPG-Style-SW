@@ -6,3 +6,5 @@ coverage
 *.lock
 .env
 .env.local
+playwright-report
+test-results

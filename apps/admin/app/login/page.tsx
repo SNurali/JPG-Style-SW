@@ -43,16 +43,32 @@ export default function LoginPage() {
         <form onSubmit={handleSubmit} className="space-y-4">
           <div>
             <label className="block text-sm text-text-muted mb-1">Email</label>
-            <input type="email" required value={email} onChange={(e) => setEmail(e.target.value)}
-              className="input-field" placeholder="admin@smartwash.uz" />
+            <input
+              type="email"
+              required
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              className="input-field"
+              placeholder="admin@smartwash.uz"
+            />
           </div>
           <div>
             <label className="block text-sm text-text-muted mb-1">Пароль</label>
-            <input type="password" required value={password} onChange={(e) => setPassword(e.target.value)}
-              className="input-field" placeholder="••••••••" autoComplete="current-password" />
+            <input
+              type="password"
+              required
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              className="input-field"
+              placeholder="••••••••"
+              autoComplete="current-password"
+            />
           </div>
-          <button type="submit" disabled={loading}
-            className={`btn-primary w-full ${loading ? 'opacity-70' : ''}`}>
+          <button
+            type="submit"
+            disabled={loading}
+            className={`btn-primary w-full ${loading ? 'opacity-70' : ''}`}
+          >
             {loading ? 'Входим...' : 'Войти'}
           </button>
         </form>

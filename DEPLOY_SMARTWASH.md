@@ -2,13 +2,13 @@
 
 ## Информация о сервере
 
-| Параметр | Значение |
-|----------|----------|
-| **Внешний IP** | `195.158.24.137` |
-| **WireGuard IP** | `172.16.252.32` |
-| **SSH User** | `yoyo` |
-| **OS** | Ubuntu (Docker + Nginx установлены) |
-| **Репозиторий** | https://github.com/SNurali/JPG-Style-SW.git |
+| Параметр         | Значение                                    |
+| ---------------- | ------------------------------------------- |
+| **Внешний IP**   | `195.158.24.137`                            |
+| **WireGuard IP** | `172.16.252.32`                             |
+| **SSH User**     | `yoyo`                                      |
+| **OS**           | Ubuntu (Docker + Nginx установлены)         |
+| **Репозиторий**  | https://github.com/SNurali/JPG-Style-SW.git |
 
 ---
 
@@ -16,15 +16,15 @@
 
 На этом сервере уже работает **NODIR_HDD_FIXER** (RECOVERY.UZ):
 
-| Ресурс | NODIR_HDD_FIXER (занято) | SmartWash (наш) |
-|--------|--------------------------|-----------------|
-| **Директория** | `/home/yoyo/nodir_hdd_fixer/` | `/home/yoyo/jpg-style-smartwash/` |
-| **Web порт** | 3003 | **3010** |
-| **API порт** | 3004 | **3011** |
-| **PostgreSQL** | 5436 (внешний) / 5432 (внутренний) | **5437** (внешний) / 5432 (внутренний) |
-| **Redis** | 6380 (внешний) / 6379 (внутренний) | **6381** (внешний) / 6379 (внутренний) |
-| **Docker Prefix** | `hdd_fixer_*` | `smartwash_*` |
-| **Nginx** | `/etc/nginx/sites-available/hdd-fixer` | `/etc/nginx/sites-available/smartwash` |
+| Ресурс            | NODIR_HDD_FIXER (занято)               | SmartWash (наш)                        |
+| ----------------- | -------------------------------------- | -------------------------------------- |
+| **Директория**    | `/home/yoyo/nodir_hdd_fixer/`          | `/home/yoyo/jpg-style-smartwash/`      |
+| **Web порт**      | 3003                                   | **3010**                               |
+| **API порт**      | 3004                                   | **3011**                               |
+| **PostgreSQL**    | 5436 (внешний) / 5432 (внутренний)     | **5437** (внешний) / 5432 (внутренний) |
+| **Redis**         | 6380 (внешний) / 6379 (внутренний)     | **6381** (внешний) / 6379 (внутренний) |
+| **Docker Prefix** | `hdd_fixer_*`                          | `smartwash_*`                          |
+| **Nginx**         | `/etc/nginx/sites-available/hdd-fixer` | `/etc/nginx/sites-available/smartwash` |
 
 > **ВАЖНО:** Не трогать порты 3003, 3004, 5436, 6380 — они заняты NODIR_HDD_FIXER!
 
@@ -112,6 +112,7 @@ EOF
 ```
 
 **Сгенерировать безопасные секреты:**
+
 ```bash
 # JWT_SECRET
 openssl rand -base64 32
@@ -350,18 +351,18 @@ docker exec smartwash_redis redis-cli ping
 
 ## 🗂️ Карта портов сервера (полная)
 
-| Порт | Сервис | Проект |
-|------|--------|--------|
-| 80 | Nginx | Общий |
-| 443 | Nginx SSL | Общий |
+| Порт | Сервис       | Проект             |
+| ---- | ------------ | ------------------ |
+| 80   | Nginx        | Общий              |
+| 443  | Nginx SSL    | Общий              |
 | 3003 | Web Frontend | NODIR_HDD_FIXER ⛔ |
-| 3004 | API Backend | NODIR_HDD_FIXER ⛔ |
-| 3010 | Web Frontend | **SmartWash** ✅ |
-| 3011 | API Backend | **SmartWash** ✅ |
-| 5436 | PostgreSQL | NODIR_HDD_FIXER ⛔ |
-| 5437 | PostgreSQL | **SmartWash** ✅ |
-| 6380 | Redis | NODIR_HDD_FIXER ⛔ |
-| 6381 | Redis | **SmartWash** ✅ |
+| 3004 | API Backend  | NODIR_HDD_FIXER ⛔ |
+| 3010 | Web Frontend | **SmartWash** ✅   |
+| 3011 | API Backend  | **SmartWash** ✅   |
+| 5436 | PostgreSQL   | NODIR_HDD_FIXER ⛔ |
+| 5437 | PostgreSQL   | **SmartWash** ✅   |
+| 6380 | Redis        | NODIR_HDD_FIXER ⛔ |
+| 6381 | Redis        | **SmartWash** ✅   |
 
 ---
 

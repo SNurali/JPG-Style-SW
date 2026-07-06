@@ -5,7 +5,17 @@ import Link from 'next/link';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { useLanguage } from '@/lib/i18n';
 
-function FloatingBubble({ delay, size, left, duration }: { delay: number; size: number; left: string; duration: number }) {
+function FloatingBubble({
+  delay,
+  size,
+  left,
+  duration,
+}: {
+  delay: number;
+  size: number;
+  left: string;
+  duration: number;
+}) {
   return (
     <div
       className="bubble"
@@ -52,11 +62,15 @@ export function HeroSection() {
   return (
     <section className="relative min-h-[90vh] flex items-center overflow-hidden">
       {/* Animated gradient background */}
-      <div className="absolute inset-0" style={{
-        background: 'linear-gradient(135deg, #0f0f23 0%, #1a1a2e 25%, #16213e 50%, #1a1a2e 75%, #0f0f23 100%)',
-        backgroundSize: '400% 400%',
-        animation: 'gradient-shift 15s ease infinite',
-      }} />
+      <div
+        className="absolute inset-0"
+        style={{
+          background:
+            'linear-gradient(135deg, #0f0f23 0%, #1a1a2e 25%, #16213e 50%, #1a1a2e 75%, #0f0f23 100%)',
+          backgroundSize: '400% 400%',
+          animation: 'gradient-shift 15s ease infinite',
+        }}
+      />
 
       {/* Animated blobs */}
       <motion.div className="hero-blob hero-blob-1" style={{ y: y1 }} />
@@ -75,18 +89,29 @@ export function HeroSection() {
       ))}
 
       {/* Grid pattern overlay */}
-      <div className="absolute inset-0 opacity-[0.03]" style={{
-        backgroundImage: 'linear-gradient(rgba(255,255,255,0.1) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.1) 1px, transparent 1px)',
-        backgroundSize: '60px 60px',
-      }} />
+      <div
+        className="absolute inset-0 opacity-[0.03]"
+        style={{
+          backgroundImage:
+            'linear-gradient(rgba(255,255,255,0.1) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.1) 1px, transparent 1px)',
+          backgroundSize: '60px 60px',
+        }}
+      />
 
       {/* Radial vignette */}
-      <div className="absolute inset-0" style={{
-        background: 'radial-gradient(ellipse at center, transparent 30%, rgba(15, 15, 35, 0.8) 100%)',
-      }} />
+      <div
+        className="absolute inset-0"
+        style={{
+          background:
+            'radial-gradient(ellipse at center, transparent 30%, rgba(15, 15, 35, 0.8) 100%)',
+        }}
+      />
 
       {/* Content */}
-      <motion.div className="relative max-w-7xl mx-auto px-4 sm:px-6 py-20 text-center w-full" style={{ opacity }}>
+      <motion.div
+        className="relative max-w-7xl mx-auto px-4 sm:px-6 py-20 text-center w-full"
+        style={{ opacity }}
+      >
         <motion.div
           initial={{ opacity: 0, y: 40 }}
           animate={{ opacity: 1, y: 0 }}
@@ -141,7 +166,12 @@ export function HeroSection() {
               className="btn-secondary text-lg px-8 py-4 flex items-center gap-2 ripple"
             >
               <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"
+                />
               </svg>
               {t('hero.askBot')}
             </button>
@@ -159,7 +189,7 @@ export function HeroSection() {
               { value: '50+', label: t('stats.products'), delay: 0.1 },
               { value: '1000+', label: t('stats.orders'), delay: 0.2 },
               { value: '4.8⭐', label: t('stats.rating'), delay: 0.3 },
-            ].map((stat, i) => (
+            ].map((stat) => (
               <motion.div
                 key={stat.label}
                 className="text-center p-4 rounded-2xl glass-card stat-glow"
@@ -168,7 +198,9 @@ export function HeroSection() {
                 transition={{ delay: 1 + stat.delay, duration: 0.5 }}
                 whileHover={{ scale: 1.05, y: -4 }}
               >
-                <div className="font-heading text-2xl sm:text-3xl font-bold text-white">{stat.value}</div>
+                <div className="font-heading text-2xl sm:text-3xl font-bold text-white">
+                  {stat.value}
+                </div>
                 <div className="text-sm text-text-muted mt-1">{stat.label}</div>
               </motion.div>
             ))}

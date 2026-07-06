@@ -6,8 +6,12 @@ import { useAuth } from '@/lib/auth';
 import { fetchMyOrders, updateMyProfile } from '@/lib/api';
 
 const STATUS_RU: Record<string, string> = {
-  pending: 'Новый', confirmed: 'Подтверждён', processing: 'В обработке',
-  delivering: 'Доставка', delivered: 'Доставлен', cancelled: 'Отменён',
+  pending: 'Новый',
+  confirmed: 'Подтверждён',
+  processing: 'В обработке',
+  delivering: 'Доставка',
+  delivered: 'Доставлен',
+  cancelled: 'Отменён',
 };
 
 export default function AccountPage() {
@@ -25,7 +29,10 @@ export default function AccountPage() {
   }, [isLoading, user, router]);
 
   useEffect(() => {
-    if (user) { setName(user.name || ''); setPhone(user.phone || ''); }
+    if (user) {
+      setName(user.name || '');
+      setPhone(user.phone || '');
+    }
   }, [user]);
 
   useEffect(() => {
@@ -37,26 +44,41 @@ export default function AccountPage() {
   }, [user]);
 
   if (isLoading || !user) {
-    return <div className="min-h-[60vh] flex items-center justify-center text-text-muted">Загрузка...</div>;
+    return (
+      <div className="min-h-[60vh] flex items-center justify-center text-text-muted">
+        Загрузка...
+      </div>
+    );
   }
 
   const saveProfile = async (e: React.FormEvent) => {
     e.preventDefault();
-    setSaving(true); setMsg('');
+    setSaving(true);
+    setMsg('');
     try {
       const { data } = await updateMyProfile({ name, phone: phone || undefined });
       setUser(data);
       setMsg('Сохранено ✓');
     } catch (err: any) {
       setMsg(err.message || 'Ошибка сохранения');
-    } finally { setSaving(false); }
+    } finally {
+      setSaving(false);
+    }
   };
 
   return (
     <div className="max-w-4xl mx-auto px-6 py-12">
       <div className="flex items-center justify-between mb-8">
         <h1 className="font-heading text-3xl font-bold text-white">Личный кабинет</h1>
-        <button onClick={() => { logout(); router.push('/'); }} className="btn-secondary text-sm">Выйти</button>
+        <button
+          onClick={() => {
+            logout();
+            router.push('/');
+          }}
+          className="btn-secondary text-sm"
+        >
+          Выйти
+        </button>
       </div>
 
       <div className="grid md:grid-cols-2 gap-6">
@@ -66,7 +88,11 @@ export default function AccountPage() {
           <form onSubmit={saveProfile} className="space-y-4">
             <div>
               <label className="block text-sm text-text-muted mb-1">Имя</label>
-              <input value={name} onChange={(e) => setName(e.target.value)} className="input-field" />
+              <input
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+                className="input-field"
+              />
             </div>
             <div>
               <label className="block text-sm text-text-muted mb-1">Email</label>
@@ -74,13 +100,24 @@ export default function AccountPage() {
             </div>
             <div>
               <label className="block text-sm text-text-muted mb-1">Телефон</label>
-              <input value={phone} onChange={(e) => setPhone(e.target.value)} className="input-field" placeholder="+998 __ ___ __ __" />
+              <input
+                value={phone}
+                onChange={(e) => setPhone(e.target.value)}
+                className="input-field"
+                placeholder="+998 __ ___ __ __"
+              />
             </div>
             {msg && <p className="text-sm text-accent">{msg}</p>}
-            <button type="submit" disabled={saving} className={`btn-primary w-full ${saving ? 'opacity-70' : ''}`}>
+            <button
+              type="submit"
+              disabled={saving}
+              className={`btn-primary w-full ${saving ? 'opacity-70' : ''}`}
+            >
               {saving ? 'Сохраняем...' : 'Сохранить'}
             </button>
-            {user.googleLinked && <p className="text-xs text-text-muted text-center">Аккаунт привязан к Google</p>}
+            {user.googleLinked && (
+              <p className="text-xs text-text-muted text-center">Аккаунт привязан к Google</p>
+            )}
           </form>
         </div>
 
@@ -97,11 +134,16 @@ export default function AccountPage() {
                 <li key={o.orderNumber} className="rounded-xl border border-white/[0.06] p-3">
                   <div className="flex items-center justify-between">
                     <span className="text-white text-sm font-semibold">№ {o.orderNumber}</span>
-                    <span className="text-xs px-2 py-0.5 rounded-full bg-accent/15 text-accent">{STATUS_RU[o.status] || o.status}</span>
+                    <span className="text-xs px-2 py-0.5 rounded-full bg-accent/15 text-accent">
+                      {STATUS_RU[o.status] || o.status}
+                    </span>
                   </div>
                   <div className="text-xs text-text-muted mt-1">
-                    {new Date(o.createdAt).toLocaleDateString('ru-RU')} · {(o.items?.length || 0)} тов. ·{' '}
-                    <span className="text-white font-semibold">{Number(o.total).toLocaleString('ru-RU')} сум</span>
+                    {new Date(o.createdAt).toLocaleDateString('ru-RU')} · {o.items?.length || 0}{' '}
+                    тов. ·{' '}
+                    <span className="text-white font-semibold">
+                      {Number(o.total).toLocaleString('ru-RU')} сум
+                    </span>
                   </div>
                 </li>
               ))}

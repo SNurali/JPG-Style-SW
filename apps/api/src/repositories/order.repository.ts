@@ -3,7 +3,14 @@ import { query, withTransaction } from '../db/connection';
 export const orderRepository = {
   async create(data: {
     customerId: string;
-    items: { productId: string; productName: string; productImage?: string; quantity: number; unitPrice: number; totalPrice: number }[];
+    items: {
+      productId: string;
+      productName: string;
+      productImage?: string;
+      quantity: number;
+      unitPrice: number;
+      totalPrice: number;
+    }[];
     subtotal: number;
     discountAmount: number;
     deliveryFee: number;
@@ -21,20 +28,29 @@ export const orderRepository = {
         `INSERT INTO orders (order_number, customer_id, items, subtotal, discount_amount, delivery_fee, total, delivery_address, delivery_zone, payment_method, payment_status, status, notes, discount_code)
          VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14) RETURNING *`,
         [
-          orderNumber, data.customerId, JSON.stringify(data.items),
-          data.subtotal, data.discountAmount, data.deliveryFee, data.total,
-          data.deliveryAddress, data.deliveryZone, data.paymentMethod,
-          data.paymentMethod === 'cash' ? 'pending' : 'awaiting', 'pending',
-          data.notes, data.discountCode || null,
+          orderNumber,
+          data.customerId,
+          JSON.stringify(data.items),
+          data.subtotal,
+          data.discountAmount,
+          data.deliveryFee,
+          data.total,
+          data.deliveryAddress,
+          data.deliveryZone,
+          data.paymentMethod,
+          data.paymentMethod === 'cash' ? 'pending' : 'awaiting',
+          'pending',
+          data.notes,
+          data.discountCode || null,
         ]
       );
 
       // Decrease stock for each product
       for (const item of data.items) {
-        await client.query(
-          `UPDATE products SET stock = GREATEST(0, stock - $1) WHERE id = $2`,
-          [item.quantity, item.productId]
-        );
+        await client.query(`UPDATE products SET stock = GREATEST(0, stock - $1) WHERE id = $2`, [
+          item.quantity,
+          item.productId,
+        ]);
         await client.query(
           `INSERT INTO inventory_log (product_id, quantity_change, reason, reference_id) VALUES ($1, $2, $3, $4)`,
           [item.productId, -item.quantity, 'order', orderNumber]
@@ -95,7 +111,9 @@ export const orderRepository = {
       params.push(filters.status);
     }
     if (filters.search) {
-      conditions.push(`(o.order_number ILIKE $${idx} OR c.phone ILIKE $${idx} OR c.first_name ILIKE $${idx})`);
+      conditions.push(
+        `(o.order_number ILIKE $${idx} OR c.phone ILIKE $${idx} OR c.first_name ILIKE $${idx})`
+      );
       params.push(`%${filters.search}%`);
       idx++;
     }
@@ -132,18 +150,18 @@ export const orderRepository = {
   },
 
   async updateStatus(id: string, status: string) {
-    const result = await query(
-      `UPDATE orders SET status = $1 WHERE id = $2 RETURNING *`,
-      [status, id]
-    );
+    const result = await query(`UPDATE orders SET status = $1 WHERE id = $2 RETURNING *`, [
+      status,
+      id,
+    ]);
     return result.rows[0] ? mapOrderRow(result.rows[0]) : null;
   },
 
   async updatePaymentStatus(id: string, paymentStatus: string) {
-    const result = await query(
-      `UPDATE orders SET payment_status = $1 WHERE id = $2 RETURNING *`,
-      [paymentStatus, id]
-    );
+    const result = await query(`UPDATE orders SET payment_status = $1 WHERE id = $2 RETURNING *`, [
+      paymentStatus,
+      id,
+    ]);
     return result.rows[0] ? mapOrderRow(result.rows[0]) : null;
   },
 

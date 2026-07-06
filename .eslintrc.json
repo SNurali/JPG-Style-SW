@@ -20,12 +20,7 @@
     "plugin:react-hooks/recommended",
     "prettier"
   ],
-  "plugins": [
-    "@typescript-eslint",
-    "react",
-    "react-hooks",
-    "prettier"
-  ],
+  "plugins": ["@typescript-eslint", "react", "react-hooks", "prettier"],
   "rules": {
     "prettier/prettier": "error",
     "@typescript-eslint/no-explicit-any": "warn",
@@ -40,10 +35,7 @@
     "no-console": [
       "warn",
       {
-        "allow": [
-          "warn",
-          "error"
-        ]
+        "allow": ["warn", "error"]
       }
     ]
   },
@@ -51,16 +43,5 @@
     "react": {
       "version": "detect"
     }
-  },
-  "overrides": [
-    {
-      "files": [
-        "apps/web/**",
-        "apps/admin/**"
-      ],
-      "extends": [
-        "plugin:next/recommended"
-      ]
-    }
-  ]
+  }
 }

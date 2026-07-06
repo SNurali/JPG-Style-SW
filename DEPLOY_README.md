@@ -59,10 +59,10 @@ ssh-copy-id -i ~/.ssh/deploy_key.pub yoyo@172.16.252.32
 
 Перейти в **Settings → Secrets and variables → Actions** и добавить:
 
-| Название | Значение |
-|----------|----------|
-| `VPS_IP` | `172.16.252.32` |
-| `VPS_USER` | `yoyo` |
+| Название      | Значение                       |
+| ------------- | ------------------------------ |
+| `VPS_IP`      | `172.16.252.32`                |
+| `VPS_USER`    | `yoyo`                         |
 | `VPS_SSH_KEY` | Содержимое `~/.ssh/deploy_key` |
 
 ---
@@ -123,15 +123,15 @@ docker compose -f docker-compose.prod.yml up -d --build
 
 ## 📊 Информация о сервере
 
-| Параметр | Значение |
-|----------|----------|
-| **IP адрес** | `195.158.24.137` |
-| **WireGuard IP** | `172.16.252.32` |
-| **SSH User** | `yoyo` |
-| **Frontend** | http://195.158.24.137:3000 |
-| **API** | http://195.158.24.137:4000 |
-| **PostgreSQL** | localhost:5432 |
-| **Redis** | localhost:6379 |
+| Параметр         | Значение                   |
+| ---------------- | -------------------------- |
+| **IP адрес**     | `195.158.24.137`           |
+| **WireGuard IP** | `172.16.252.32`            |
+| **SSH User**     | `yoyo`                     |
+| **Frontend**     | http://195.158.24.137:3000 |
+| **API**          | http://195.158.24.137:4000 |
+| **PostgreSQL**   | localhost:5432             |
+| **Redis**        | localhost:6379             |
 
 ---
 

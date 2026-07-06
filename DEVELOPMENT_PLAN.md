@@ -12,6 +12,7 @@
 ### 1.1 Уведомления о деплое
 
 **Задачи:**
+
 - [ ] Создать Telegram бота (@RecoveryUzBot)
 - [ ] Получить токен бота и chat_id
 - [ ] Добавить отправку уведомлений в `scripts/deploy-update.sh`
@@ -19,6 +20,7 @@
 - [ ] Добавить ссылку на коммит в уведомление
 
 **Файлы для изменения:**
+
 ```
 scripts/deploy-update.sh
 scripts/deploy-pm2.sh
@@ -26,6 +28,7 @@ apps/api/src/modules/telegram/telegram.service.ts
 ```
 
 **Пример сообщения:**
+
 ```
 🚀 RECOVERY.UZ - Деплой завершён
 
@@ -40,12 +43,14 @@ apps/api/src/modules/telegram/telegram.service.ts
 ### 1.2 Уведомления об ошибках
 
 **Задачи:**
+
 - [ ] Перехватывать критические ошибки API
 - [ ] Отправлять стектрейс в Telegram
 - [ ] Настроить фильтрацию (только критичные)
 - [ ] Добавить кнопку "Починить" в уведомление
 
 **Файлы для изменения:**
+
 ```
 apps/api/src/common/filters/http-exception.filter.ts
 apps/api/src/main.ts
@@ -53,6 +58,7 @@ apps/api/src/modules/telegram/telegram.service.ts
 ```
 
 **Пример сообщения:**
+
 ```
 ❌ RECOVERY.UZ - Ошибка сервера
 
@@ -68,18 +74,21 @@ User: master_123
 ### 1.3 Уведомления о новых заказах
 
 **Задачи:**
+
 - [ ] Отправлять уведомление при создании заказа
 - [ ] Уведомлять админа и оператора
 - [ ] Уведомлять мастера при назначении
 - [ ] Добавить информацию о заказе
 
 **Файлы для изменения:**
+
 ```
 apps/api/src/modules/orders/orders.service.ts
 apps/api/src/modules/notifications/notifications.service.ts
 ```
 
 **Пример сообщения:**
+
 ```
 📦 Новый заказ #ABC123
 
@@ -101,12 +110,14 @@ apps/api/src/modules/notifications/notifications.service.ts
 ### 2.1 CPU/RAM Использование
 
 **Задачи:**
+
 - [ ] Создать endpoint `/monitoring/resources`
 - [ ] Сбор метрик: CPU%, RAM MB, Swap%
 - [ ] Сохранять историю (Redis TimeSeries)
 - [ ] Админ-панель с графиками
 
 **API Endpoint:**
+
 ```typescript
 GET /monitoring/resources
 {
@@ -125,6 +136,7 @@ GET /monitoring/resources
 ```
 
 **Файлы:**
+
 ```
 apps/api/src/modules/monitoring/monitoring.controller.ts
 apps/api/src/modules/monitoring/monitoring.service.ts
@@ -136,12 +148,14 @@ apps/web/src/app/admin/monitoring/page.tsx
 ### 2.2 Свободное место на диске
 
 **Задачи:**
+
 - [ ] Endpoint `/monitoring/disk`
 - [ ] Мониторить: /, /uploads, /backups
 - [ ] Тревога при <10% места
 - [ ] Telegram уведомление при критичном уровне
 
 **API Endpoint:**
+
 ```typescript
 GET /monitoring/disk
 {
@@ -163,18 +177,21 @@ GET /monitoring/disk
 ### 2.3 Uptime Сервиса
 
 **Задачи:**
+
 - [ ] Endpoint `/monitoring/uptime`
 - [ ] Считать uptime API, Web, PostgreSQL, Redis
 - [ ] История доступности (99.9% target)
 - [ ] Dashboard с графиками
 
 **Файлы:**
+
 ```
 apps/api/src/modules/monitoring/monitoring.service.ts
 apps/web/src/app/admin/monitoring/page.tsx
 ```
 
 **Пример сообщения:**
+
 ```
 📊 RECOVERY.UZ - Мониторинг
 
@@ -196,6 +213,7 @@ RAM: 2.1GB / 4GB
 ### 3.1 Ежедневные Бэкапы
 
 **Задачи:**
+
 - [ ] Скрипт `scripts/backup-db.sh`
 - [ ] Cron на 03:00 ежедневно
 - [ ] Сжатие gzip
@@ -203,6 +221,7 @@ RAM: 2.1GB / 4GB
 - [ ] Логирование результатов
 
 **Скрипт бэкапа:**
+
 ```bash
 #!/bin/bash
 DATE=$(date +%Y%m%d_%H%M%S)
@@ -212,6 +231,7 @@ find backups -name "*.sql.gz" -mtime +7 -delete
 ```
 
 **Файлы:**
+
 ```
 scripts/backup-db.sh
 crontab -e
@@ -222,12 +242,14 @@ crontab -e
 ### 3.2 Хранение в Облаке
 
 **Задачи:**
+
 - [ ] Настроить Google Drive / Yandex Disk
 - [ ] Загрузка бэкапа после создания
 - [ ] Шифрование перед отправкой
 - [ ] Уведомление об успехе/ошибке
 
 **Интеграция с Google Drive:**
+
 ```bash
 # Установить rclone
 apt install rclone
@@ -240,6 +262,7 @@ rclone copy backups/db_backup_$DATE.sql.gz gdrive:backups/
 ```
 
 **Файлы:**
+
 ```
 scripts/backup-cloud.sh
 .env.production (добавить CLOUD_CREDENTIALS)
@@ -252,14 +275,17 @@ scripts/backup-cloud.sh
 ### Неделя 1 (16-22 Марта)
 
 **Понедельник-Вторник:**
+
 - [ ] 1.1 Telegram бот
 - [ ] 1.1 Уведомления о деплое
 
 **Среда-Четверг:**
+
 - [ ] 1.2 Уведомления об ошибках
 - [ ] 1.3 Уведомления о заказах
 
 **Пятница:**
+
 - [ ] Тестирование Telegram
 - [ ] Документация
 
@@ -268,14 +294,17 @@ scripts/backup-cloud.sh
 ### Неделя 2 (23-29 Марта)
 
 **Понедельник-Вторник:**
+
 - [ ] 2.1 CPU/RAM мониторинг
 - [ ] 2.2 Диск мониторинг
 
 **Среда-Четверг:**
+
 - [ ] 2.3 Uptime
 - [ ] Админ dashboard
 
 **Пятница:**
+
 - [ ] Тестирование мониторинга
 - [ ] Настройка алертов
 
@@ -284,14 +313,17 @@ scripts/backup-cloud.sh
 ### Неделя 3 (30 Марта - 5 Апреля)
 
 **Понедельник:**
+
 - [ ] 3.1 Скрипт бэкапа
 - [ ] Настройка cron
 
 **Вторник-Среда:**
+
 - [ ] 3.2 Облачное хранилище
 - [ ] Шифрование
 
 **Четверг-Пятница:**
+
 - [ ] Тестирование восстановления
 - [ ] Документация
 
@@ -300,18 +332,21 @@ scripts/backup-cloud.sh
 ## 🎯 Критерии Успеха
 
 ### Telegram Уведомления ✅
+
 - [ ] Бот отправляет сообщения
 - [ ] Деплой уведомляет в Telegram
 - [ ] Ошибки логируются и отправляются
 - [ ] Новые заказы видны в канале
 
 ### Мониторинг ✅
+
 - [ ] Dashboard доступен `/admin/monitoring`
 - [ ] Графики CPU/RAM/Disk работают
 - [ ] Uptime считается корректно
 - [ ] Алерты приходят при >90%
 
 ### Бэкапы ✅
+
 - [ ] Бэкап создаётся ежедневно в 03:00
 - [ ] 7 последних бэкапов хранятся
 - [ ] Копия в облаке актуальна
@@ -321,13 +356,13 @@ scripts/backup-cloud.sh
 
 ## 📊 Метрики
 
-| Метрика | Target | Текущий |
-|---------|--------|---------|
-| Uptime | 99.9% | - |
-| Время деплоя | <5 мин | - |
-| Время восстановления | <15 мин | - |
-| RPO (Backup) | 24 часа | - |
-| RTO (Recovery) | 1 час | - |
+| Метрика              | Target  | Текущий |
+| -------------------- | ------- | ------- |
+| Uptime               | 99.9%   | -       |
+| Время деплоя         | <5 мин  | -       |
+| Время восстановления | <15 мин | -       |
+| RPO (Backup)         | 24 часа | -       |
+| RTO (Recovery)       | 1 час   | -       |
 
 ---
 
@@ -336,16 +371,19 @@ scripts/backup-cloud.sh
 ### Стек технологий
 
 **Telegram:**
+
 - `node-telegram-bot-api` или `telegraf`
 - Inline кнопки
 - Webhooks
 
 **Мониторинг:**
+
 - `systeminformation` (Node.js пакет)
 - Redis TimeSeries для истории
 - Chart.js для графиков
 
 **Бэкапы:**
+
 - `pg_dump` (PostgreSQL)
 - `gzip` (сжатие)
 - `rclone` (облако)
@@ -389,6 +427,7 @@ npm install telegraf --workspace=apps/api
 **Готов приступить к реализации?** 🤖
 
 Выберите с чего начать:
+
 1. Telegram бот (самое важное)
 2. Мониторинг dashboard
 3. Бэкапы

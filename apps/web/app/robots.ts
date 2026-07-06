@@ -6,7 +6,16 @@ export default function robots(): MetadataRoute.Robots {
       {
         userAgent: '*',
         allow: '/',
-        disallow: ['/api/', '/admin/', '/checkout', '/account', '/cart', '/login', '/register', '/print-labels'],
+        disallow: [
+          '/api/',
+          '/admin/',
+          '/checkout',
+          '/account',
+          '/cart',
+          '/login',
+          '/register',
+          '/print-labels',
+        ],
       },
     ],
     sitemap: 'https://smartwash.uz/sitemap.xml',

@@ -19,12 +19,19 @@ const statusOptions = [
 ];
 
 const statusLabels: Record<string, string> = {
-  pending: 'Ожидает', confirmed: 'Подтверждён', processing: 'В обработке',
-  delivering: 'Доставляется', delivered: 'Доставлен', cancelled: 'Отменён',
+  pending: 'Ожидает',
+  confirmed: 'Подтверждён',
+  processing: 'В обработке',
+  delivering: 'Доставляется',
+  delivered: 'Доставлен',
+  cancelled: 'Отменён',
 };
 
 const paymentLabels: Record<string, string> = {
-  pending: 'Ожидает', awaiting: 'Ожидает оплаты', paid: 'Оплачено', failed: 'Ошибка',
+  pending: 'Ожидает',
+  awaiting: 'Ожидает оплаты',
+  paid: 'Оплачено',
+  failed: 'Ошибка',
 };
 
 export default function OrdersPage() {
@@ -36,20 +43,28 @@ export default function OrdersPage() {
   const [loading, setLoading] = useState(true);
   const [expandedOrder, setExpandedOrder] = useState<string | null>(null);
 
-  const loadOrders = useCallback(async (page = 1) => {
-    setLoading(true);
-    try {
-      const qs = new URLSearchParams({ page: String(page), limit: '20' });
-      if (search) qs.set('search', search);
-      if (statusFilter) qs.set('status', statusFilter);
-      const res = await api(`/api/admin/orders?${qs}`);
-      setOrders(res.data || []);
-      setPagination(res.pagination);
-    } catch (err) { console.error(err); }
-    finally { setLoading(false); }
-  }, [api, search, statusFilter]);
+  const loadOrders = useCallback(
+    async (page = 1) => {
+      setLoading(true);
+      try {
+        const qs = new URLSearchParams({ page: String(page), limit: '20' });
+        if (search) qs.set('search', search);
+        if (statusFilter) qs.set('status', statusFilter);
+        const res = await api(`/api/admin/orders?${qs}`);
+        setOrders(res.data || []);
+        setPagination(res.pagination);
+      } catch (err) {
+        console.error(err);
+      } finally {
+        setLoading(false);
+      }
+    },
+    [api, search, statusFilter]
+  );
 
-  useEffect(() => { loadOrders(); }, [loadOrders]);
+  useEffect(() => {
+    loadOrders();
+  }, [loadOrders]);
 
   const updateStatus = async (id: string, status: string) => {
     try {
@@ -58,7 +73,9 @@ export default function OrdersPage() {
         body: JSON.stringify({ status }),
       });
       loadOrders(pagination.page);
-    } catch (err) { console.error(err); }
+    } catch (err) {
+      console.error(err);
+    }
   };
 
   return (
@@ -80,12 +97,20 @@ export default function OrdersPage() {
         />
         <select
           value={statusFilter}
-          onChange={(e) => { setStatusFilter(e.target.value); }}
+          onChange={(e) => {
+            setStatusFilter(e.target.value);
+          }}
           className="input-field max-w-[200px]"
         >
-          {statusOptions.map((o) => <option key={o.value} value={o.value}>{o.label}</option>)}
+          {statusOptions.map((o) => (
+            <option key={o.value} value={o.value}>
+              {o.label}
+            </option>
+          ))}
         </select>
-        <button onClick={() => loadOrders(1)} className="btn-secondary">Фильтр</button>
+        <button onClick={() => loadOrders(1)} className="btn-secondary">
+          Фильтр
+        </button>
       </div>
 
       {/* Table */}
@@ -105,72 +130,127 @@ export default function OrdersPage() {
             </thead>
             <tbody className="divide-y divide-white/5">
               {loading ? (
-                <tr><td colSpan={7} className="p-8 text-center text-text-muted">Загрузка...</td></tr>
+                <tr>
+                  <td colSpan={7} className="p-8 text-center text-text-muted">
+                    Загрузка...
+                  </td>
+                </tr>
               ) : orders.length === 0 ? (
-                <tr><td colSpan={7} className="p-8 text-center text-text-muted">Заказов не найдено</td></tr>
-              ) : orders.map((order) => (
-                <React.Fragment key={order.id}>
-                  <tr
-                    className="hover:bg-white/[0.02] cursor-pointer"
-                    onClick={() => setExpandedOrder(expandedOrder === order.id ? null : order.id)}
-                  >
-                    <td className="p-4 font-medium text-accent">{order.orderNumber}</td>
-                    <td className="p-4">
-                      <div className="text-white">{order.customerName}</div>
-                      <div className="text-text-muted text-xs">{order.customerPhone}</div>
-                    </td>
-                    <td className="p-4 text-white font-medium">{formatPrice(order.total)}</td>
-                    <td className="p-4"><span className={`badge-${order.status}`}>{statusLabels[order.status]}</span></td>
-                    <td className="p-4"><span className={`badge-${order.paymentStatus}`}>{paymentLabels[order.paymentStatus]}</span></td>
-                    <td className="p-4 text-text-muted">{new Date(order.createdAt).toLocaleDateString('ru-RU')}</td>
-                    <td className="p-4">
-                      <select
-                        value={order.status}
-                        onChange={(e) => { e.stopPropagation(); updateStatus(order.id, e.target.value); }}
-                        onClick={(e) => e.stopPropagation()}
-                        className="input-field text-xs py-1 px-2 w-auto"
-                      >
-                        {statusOptions.filter((o) => o.value).map((o) => (
-                          <option key={o.value} value={o.value}>{o.label}</option>
-                        ))}
-                      </select>
-                    </td>
-                  </tr>
-                  {/* Expanded row */}
-                  {expandedOrder === order.id && (
-                    <tr>
-                      <td colSpan={7} className="p-4 bg-primary/30">
-                        <div className="grid grid-cols-2 gap-4 text-sm">
-                          <div>
-                            <p className="text-text-muted mb-1">Товары:</p>
-                            {(order.items || []).map((item: any, i: number) => (
-                              <p key={i} className="text-white">
-                                {item.productName} × {item.quantity} = {formatPrice(item.totalPrice)}
-                              </p>
+                <tr>
+                  <td colSpan={7} className="p-8 text-center text-text-muted">
+                    Заказов не найдено
+                  </td>
+                </tr>
+              ) : (
+                orders.map((order) => (
+                  <React.Fragment key={order.id}>
+                    <tr
+                      className="hover:bg-white/[0.02] cursor-pointer"
+                      onClick={() => setExpandedOrder(expandedOrder === order.id ? null : order.id)}
+                    >
+                      <td className="p-4 font-medium text-accent">{order.orderNumber}</td>
+                      <td className="p-4">
+                        <div className="text-white">{order.customerName}</div>
+                        <div className="text-text-muted text-xs">{order.customerPhone}</div>
+                      </td>
+                      <td className="p-4 text-white font-medium">{formatPrice(order.total)}</td>
+                      <td className="p-4">
+                        <span className={`badge-${order.status}`}>
+                          {statusLabels[order.status]}
+                        </span>
+                      </td>
+                      <td className="p-4">
+                        <span className={`badge-${order.paymentStatus}`}>
+                          {paymentLabels[order.paymentStatus]}
+                        </span>
+                      </td>
+                      <td className="p-4 text-text-muted">
+                        {new Date(order.createdAt).toLocaleDateString('ru-RU')}
+                      </td>
+                      <td className="p-4">
+                        <select
+                          value={order.status}
+                          onChange={(e) => {
+                            e.stopPropagation();
+                            updateStatus(order.id, e.target.value);
+                          }}
+                          onClick={(e) => e.stopPropagation()}
+                          className="input-field text-xs py-1 px-2 w-auto"
+                        >
+                          {statusOptions
+                            .filter((o) => o.value)
+                            .map((o) => (
+                              <option key={o.value} value={o.value}>
+                                {o.label}
+                              </option>
                             ))}
-                          </div>
-                          <div>
-                            <p className="text-text-muted">Адрес: <span className="text-white">{order.deliveryAddress || 'Самовывоз'}</span></p>
-                            <p className="text-text-muted">Зона: <span className="text-white">{order.deliveryZone}</span></p>
-                            <p className="text-text-muted">Оплата: <span className="text-white">{order.paymentMethod}</span></p>
-                            {order.notes && <p className="text-text-muted">Комментарий: <span className="text-white">{order.notes}</span></p>}
-                          </div>
-                        </div>
+                        </select>
                       </td>
                     </tr>
-                  )}
-                </React.Fragment>
-              ))}
+                    {/* Expanded row */}
+                    {expandedOrder === order.id && (
+                      <tr>
+                        <td colSpan={7} className="p-4 bg-primary/30">
+                          <div className="grid grid-cols-2 gap-4 text-sm">
+                            <div>
+                              <p className="text-text-muted mb-1">Товары:</p>
+                              {(order.items || []).map((item: any, i: number) => (
+                                <p key={i} className="text-white">
+                                  {item.productName} × {item.quantity} ={' '}
+                                  {formatPrice(item.totalPrice)}
+                                </p>
+                              ))}
+                            </div>
+                            <div>
+                              <p className="text-text-muted">
+                                Адрес:{' '}
+                                <span className="text-white">
+                                  {order.deliveryAddress || 'Самовывоз'}
+                                </span>
+                              </p>
+                              <p className="text-text-muted">
+                                Зона: <span className="text-white">{order.deliveryZone}</span>
+                              </p>
+                              <p className="text-text-muted">
+                                Оплата: <span className="text-white">{order.paymentMethod}</span>
+                              </p>
+                              {order.notes && (
+                                <p className="text-text-muted">
+                                  Комментарий: <span className="text-white">{order.notes}</span>
+                                </p>
+                              )}
+                            </div>
+                          </div>
+                        </td>
+                      </tr>
+                    )}
+                  </React.Fragment>
+                ))
+              )}
             </tbody>
           </table>
         </div>
 
         {pagination.totalPages > 1 && (
           <div className="flex items-center justify-between p-4 border-t border-white/5">
-            <span className="text-xs text-text-muted">Страница {pagination.page} из {pagination.totalPages}</span>
+            <span className="text-xs text-text-muted">
+              Страница {pagination.page} из {pagination.totalPages}
+            </span>
             <div className="flex gap-2">
-              <button disabled={pagination.page <= 1} onClick={() => loadOrders(pagination.page - 1)} className="btn-secondary text-xs disabled:opacity-30">←</button>
-              <button disabled={pagination.page >= pagination.totalPages} onClick={() => loadOrders(pagination.page + 1)} className="btn-secondary text-xs disabled:opacity-30">→</button>
+              <button
+                disabled={pagination.page <= 1}
+                onClick={() => loadOrders(pagination.page - 1)}
+                className="btn-secondary text-xs disabled:opacity-30"
+              >
+                ←
+              </button>
+              <button
+                disabled={pagination.page >= pagination.totalPages}
+                onClick={() => loadOrders(pagination.page + 1)}
+                className="btn-secondary text-xs disabled:opacity-30"
+              >
+                →
+              </button>
             </div>
           </div>
         )}

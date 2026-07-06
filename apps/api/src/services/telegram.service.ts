@@ -36,7 +36,9 @@ export const telegramService = {
 
     const poll = async () => {
       try {
-        const res = await fetch(`${TELEGRAM_API}${token}/getUpdates?offset=${this.lastUpdateId + 1}&timeout=30`);
+        const res = await fetch(
+          `${TELEGRAM_API}${token}/getUpdates?offset=${this.lastUpdateId + 1}&timeout=30`
+        );
         if (res.ok) {
           const data = (await res.json()) as any;
           if (data.ok && data.result) {
@@ -50,21 +52,28 @@ export const telegramService = {
                   const statusEvent = parts[0];
                   const orderNum = parts[1];
                   const newStatus = statusEvent === 'confirm' ? 'processing' : 'cancelled';
-                  
+
                   // Answer callback
                   await fetch(`${TELEGRAM_API}${token}/answerCallbackQuery`, {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ callback_query_id: cb.id, text: `Заказ ${orderNum} ${statusEvent === 'confirm' ? 'взят в работу' : 'отменен'}` })
+                    body: JSON.stringify({
+                      callback_query_id: cb.id,
+                      text: `Заказ ${orderNum} ${statusEvent === 'confirm' ? 'взят в работу' : 'отменен'}`,
+                    }),
                   });
 
                   // Remove buttons
                   await fetch(`${TELEGRAM_API}${token}/editMessageReplyMarkup`, {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ chat_id: cb.message.chat.id, message_id: cb.message.message_id, reply_markup: { inline_keyboard: [] } })
+                    body: JSON.stringify({
+                      chat_id: cb.message.chat.id,
+                      message_id: cb.message.message_id,
+                      reply_markup: { inline_keyboard: [] },
+                    }),
                   });
-                  
+
                   await this.sendStatusUpdate(cb.message.chat.id, orderNum, newStatus);
 
                   // Update DB
@@ -75,9 +84,9 @@ export const telegramService = {
 
                     const mainLib = await import('../main');
                     if (mainLib.isDbAvailable()) {
-                       const { orderRepository } = await import('../repositories/order.repository');
-                       const dbOrder = await orderRepository.findByOrderNumber(orderNum);
-                       if (dbOrder) await orderRepository.updateStatus(dbOrder.id, newStatus);
+                      const { orderRepository } = await import('../repositories/order.repository');
+                      const dbOrder = await orderRepository.findByOrderNumber(orderNum);
+                      if (dbOrder) await orderRepository.updateStatus(dbOrder.id, newStatus);
                     }
                   } catch (e) {
                     console.error('DB Telegram update err', e);
@@ -87,7 +96,9 @@ export const telegramService = {
             }
           }
         }
-      } catch (err) {}
+      } catch {
+        /* ignore polling errors, retry on next tick */
+      }
       if (this.isPolling) setTimeout(poll, 1000);
     };
     poll();
@@ -110,7 +121,10 @@ export const telegramService = {
     };
 
     const itemLines = order.items
-      .map((item, i) => `  ${i + 1}. ${item.productName} × ${item.quantity} = ${formatP(item.totalPrice)}`)
+      .map(
+        (item, i) =>
+          `  ${i + 1}. ${item.productName} × ${item.quantity} = ${formatP(item.totalPrice)}`
+      )
       .join('\n');
 
     const message = `🆕 <b>Новый заказ!</b>
@@ -148,7 +162,10 @@ ${order.notes ? `📝 <b>Комментарий:</b> ${escapeHtml(order.notes)}`
                 { text: '❌ Отменить', callback_data: `cancel_${order.orderNumber}` },
               ],
               [
-                { text: '📋 Открыть в админке', url: `https://smartwash.uz/admin/orders?search=${order.orderNumber}` },
+                {
+                  text: '📋 Открыть в админке',
+                  url: `https://smartwash.uz/admin/orders?search=${order.orderNumber}`,
+                },
               ],
             ],
           },
@@ -158,7 +175,7 @@ ${order.notes ? `📝 <b>Комментарий:</b> ${escapeHtml(order.notes)}`
       const data = (await response.json()) as any;
       if (data.ok) {
         console.log(`📱 Telegram notification sent for ${order.orderNumber}`);
-        
+
         // If location is provided, send a map pin
         if (order.location) {
           try {
@@ -169,7 +186,7 @@ ${order.notes ? `📝 <b>Комментарий:</b> ${escapeHtml(order.notes)}`
                 chat_id: chatId,
                 latitude: order.location.lat,
                 longitude: order.location.lng,
-                reply_to_message_id: data.result.message_id
+                reply_to_message_id: data.result.message_id,
               }),
             });
             console.log(`📍 Telegram location pin sent for ${order.orderNumber}`);
@@ -248,8 +265,5 @@ function formatP(price: number): string {
 
 function escapeHtml(text: string): string {
   if (!text) return '';
-  return text
-    .replace(/&/g, '&amp;')
-    .replace(/</g, '&lt;')
-    .replace(/>/g, '&gt;');
+  return text.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
 }

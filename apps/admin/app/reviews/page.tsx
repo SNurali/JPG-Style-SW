@@ -16,24 +16,33 @@ export default function ReviewsPage() {
       const qs = showPending ? '?pending=true' : '';
       const res = await api(`/api/admin/reviews${qs}`);
       setReviews(res.data || []);
-    } catch (err) { console.error(err); }
-    finally { setLoading(false); }
+    } catch (err) {
+      console.error(err);
+    } finally {
+      setLoading(false);
+    }
   }, [api, showPending]);
 
-  useEffect(() => { load(); }, [load]);
+  useEffect(() => {
+    load();
+  }, [load]);
 
   const approve = async (id: string) => {
     try {
       await api(`/api/admin/reviews/${id}/approve`, { method: 'PUT' });
       load();
-    } catch (err) { console.error(err); }
+    } catch (err) {
+      console.error(err);
+    }
   };
 
   const reject = async (id: string) => {
     try {
       await api(`/api/admin/reviews/${id}`, { method: 'DELETE' });
       load();
-    } catch (err) { console.error(err); }
+    } catch (err) {
+      console.error(err);
+    }
   };
 
   return (
@@ -63,42 +72,57 @@ export default function ReviewsPage() {
           <p className="text-text-muted">Загрузка...</p>
         ) : reviews.length === 0 ? (
           <div className="glass-card p-8 text-center">
-            <p className="text-text-muted">{showPending ? 'Нет отзывов на модерации ✨' : 'Отзывов пока нет'}</p>
+            <p className="text-text-muted">
+              {showPending ? 'Нет отзывов на модерации ✨' : 'Отзывов пока нет'}
+            </p>
           </div>
-        ) : reviews.map((review) => (
-          <div key={review.id} className="glass-card p-5">
-            <div className="flex items-start justify-between gap-4">
-              <div className="flex-1">
-                <div className="flex items-center gap-3 mb-2">
-                  <div className="w-8 h-8 rounded-full bg-accent/20 flex items-center justify-center text-accent font-bold text-xs">
-                    {review.customerName[0]}
+        ) : (
+          reviews.map((review) => (
+            <div key={review.id} className="glass-card p-5">
+              <div className="flex items-start justify-between gap-4">
+                <div className="flex-1">
+                  <div className="flex items-center gap-3 mb-2">
+                    <div className="w-8 h-8 rounded-full bg-accent/20 flex items-center justify-center text-accent font-bold text-xs">
+                      {review.customerName[0]}
+                    </div>
+                    <div>
+                      <span className="text-white font-medium text-sm">{review.customerName}</span>
+                      <span className="text-text-muted text-xs ml-2">{review.productName}</span>
+                    </div>
                   </div>
-                  <div>
-                    <span className="text-white font-medium text-sm">{review.customerName}</span>
-                    <span className="text-text-muted text-xs ml-2">{review.productName}</span>
+                  <div className="flex gap-0.5 mb-2">
+                    {[1, 2, 3, 4, 5].map((s) => (
+                      <span
+                        key={s}
+                        className={`text-sm ${s <= review.rating ? 'text-yellow-400' : 'text-white/10'}`}
+                      >
+                        ★
+                      </span>
+                    ))}
                   </div>
+                  <p className="text-text-muted text-sm">{review.comment}</p>
+                  <p className="text-text-muted text-xs mt-2">
+                    {new Date(review.createdAt).toLocaleDateString('ru-RU')}
+                  </p>
                 </div>
-                <div className="flex gap-0.5 mb-2">
-                  {[1,2,3,4,5].map((s) => (
-                    <span key={s} className={`text-sm ${s <= review.rating ? 'text-yellow-400' : 'text-white/10'}`}>★</span>
-                  ))}
-                </div>
-                <p className="text-text-muted text-sm">{review.comment}</p>
-                <p className="text-text-muted text-xs mt-2">{new Date(review.createdAt).toLocaleDateString('ru-RU')}</p>
-              </div>
 
-              {!review.isApproved && (
-                <div className="flex gap-2 flex-shrink-0">
-                  <button onClick={() => approve(review.id)} className="btn-primary text-xs">✓ Одобрить</button>
-                  <button onClick={() => reject(review.id)} className="btn-danger text-xs">✕ Удалить</button>
-                </div>
-              )}
-              {review.isApproved && (
-                <span className="badge bg-green-500/20 text-green-400">Одобрен</span>
-              )}
+                {!review.isApproved && (
+                  <div className="flex gap-2 flex-shrink-0">
+                    <button onClick={() => approve(review.id)} className="btn-primary text-xs">
+                      ✓ Одобрить
+                    </button>
+                    <button onClick={() => reject(review.id)} className="btn-danger text-xs">
+                      ✕ Удалить
+                    </button>
+                  </div>
+                )}
+                {review.isApproved && (
+                  <span className="badge bg-green-500/20 text-green-400">Одобрен</span>
+                )}
+              </div>
             </div>
-          </div>
-        ))}
+          ))
+        )}
       </div>
     </AdminShell>
   );

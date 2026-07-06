@@ -18,16 +18,30 @@ export function PromoBanner() {
         transition={{ duration: 0.6 }}
       >
         {/* Gradient background */}
-        <div className="absolute inset-0" style={{
-          background: 'linear-gradient(135deg, rgba(67, 97, 238, 0.15) 0%, rgba(108, 99, 255, 0.1) 50%, rgba(230, 57, 70, 0.08) 100%)',
-        }} />
-        <div className="absolute inset-0" style={{
-          background: 'radial-gradient(ellipse at top right, rgba(67, 97, 238, 0.2), transparent 60%)',
-        }} />
+        <div
+          className="absolute inset-0"
+          style={{
+            background:
+              'linear-gradient(135deg, rgba(67, 97, 238, 0.15) 0%, rgba(108, 99, 255, 0.1) 50%, rgba(230, 57, 70, 0.08) 100%)',
+          }}
+        />
+        <div
+          className="absolute inset-0"
+          style={{
+            background:
+              'radial-gradient(ellipse at top right, rgba(67, 97, 238, 0.2), transparent 60%)',
+          }}
+        />
 
         {/* Animated blobs */}
-        <div className="absolute top-0 right-0 w-64 h-64 rounded-full bg-accent/10 blur-3xl" style={{ animation: 'blob 8s ease-in-out infinite' }} />
-        <div className="absolute bottom-0 left-0 w-48 h-48 rounded-full bg-danger/10 blur-3xl" style={{ animation: 'blob 10s ease-in-out infinite reverse' }} />
+        <div
+          className="absolute top-0 right-0 w-64 h-64 rounded-full bg-accent/10 blur-3xl"
+          style={{ animation: 'blob 8s ease-in-out infinite' }}
+        />
+        <div
+          className="absolute bottom-0 left-0 w-48 h-48 rounded-full bg-danger/10 blur-3xl"
+          style={{ animation: 'blob 10s ease-in-out infinite reverse' }}
+        />
 
         {/* Content */}
         <div className="relative z-10 flex flex-col md:flex-row items-center justify-between gap-6">
@@ -58,7 +72,10 @@ export function PromoBanner() {
             viewport={{ once: true }}
             transition={{ delay: 0.4 }}
           >
-            <Link href="/categories" className="btn-primary px-8 py-3 text-base whitespace-nowrap ripple">
+            <Link
+              href="/categories"
+              className="btn-primary px-8 py-3 text-base whitespace-nowrap ripple"
+            >
               {t('promoBanner.btn')}
             </Link>
           </motion.div>

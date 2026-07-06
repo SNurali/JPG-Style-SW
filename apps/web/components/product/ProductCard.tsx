@@ -106,7 +106,9 @@ export function ProductCard({ product }: { product: Product }) {
               animate={{ opacity: 1 }}
               transition={{ delay: 0.5 }}
             >
-              <span className="badge-stock-low">{t('product.stockLeft')} {product.stock} {t('product.pcs')}</span>
+              <span className="badge-stock-low">
+                {t('product.stockLeft')} {product.stock} {t('product.pcs')}
+              </span>
             </motion.div>
           )}
 
@@ -152,9 +154,13 @@ export function ProductCard({ product }: { product: Product }) {
 
           {/* Price */}
           <div className="flex items-center gap-2">
-            <span className="font-heading font-bold text-white text-lg">{formatPrice(product.price, t('currency'))}</span>
+            <span className="font-heading font-bold text-white text-lg">
+              {formatPrice(product.price, t('currency'))}
+            </span>
             {product.compareAtPrice && (
-              <span className="text-sm text-text-muted line-through">{formatPrice(product.compareAtPrice, t('currency'))}</span>
+              <span className="text-sm text-text-muted line-through">
+                {formatPrice(product.compareAtPrice, t('currency'))}
+              </span>
             )}
           </div>
         </div>

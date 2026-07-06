@@ -9,7 +9,8 @@ export function organizationJsonLd() {
     name: 'JPG Style SmartWash',
     url: BASE_URL,
     logo: `${BASE_URL}/icon-512.png`,
-    description: 'Профессиональная автохимия премиум-класса. Автошампуни, нано-покрытия, воски, чернители.',
+    description:
+      'Профессиональная автохимия премиум-класса. Автошампуни, нано-покрытия, воски, чернители.',
     address: {
       '@type': 'PostalAddress',
       addressLocality: 'Ташкент',
@@ -85,7 +86,8 @@ export function productJsonLd(product: Product) {
       url: `${BASE_URL}/products/${product.slug}`,
       priceCurrency: 'UZS',
       price: product.price,
-      availability: product.stock > 0 ? 'https://schema.org/InStock' : 'https://schema.org/OutOfStock',
+      availability:
+        product.stock > 0 ? 'https://schema.org/InStock' : 'https://schema.org/OutOfStock',
       seller: {
         '@type': 'Organization',
         name: 'JPG Style SmartWash',

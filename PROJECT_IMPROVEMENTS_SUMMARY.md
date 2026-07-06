@@ -11,11 +11,13 @@
 ### 1. ✅ Линтинг и форматирование кода
 
 **Файлы:**
+
 - `.eslintrc.json` - конфиг ESLint
 - `.prettierrc.json` - конфиг Prettier
 - `.prettierignore` - исключения для Prettier
 
 **Что добавлено:**
+
 - ESLint с поддержкой TypeScript, React, Next.js
 - Prettier для автоматического форматирования
 - Единые правила для всего монорепо
@@ -26,10 +28,12 @@
 ### 2. ✅ Pre-commit хуки
 
 **Файлы:**
+
 - `.husky/pre-commit` - хук для проверки перед коммитом
 - `.lintstagedrc.json` - конфиг lint-staged
 
 **Что добавлено:**
+
 - Автоматическая проверка кода перед коммитом
 - Форматирование файлов перед коммитом
 - Предотвращение коммитов с ошибками
@@ -39,10 +43,12 @@
 ### 3. ✅ Unit тестирование
 
 **Файлы:**
+
 - `vitest.config.ts` - конфиг Vitest
 - Поддержка всех приложений
 
 **Что добавлено:**
+
 - Vitest для быстрого тестирования
 - Покрытие кода (target 70%)
 - UI для просмотра тестов
@@ -53,10 +59,12 @@
 ### 4. ✅ E2E тестирование
 
 **Файлы:**
+
 - `playwright.config.ts` - конфиг Playwright
 - `e2e/example.spec.ts` - примеры тестов
 
 **Что добавлено:**
+
 - Playwright для E2E тестирования
 - Поддержка Chrome, Firefox, Safari
 - Скрипты: `npm run e2e`, `npm run e2e:ui`, `npm run e2e:debug`
@@ -66,9 +74,11 @@
 ### 5. ✅ CI/CD Pipeline
 
 **Файлы:**
+
 - `.github/workflows/ci.yml` - GitHub Actions workflow
 
 **Что добавлено:**
+
 - Автоматический линтинг на каждый PR
 - Запуск тестов
 - Проверка типов
@@ -80,10 +90,12 @@
 ### 6. ✅ Валидация данных
 
 **Файлы:**
+
 - `packages/shared/schemas.ts` - Zod схемы
 - `apps/api/src/middleware/validation.ts` - middleware для валидации
 
 **Что добавлено:**
+
 - Zod для типобезопасной валидации
 - Схемы для Login, Register, Product, Order
 - Middleware для валидации request/query
@@ -94,9 +106,11 @@
 ### 7. ✅ Rate Limiting
 
 **Файлы:**
+
 - `apps/api/src/middleware/rateLimiter.ts` - конфиги rate limiting
 
 **Что добавлено:**
+
 - Express Rate Limit для защиты API
 - Разные лимиты для разных операций
 - Auth limiter (5 попыток за 15 минут)
@@ -108,9 +122,11 @@
 ### 8. ✅ Структурированное логирование
 
 **Файлы:**
+
 - `apps/api/src/utils/logger.ts` - конфиг Pino
 
 **Что добавлено:**
+
 - Pino для структурированного логирования
 - Красивый вывод в dev режиме
 - JSON логи в production
@@ -121,9 +137,11 @@
 ### 9. ✅ API документация
 
 **Файлы:**
+
 - `apps/api/src/utils/swagger.ts` - конфиг Swagger
 
 **Что добавлено:**
+
 - Swagger/OpenAPI документация
 - Автоматическая генерация из JSDoc комментариев
 - Интерактивный UI для тестирования API
@@ -134,12 +152,14 @@
 ### 10. ✅ Shared пакет
 
 **Файлы:**
+
 - `packages/shared/schemas.ts` - Zod схемы
 - `packages/shared/constants.ts` - константы
 - `packages/shared/types/entities.ts` - типы сущностей
 - `packages/shared/utils/helpers.ts` - утилиты
 
 **Что добавлено:**
+
 - Единые типы для всех приложений
 - Валидационные схемы
 - API endpoints константы
@@ -151,12 +171,14 @@
 ### 11. ✅ Docker оптимизация
 
 **Файлы:**
+
 - `apps/web/Dockerfile` - оптимизированный Dockerfile для web
 - `apps/api/Dockerfile` - оптимизированный Dockerfile для API
 - `apps/admin/Dockerfile` - оптимизированный Dockerfile для admin
 - `docker/docker-compose.yml` - обновлённый docker-compose
 
 **Что добавлено:**
+
 - Multi-stage builds для оптимизации размера
 - Healthchecks для всех сервисов
 - Правильные зависимости между сервисами
@@ -168,9 +190,11 @@
 ### 12. ✅ Contributing Guide
 
 **Файлы:**
+
 - `CONTRIBUTING.md` - гайд для разработчиков
 
 **Что добавлено:**
+
 - Инструкции по установке
 - Команды для разработки
 - Правила коммитов
@@ -184,15 +208,18 @@
 ### Добавленные файлы
 
 **Скрипты:**
+
 - `deploy.sh` - автоматизированный деплой скрипт
 - `setup-production.sh` - скрипт первичной настройки production
 
 **Документация:**
+
 - `DEPLOY_README.md` - быстрый старт
 - `DEPLOYMENT_GUIDE_FULL.md` - полное руководство
 - `DEPLOYMENT_CHECKLIST.md` - чек-лист перед деплоем
 
 **CI/CD:**
+
 - `.github/workflows/deploy.yml` - GitHub Actions для автоматического деплоя
 
 ### Возможности деплоя
@@ -221,20 +248,21 @@ sudo bash setup-production.sh
 
 ## 📊 Статистика
 
-| Категория | Количество |
-|-----------|-----------|
-| Новых файлов конфигурации | 15+ |
-| Новых скриптов | 2 |
-| Новых документов | 5 |
-| Установленных пакетов | 50+ |
-| Строк кода в конфигах | 1000+ |
-| Поддерживаемых браузеров (E2E) | 3 |
+| Категория                      | Количество |
+| ------------------------------ | ---------- |
+| Новых файлов конфигурации      | 15+        |
+| Новых скриптов                 | 2          |
+| Новых документов               | 5          |
+| Установленных пакетов          | 50+        |
+| Строк кода в конфигах          | 1000+      |
+| Поддерживаемых браузеров (E2E) | 3          |
 
 ---
 
 ## 🔧 Установленные зависимости
 
 ### Линтинг и форматирование
+
 - `eslint` - линтер
 - `prettier` - форматер
 - `@typescript-eslint/*` - поддержка TypeScript
@@ -242,16 +270,19 @@ sudo bash setup-production.sh
 - `eslint-plugin-next` - правила для Next.js
 
 ### Тестирование
+
 - `vitest` - unit тесты
 - `@vitest/ui` - UI для тестов
 - `@vitest/coverage-v8` - покрытие кода
 - `@playwright/test` - E2E тесты
 
 ### Pre-commit
+
 - `husky` - git хуки
 - `lint-staged` - запуск линтера на staged файлы
 
 ### API
+
 - `zod` - валидация данных
 - `express-rate-limit` - rate limiting
 - `pino` - логирование
@@ -264,6 +295,7 @@ sudo bash setup-production.sh
 ## 📈 Улучшения качества кода
 
 ### До
+
 - ❌ Нет единых правил форматирования
 - ❌ Нет автоматической проверки перед коммитом
 - ❌ Нет тестов
@@ -274,6 +306,7 @@ sudo bash setup-production.sh
 - ❌ Нет автоматического деплоя
 
 ### После
+
 - ✅ ESLint + Prettier для единообразного кода
 - ✅ Pre-commit хуки для проверки качества
 - ✅ Unit и E2E тесты
@@ -288,18 +321,21 @@ sudo bash setup-production.sh
 ## 🎓 Документация
 
 ### Для разработчиков
+
 - `CONTRIBUTING.md` - как начать разработку
 - `README.md` - описание проекта
 - `.eslintrc.json` - правила линтинга
 - `vitest.config.ts` - конфиг тестов
 
 ### Для DevOps
+
 - `DEPLOY_README.md` - быстрый старт деплоя
 - `DEPLOYMENT_GUIDE_FULL.md` - полное руководство
 - `DEPLOYMENT_CHECKLIST.md` - чек-лист
 - `docker-compose.prod.yml` - production конфиг
 
 ### Для CI/CD
+
 - `.github/workflows/ci.yml` - CI pipeline
 - `.github/workflows/deploy.yml` - CD pipeline
 
@@ -308,6 +344,7 @@ sudo bash setup-production.sh
 ## 🚀 Следующие шаги
 
 ### Рекомендуется
+
 1. Добавить Sentry для error tracking
 2. Добавить DataDog для мониторинга
 3. Настроить SSL сертификаты
@@ -315,6 +352,7 @@ sudo bash setup-production.sh
 5. Настроить CDN для статических файлов
 
 ### Опционально
+
 1. Миграция на NestJS (вместо Express)
 2. Добавить GraphQL API
 3. Добавить WebSocket поддержку

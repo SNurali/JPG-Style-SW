@@ -35,102 +35,181 @@ type ChatStep =
 const chatTranslations: Record<string, Record<string, string>> = {
   'chat.greeting': {
     ru: '👋 Привет! Я — SmartBot, ваш помощник по заказам.\n\nЯ помогу вам быстро оформить заказ. Просто скажите, что вас интересует, или выберите из меню ниже!',
-    uz: '👋 Salom! Men — SmartBot, buyurtma bo\'yicha yordamchingiz.\n\nMen sizga tez buyurtma berishga yordam beraman. Nima kerakligini ayting yoki quyidagi menyudan tanlang!',
-    'uz-cy': '👋 Салом! Мен — SmartBot, буюртма бўйича ёрдамчингиз.\n\nМен сизга тез буюртма беришга ёрдам бераман. Нима кераклигини айтинг ёки қуйидаги менюдан танланг!',
-    en: '👋 Hi! I\'m SmartBot, your order assistant.\n\nI\'ll help you place an order quickly. Just tell me what you need, or choose from the menu below!',
+    uz: "👋 Salom! Men — SmartBot, buyurtma bo'yicha yordamchingiz.\n\nMen sizga tez buyurtma berishga yordam beraman. Nima kerakligini ayting yoki quyidagi menyudan tanlang!",
+    'uz-cy':
+      '👋 Салом! Мен — SmartBot, буюртма бўйича ёрдамчингиз.\n\nМен сизга тез буюртма беришга ёрдам бераман. Нима кераклигини айтинг ёки қуйидаги менюдан танланг!',
+    en: "👋 Hi! I'm SmartBot, your order assistant.\n\nI'll help you place an order quickly. Just tell me what you need, or choose from the menu below!",
   },
   'chat.showAll': {
-    ru: '🛍️ Показать все товары', uz: '🛍️ Barcha tovarlarni ko\'rsatish',
-    'uz-cy': '🛍️ Барча товарларни кўрсатиш', en: '🛍️ Show all products',
+    ru: '🛍️ Показать все товары',
+    uz: "🛍️ Barcha tovarlarni ko'rsatish",
+    'uz-cy': '🛍️ Барча товарларни кўрсатиш',
+    en: '🛍️ Show all products',
   },
   'chat.bestsellers': {
-    ru: '🔥 Хиты продаж', uz: '🔥 Ommabop', 'uz-cy': '🔥 Оммабоп', en: '🔥 Bestsellers',
+    ru: '🔥 Хиты продаж',
+    uz: '🔥 Ommabop',
+    'uz-cy': '🔥 Оммабоп',
+    en: '🔥 Bestsellers',
   },
   'chat.help': {
-    ru: '❓ Помощь', uz: '❓ Yordam', 'uz-cy': '❓ Ёрдам', en: '❓ Help',
+    ru: '❓ Помощь',
+    uz: '❓ Yordam',
+    'uz-cy': '❓ Ёрдам',
+    en: '❓ Help',
   },
   'chat.checkout': {
-    ru: '✅ Оформить заказ', uz: '✅ Buyurtma berish',
-    'uz-cy': '✅ Буюртма бериш', en: '✅ Checkout',
+    ru: '✅ Оформить заказ',
+    uz: '✅ Buyurtma berish',
+    'uz-cy': '✅ Буюртма бериш',
+    en: '✅ Checkout',
   },
   'chat.cartEmpty': {
     ru: '🛒 Корзина пуста. Сначала добавьте товары!\n\nНапишите название товара или нажмите "Показать все товары".',
-    uz: '🛒 Savatcha bo\'sh. Avval tovar qo\'shing!\n\nTovar nomini yozing yoki "Barcha tovarlarni ko\'rsatish" tugmasini bosing.',
-    'uz-cy': '🛒 Саватча бўш. Аввал товар қўшинг!\n\nТовар номини ёзинг ёки "Барча товарларни кўрсатиш" тугмасини босинг.',
+    uz: "🛒 Savatcha bo'sh. Avval tovar qo'shing!\n\nTovar nomini yozing yoki \"Barcha tovarlarni ko'rsatish\" tugmasini bosing.",
+    'uz-cy':
+      '🛒 Саватча бўш. Аввал товар қўшинг!\n\nТовар номини ёзинг ёки "Барча товарларни кўрсатиш" тугмасини босинг.',
     en: '🛒 Cart is empty. Add products first!\n\nType a product name or click "Show all products".',
   },
   'chat.hereAreProducts': {
-    ru: '📦 Вот наши товары. Нажмите + чтобы добавить:', uz: '📦 Mana bizning tovarlarimiz. Qo\'shish uchun + bosing:',
-    'uz-cy': '📦 Мана бизнинг товарларимиз. Қўшиш учун + босинг:', en: '📦 Here are our products. Click + to add:',
+    ru: '📦 Вот наши товары. Нажмите + чтобы добавить:',
+    uz: "📦 Mana bizning tovarlarimiz. Qo'shish uchun + bosing:",
+    'uz-cy': '📦 Мана бизнинг товарларимиз. Қўшиш учун + босинг:',
+    en: '📦 Here are our products. Click + to add:',
   },
   'chat.hereBestsellers': {
-    ru: '🔥 Наши хиты продаж:', uz: '🔥 Bizning eng ommabop tovarlarimiz:',
-    'uz-cy': '🔥 Бизнинг энг оммабоп товарларимиз:', en: '🔥 Our bestsellers:',
+    ru: '🔥 Наши хиты продаж:',
+    uz: '🔥 Bizning eng ommabop tovarlarimiz:',
+    'uz-cy': '🔥 Бизнинг энг оммабоп товарларимиз:',
+    en: '🔥 Our bestsellers:',
   },
   'chat.added': {
-    ru: '✅ Добавлено: ', uz: '✅ Qo\'shildi: ', 'uz-cy': '✅ Қўшилди: ', en: '✅ Added: ',
+    ru: '✅ Добавлено: ',
+    uz: "✅ Qo'shildi: ",
+    'uz-cy': '✅ Қўшилди: ',
+    en: '✅ Added: ',
   },
   'chat.yourCart': {
-    ru: '🛒 Ваша корзина:\n', uz: '🛒 Sizning savatchangiz:\n',
-    'uz-cy': '🛒 Сизнинг саватчангиз:\n', en: '🛒 Your cart:\n',
+    ru: '🛒 Ваша корзина:\n',
+    uz: '🛒 Sizning savatchangiz:\n',
+    'uz-cy': '🛒 Сизнинг саватчангиз:\n',
+    en: '🛒 Your cart:\n',
   },
-  'chat.total': { ru: '\n💰 Итого: ', uz: '\n💰 Jami: ', 'uz-cy': '\n💰 Жами: ', en: '\n💰 Total: ' },
+  'chat.total': {
+    ru: '\n💰 Итого: ',
+    uz: '\n💰 Jami: ',
+    'uz-cy': '\n💰 Жами: ',
+    en: '\n💰 Total: ',
+  },
   'chat.askName': {
-    ru: '📋 Отлично! Как вас зовут? (Имя и Фамилия)', uz: '📋 Ajoyib! Ismingiz nima? (Ism va Familiya)',
-    'uz-cy': '📋 Ажойиб! Исмингиз нима? (Исм ва Фамилия)', en: '📋 Great! What\'s your name? (First and Last)',
+    ru: '📋 Отлично! Как вас зовут? (Имя и Фамилия)',
+    uz: '📋 Ajoyib! Ismingiz nima? (Ism va Familiya)',
+    'uz-cy': '📋 Ажойиб! Исмингиз нима? (Исм ва Фамилия)',
+    en: "📋 Great! What's your name? (First and Last)",
   },
   'chat.askPhone': {
-    ru: '📞 Спасибо! Теперь укажите ваш номер телефона:', uz: '📞 Rahmat! Endi telefon raqamingizni kiriting:',
-    'uz-cy': '📞 Раҳмат! Энди телефон рақамингизни киритинг:', en: '📞 Thanks! Now enter your phone number:',
+    ru: '📞 Спасибо! Теперь укажите ваш номер телефона:',
+    uz: '📞 Rahmat! Endi telefon raqamingizni kiriting:',
+    'uz-cy': '📞 Раҳмат! Энди телефон рақамингизни киритинг:',
+    en: '📞 Thanks! Now enter your phone number:',
   },
   'chat.askAddress': {
-    ru: '📍 Куда доставить? Укажите адрес:', uz: '📍 Qayerga yetkazib berish kerak? Manzilni kiriting:',
-    'uz-cy': '📍 Қаерга етказиб бериш керак? Манзилни киритинг:', en: '📍 Where to deliver? Enter your address:',
+    ru: '📍 Куда доставить? Укажите адрес:',
+    uz: '📍 Qayerga yetkazib berish kerak? Manzilni kiriting:',
+    'uz-cy': '📍 Қаерга етказиб бериш керак? Манзилни киритинг:',
+    en: '📍 Where to deliver? Enter your address:',
   },
   'chat.askPayment': {
-    ru: '💳 Выберите способ оплаты:', uz: '💳 To\'lov usulini tanlang:',
-    'uz-cy': '💳 Тўлов усулини танланг:', en: '💳 Choose payment method:',
+    ru: '💳 Выберите способ оплаты:',
+    uz: "💳 To'lov usulini tanlang:",
+    'uz-cy': '💳 Тўлов усулини танланг:',
+    en: '💳 Choose payment method:',
   },
   'chat.confirm': {
-    ru: '📋 Проверьте ваш заказ:\n', uz: '📋 Buyurtmangizni tekshiring:\n',
-    'uz-cy': '📋 Буюртмангизни текширинг:\n', en: '📋 Review your order:\n',
+    ru: '📋 Проверьте ваш заказ:\n',
+    uz: '📋 Buyurtmangizni tekshiring:\n',
+    'uz-cy': '📋 Буюртмангизни текширинг:\n',
+    en: '📋 Review your order:\n',
   },
   'chat.name': { ru: '👤 Имя: ', uz: '👤 Ism: ', 'uz-cy': '👤 Исм: ', en: '👤 Name: ' },
   'chat.phone': { ru: '📞 Тел: ', uz: '📞 Tel: ', 'uz-cy': '📞 Тел: ', en: '📞 Phone: ' },
-  'chat.address': { ru: '📍 Адрес: ', uz: '📍 Manzil: ', 'uz-cy': '📍 Манзил: ', en: '📍 Address: ' },
-  'chat.payment': { ru: '💳 Оплата: ', uz: '💳 To\'lov: ', 'uz-cy': '💳 Тўлов: ', en: '💳 Payment: ' },
-  'chat.confirmBtn': { ru: '✅ Подтвердить', uz: '✅ Tasdiqlash', 'uz-cy': '✅ Тасдиқлаш', en: '✅ Confirm' },
-  'chat.editBtn': { ru: '✏️ Изменить', uz: '✏️ O\'zgartirish', 'uz-cy': '✏️ Ўзгартириш', en: '✏️ Edit' },
+  'chat.address': {
+    ru: '📍 Адрес: ',
+    uz: '📍 Manzil: ',
+    'uz-cy': '📍 Манзил: ',
+    en: '📍 Address: ',
+  },
+  'chat.payment': {
+    ru: '💳 Оплата: ',
+    uz: "💳 To'lov: ",
+    'uz-cy': '💳 Тўлов: ',
+    en: '💳 Payment: ',
+  },
+  'chat.confirmBtn': {
+    ru: '✅ Подтвердить',
+    uz: '✅ Tasdiqlash',
+    'uz-cy': '✅ Тасдиқлаш',
+    en: '✅ Confirm',
+  },
+  'chat.editBtn': {
+    ru: '✏️ Изменить',
+    uz: "✏️ O'zgartirish",
+    'uz-cy': '✏️ Ўзгартириш',
+    en: '✏️ Edit',
+  },
   'chat.orderSuccess': {
-    ru: '🎉 Заказ оформлен!\n\nНомер заказа: ', uz: '🎉 Buyurtma tasdiqlandi!\n\nBuyurtma raqami: ',
-    'uz-cy': '🎉 Буюртма тасдиқланди!\n\nБуюртма рақами: ', en: '🎉 Order placed!\n\nOrder number: ',
+    ru: '🎉 Заказ оформлен!\n\nНомер заказа: ',
+    uz: '🎉 Buyurtma tasdiqlandi!\n\nBuyurtma raqami: ',
+    'uz-cy': '🎉 Буюртма тасдиқланди!\n\nБуюртма рақами: ',
+    en: '🎉 Order placed!\n\nOrder number: ',
   },
   'chat.orderSuccessEnd': {
     ru: '\n\nМы свяжемся с вами в ближайшее время. Спасибо! 🙏',
-    uz: '\n\nTez orada siz bilan bog\'lanamiz. Rahmat! 🙏',
+    uz: "\n\nTez orada siz bilan bog'lanamiz. Rahmat! 🙏",
     'uz-cy': '\n\nТез орада сиз билан боғланамиз. Раҳмат! 🙏',
-    en: '\n\nWe\'ll contact you shortly. Thank you! 🙏',
+    en: "\n\nWe'll contact you shortly. Thank you! 🙏",
   },
   'chat.orderError': {
     ru: '❌ Ошибка оформления. Попробуйте снова или напишите в Telegram.',
-    uz: '❌ Xatolik yuz berdi. Qaytadan urinib ko\'ring yoki Telegramga yozing.',
+    uz: "❌ Xatolik yuz berdi. Qaytadan urinib ko'ring yoki Telegramga yozing.",
     'uz-cy': '❌ Хатолик юз берди. Қайтадан уриниб кўринг ёки Телеграмга ёзинг.',
     en: '❌ Order error. Please try again or write us on Telegram.',
   },
   'chat.helpText': {
     ru: '💡 Я могу помочь:\n\n• Напишите название товара для поиска\n• Нажмите "Показать все товары"\n• Нажмите "Хиты продаж"\n• Добавьте товары и нажмите "Оформить заказ"\n\nЯ проведу вас через весь процесс! 🚀',
     uz: '💡 Men yordam bera olaman:\n\n• Tovar nomini yozing\n• "Barcha tovarlarni ko\'rsatish" bosing\n• "Ommabop" bosing\n• Tovar qo\'shing va "Buyurtma berish" bosing\n\nMen sizni butun jarayonda boshqaraman! 🚀',
-    'uz-cy': '💡 Мен ёрдам бера оламан:\n\n• Товар номини ёзинг\n• "Барча товарларни кўрсатиш" босинг\n• "Оммабоп" босинг\n• Товар қўшинг ва "Буюртма бериш" босинг\n\nМен сизни бутун жараёнда бошқараман! 🚀',
+    'uz-cy':
+      '💡 Мен ёрдам бера оламан:\n\n• Товар номини ёзинг\n• "Барча товарларни кўрсатиш" босинг\n• "Оммабоп" босинг\n• Товар қўшинг ва "Буюртма бериш" босинг\n\nМен сизни бутун жараёнда бошқараман! 🚀',
     en: '💡 I can help you:\n\n• Type a product name to search\n• Click "Show all products"\n• Click "Bestsellers"\n• Add products and click "Checkout"\n\nI\'ll guide you through the process! 🚀',
   },
   'chat.cash': { ru: '💵 Наличные', uz: '💵 Naqd pul', 'uz-cy': '💵 Нақд пул', en: '💵 Cash' },
   'chat.click': { ru: '📱 Click', uz: '📱 Click', 'uz-cy': '📱 Click', en: '📱 Click' },
   'chat.payme': { ru: '📱 Payme', uz: '📱 Payme', 'uz-cy': '📱 Payme', en: '📱 Payme' },
-  'chat.newOrder': { ru: '🛍️ Новый заказ', uz: '🛍️ Yangi buyurtma', 'uz-cy': '🛍️ Янги буюртма', en: '🛍️ New order' },
-  'chat.inputPh': { ru: 'Напишите сообщение...', uz: 'Xabar yozing...', 'uz-cy': 'Хабар ёзинг...', en: 'Type a message...' },
+  'chat.newOrder': {
+    ru: '🛍️ Новый заказ',
+    uz: '🛍️ Yangi buyurtma',
+    'uz-cy': '🛍️ Янги буюртма',
+    en: '🛍️ New order',
+  },
+  'chat.inputPh': {
+    ru: 'Напишите сообщение...',
+    uz: 'Xabar yozing...',
+    'uz-cy': 'Хабар ёзинг...',
+    en: 'Type a message...',
+  },
   'chat.title': { ru: 'SmartBot 🤖', uz: 'SmartBot 🤖', 'uz-cy': 'SmartBot 🤖', en: 'SmartBot 🤖' },
-  'chat.subtitle': { ru: 'Помощник по заказам', uz: 'Buyurtma yordamchisi', 'uz-cy': 'Буюртма ёрдамчиси', en: 'Order Assistant' },
-  'chat.processing': { ru: '⏳ Оформляем ваш заказ...', uz: '⏳ Buyurtma rasmiylashtirmoqda...', 'uz-cy': '⏳ Буюртма расмийлаштирмоқда...', en: '⏳ Processing your order...' },
+  'chat.subtitle': {
+    ru: 'Помощник по заказам',
+    uz: 'Buyurtma yordamchisi',
+    'uz-cy': 'Буюртма ёрдамчиси',
+    en: 'Order Assistant',
+  },
+  'chat.processing': {
+    ru: '⏳ Оформляем ваш заказ...',
+    uz: '⏳ Buyurtma rasmiylashtirmoqda...',
+    'uz-cy': '⏳ Буюртма расмийлаштирмоқда...',
+    en: '⏳ Processing your order...',
+  },
 };
 
 // ─── Component ─────────────────────────────────────────────────
@@ -146,7 +225,8 @@ export function ChatBot() {
   const [hasGreeted, setHasGreeted] = useState(false);
   const messagesEndRef = useRef<HTMLDivElement>(null);
 
-  const ct = (key: string) => chatTranslations[key]?.[language] || chatTranslations[key]?.['ru'] || key;
+  const ct = (key: string) =>
+    chatTranslations[key]?.[language] || chatTranslations[key]?.['ru'] || key;
 
   const uid = () => Date.now().toString(36) + Math.random().toString(36).slice(2);
 
@@ -156,14 +236,14 @@ export function ChatBot() {
 
   const addBotMessage = (text: string, extras: Partial<Message> = {}) => {
     const msg: Message = { id: uid(), role: 'bot', text, ...extras };
-    setMessages(prev => [...prev, msg]);
+    setMessages((prev) => [...prev, msg]);
     scrollToBottom();
     return msg;
   };
 
   const addUserMessage = (text: string) => {
     const msg: Message = { id: uid(), role: 'user', text };
-    setMessages(prev => [...prev, msg]);
+    setMessages((prev) => [...prev, msg]);
     scrollToBottom();
     return msg;
   };
@@ -190,17 +270,18 @@ export function ChatBot() {
 
   // ─── Add to cart ───────────────────────────────────────────
   const addToCart = (product: Product) => {
-    setCart(prev => {
-      const existing = prev.find(i => i.product.id === product.id);
+    setCart((prev) => {
+      const existing = prev.find((i) => i.product.id === product.id);
       if (existing) {
-        return prev.map(i => i.product.id === product.id ? { ...i, quantity: i.quantity + 1 } : i);
+        return prev.map((i) =>
+          i.product.id === product.id ? { ...i, quantity: i.quantity + 1 } : i
+        );
       }
       return [...prev, { product, quantity: 1 }];
     });
-    addBotMessage(
-      ct('chat.added') + product.name + ` (${formatPrice(product.price)})`,
-      { quickReplies: [ct('chat.showAll'), ct('chat.checkout')] }
-    );
+    addBotMessage(ct('chat.added') + product.name + ` (${formatPrice(product.price)})`, {
+      quickReplies: [ct('chat.showAll'), ct('chat.checkout')],
+    });
   };
 
   // ─── Cart summary text ─────────────────────────────────────
@@ -231,7 +312,7 @@ export function ChatBot() {
       return;
     }
     if (msg === ct('chat.bestsellers')) {
-      const best = products.filter(p => p.isBestseller);
+      const best = products.filter((p) => p.isBestseller);
       setTimeout(() => {
         addBotMessage(ct('chat.hereBestsellers'), { products: best });
       }, 400);
@@ -273,52 +354,80 @@ export function ChatBot() {
       case 'browsing': {
         // Search products
         const query = msg.toLowerCase();
-        const found = products.filter(p =>
-          p.name.toLowerCase().includes(query) ||
-          p.category.toLowerCase().includes(query) ||
-          p.slug.includes(query)
+        const found = products.filter(
+          (p) =>
+            p.name.toLowerCase().includes(query) ||
+            p.category.toLowerCase().includes(query) ||
+            p.slug.includes(query)
         );
         if (found.length > 0) {
-          setTimeout(() => addBotMessage(`🔍 ${found.length} ${language === 'en' ? 'found' : language === 'uz' ? 'topildi' : 'найдено'}:`, { products: found }), 400);
+          setTimeout(
+            () =>
+              addBotMessage(
+                `🔍 ${found.length} ${language === 'en' ? 'found' : language === 'uz' ? 'topildi' : 'найдено'}:`,
+                { products: found }
+              ),
+            400
+          );
         } else {
-          setTimeout(() => addBotMessage(ct('chat.helpText'), {
-            quickReplies: [ct('chat.showAll'), ct('chat.bestsellers')],
-          }), 400);
+          setTimeout(
+            () =>
+              addBotMessage(ct('chat.helpText'), {
+                quickReplies: [ct('chat.showAll'), ct('chat.bestsellers')],
+              }),
+            400
+          );
         }
         break;
       }
       case 'ask-name':
-        setOrderData(prev => ({ ...prev, name: msg }));
+        setOrderData((prev) => ({ ...prev, name: msg }));
         setStep('ask-phone');
         setTimeout(() => addBotMessage(ct('chat.askPhone')), 400);
         break;
       case 'ask-phone':
-        setOrderData(prev => ({ ...prev, phone: msg }));
+        setOrderData((prev) => ({ ...prev, phone: msg }));
         setStep('ask-address');
         setTimeout(() => addBotMessage(ct('chat.askAddress')), 400);
         break;
       case 'ask-address':
-        setOrderData(prev => ({ ...prev, address: msg }));
+        setOrderData((prev) => ({ ...prev, address: msg }));
         setStep('ask-payment');
-        setTimeout(() => addBotMessage(ct('chat.askPayment'), {
-          quickReplies: [ct('chat.cash'), ct('chat.click'), ct('chat.payme')],
-        }), 400);
+        setTimeout(
+          () =>
+            addBotMessage(ct('chat.askPayment'), {
+              quickReplies: [ct('chat.cash'), ct('chat.click'), ct('chat.payme')],
+            }),
+          400
+        );
         break;
       case 'ask-payment': {
-        const payment = msg.replace(/[💵📱]/g, '').trim();
-        setOrderData(prev => ({ ...prev, payment }));
+        const payment = msg.replace(/💵|📱/g, '').trim();
+        setOrderData((prev) => ({ ...prev, payment }));
         setStep('confirm');
-        const { text: summary, total } = getCartSummary();
+        const { text: summary } = getCartSummary();
         const confirmText =
           ct('chat.confirm') +
-          summary + '\n\n' +
-          ct('chat.name') + orderData.name + '\n' +
-          ct('chat.phone') + orderData.phone + '\n' +
-          ct('chat.address') + orderData.address + '\n' +
-          ct('chat.payment') + payment;
-        setTimeout(() => addBotMessage(confirmText, {
-          quickReplies: [ct('chat.confirmBtn'), ct('chat.editBtn')],
-        }), 400);
+          summary +
+          '\n\n' +
+          ct('chat.name') +
+          orderData.name +
+          '\n' +
+          ct('chat.phone') +
+          orderData.phone +
+          '\n' +
+          ct('chat.address') +
+          orderData.address +
+          '\n' +
+          ct('chat.payment') +
+          payment;
+        setTimeout(
+          () =>
+            addBotMessage(confirmText, {
+              quickReplies: [ct('chat.confirmBtn'), ct('chat.editBtn')],
+            }),
+          400
+        );
         break;
       }
       case 'confirm': {
@@ -332,28 +441,33 @@ export function ChatBot() {
           addBotMessage(ct('chat.processing'));
           try {
             const payMethodMap: Record<string, string> = {
-              [ct('chat.cash').replace(/[💵📱]/g, '').trim()]: 'cash',
-              'Click': 'click', 'Payme': 'payme',
+              [ct('chat.cash').replace(/💵|📱/g, '').trim()]: 'cash',
+              Click: 'click',
+              Payme: 'payme',
             };
             const result = await createOrder({
               customerName: orderData.name,
               customerPhone: orderData.phone,
-              items: cart.map(i => ({ productId: i.product.id, quantity: i.quantity })),
+              items: cart.map((i) => ({ productId: i.product.id, quantity: i.quantity })),
               deliveryAddress: orderData.address,
               deliveryZone: 'Ташкент',
               deliveryFee: 15000,
               paymentMethod: payMethodMap[orderData.payment] || 'cash',
               notes: 'Заказ через SmartBot AI',
             });
-            setMessages(prev => prev.filter(m => m.text !== ct('chat.processing')));
+            setMessages((prev) => prev.filter((m) => m.text !== ct('chat.processing')));
             addBotMessage(
               ct('chat.orderSuccess') + result.data.orderNumber + ct('chat.orderSuccessEnd'),
-              { type: 'order-success', orderNumber: result.data.orderNumber, quickReplies: [ct('chat.newOrder')] }
+              {
+                type: 'order-success',
+                orderNumber: result.data.orderNumber,
+                quickReplies: [ct('chat.newOrder')],
+              }
             );
             setStep('done');
             setCart([]);
-          } catch (err) {
-            setMessages(prev => prev.filter(m => m.text !== ct('chat.processing')));
+          } catch {
+            setMessages((prev) => prev.filter((m) => m.text !== ct('chat.processing')));
             addBotMessage(ct('chat.orderError'), { quickReplies: [ct('chat.confirmBtn')] });
           } finally {
             setIsProcessing(false);
@@ -382,12 +496,27 @@ export function ChatBot() {
       >
         {isOpen ? (
           <svg className="w-7 h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth={2}
+              d="M6 18L18 6M6 6l12 12"
+            />
           </svg>
         ) : (
           <>
-            <svg className="w-7 h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
+            <svg
+              className="w-7 h-7 text-white"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"
+              />
             </svg>
             {cartCount > 0 && (
               <span className="absolute -top-1 -right-1 w-6 h-6 rounded-full bg-red-500 text-white text-xs flex items-center justify-center font-bold animate-bounce">
@@ -411,10 +540,16 @@ export function ChatBot() {
           }}
         >
           {/* Header */}
-          <div className="px-5 py-4 flex items-center gap-3 border-b border-white/10"
-            style={{ background: 'linear-gradient(135deg, rgba(99,102,241,0.15), rgba(139,92,246,0.1))' }}>
-            <div className="w-10 h-10 rounded-full flex items-center justify-center text-lg"
-              style={{ background: 'linear-gradient(135deg, #6366f1, #a855f7)' }}>
+          <div
+            className="px-5 py-4 flex items-center gap-3 border-b border-white/10"
+            style={{
+              background: 'linear-gradient(135deg, rgba(99,102,241,0.15), rgba(139,92,246,0.1))',
+            }}
+          >
+            <div
+              className="w-10 h-10 rounded-full flex items-center justify-center text-lg"
+              style={{ background: 'linear-gradient(135deg, #6366f1, #a855f7)' }}
+            >
               🤖
             </div>
             <div className="flex-1">
@@ -422,37 +557,59 @@ export function ChatBot() {
               <p className="text-xs text-white/50">{ct('chat.subtitle')}</p>
             </div>
             {cartCount > 0 && (
-              <span className="px-2.5 py-1 rounded-full text-xs font-bold text-white"
-                style={{ background: 'linear-gradient(135deg, #6366f1, #a855f7)' }}>
+              <span
+                className="px-2.5 py-1 rounded-full text-xs font-bold text-white"
+                style={{ background: 'linear-gradient(135deg, #6366f1, #a855f7)' }}
+              >
                 🛒 {cartCount}
               </span>
             )}
           </div>
 
           {/* Messages */}
-          <div className="flex-1 overflow-y-auto px-4 py-4 space-y-4" style={{ scrollbarWidth: 'thin' }}>
+          <div
+            className="flex-1 overflow-y-auto px-4 py-4 space-y-4"
+            style={{ scrollbarWidth: 'thin' }}
+          >
             {messages.map((msg) => (
-              <div key={msg.id} className={`flex ${msg.role === 'user' ? 'justify-end' : 'justify-start'}`}>
-                <div className={`max-w-[85%] rounded-2xl px-4 py-3 text-sm leading-relaxed ${
-                  msg.role === 'user'
-                    ? 'text-white rounded-br-md'
-                    : 'text-white/90 rounded-bl-md border border-white/5'
-                }`} style={{
-                  background: msg.role === 'user'
-                    ? 'linear-gradient(135deg, #6366f1, #8b5cf6)'
-                    : 'rgba(255,255,255,0.05)',
-                }}>
+              <div
+                key={msg.id}
+                className={`flex ${msg.role === 'user' ? 'justify-end' : 'justify-start'}`}
+              >
+                <div
+                  className={`max-w-[85%] rounded-2xl px-4 py-3 text-sm leading-relaxed ${
+                    msg.role === 'user'
+                      ? 'text-white rounded-br-md'
+                      : 'text-white/90 rounded-bl-md border border-white/5'
+                  }`}
+                  style={{
+                    background:
+                      msg.role === 'user'
+                        ? 'linear-gradient(135deg, #6366f1, #8b5cf6)'
+                        : 'rgba(255,255,255,0.05)',
+                  }}
+                >
                   <p className="whitespace-pre-line">{msg.text}</p>
 
                   {/* Product cards inside message */}
                   {msg.products && msg.products.length > 0 && (
                     <div className="mt-3 space-y-2">
                       {msg.products.map((p) => (
-                        <div key={p.id} className="flex items-center gap-3 p-2.5 rounded-xl bg-white/5 border border-white/5">
-                          <img src={p.image} alt={p.name} className="w-12 h-12 rounded-lg object-cover flex-shrink-0" loading="lazy" />
+                        <div
+                          key={p.id}
+                          className="flex items-center gap-3 p-2.5 rounded-xl bg-white/5 border border-white/5"
+                        >
+                          <img
+                            src={p.image}
+                            alt={p.name}
+                            className="w-12 h-12 rounded-lg object-cover flex-shrink-0"
+                            loading="lazy"
+                          />
                           <div className="flex-1 min-w-0">
                             <p className="text-xs font-semibold text-white truncate">{p.name}</p>
-                            <p className="text-xs text-purple-300 font-bold">{formatPrice(p.price)}</p>
+                            <p className="text-xs text-purple-300 font-bold">
+                              {formatPrice(p.price)}
+                            </p>
                           </div>
                           <button
                             onClick={() => addToCart(p)}
@@ -495,11 +652,23 @@ export function ChatBot() {
             {/* Typing indicator */}
             {isProcessing && (
               <div className="flex justify-start">
-                <div className="rounded-2xl px-4 py-3 border border-white/5" style={{ background: 'rgba(255,255,255,0.05)' }}>
+                <div
+                  className="rounded-2xl px-4 py-3 border border-white/5"
+                  style={{ background: 'rgba(255,255,255,0.05)' }}
+                >
                   <div className="flex gap-1.5">
-                    <div className="w-2 h-2 rounded-full bg-purple-400 animate-bounce" style={{ animationDelay: '0ms' }} />
-                    <div className="w-2 h-2 rounded-full bg-purple-400 animate-bounce" style={{ animationDelay: '150ms' }} />
-                    <div className="w-2 h-2 rounded-full bg-purple-400 animate-bounce" style={{ animationDelay: '300ms' }} />
+                    <div
+                      className="w-2 h-2 rounded-full bg-purple-400 animate-bounce"
+                      style={{ animationDelay: '0ms' }}
+                    />
+                    <div
+                      className="w-2 h-2 rounded-full bg-purple-400 animate-bounce"
+                      style={{ animationDelay: '150ms' }}
+                    />
+                    <div
+                      className="w-2 h-2 rounded-full bg-purple-400 animate-bounce"
+                      style={{ animationDelay: '300ms' }}
+                    />
                   </div>
                 </div>
               </div>
@@ -509,9 +678,15 @@ export function ChatBot() {
           </div>
 
           {/* Input */}
-          <div className="px-4 py-3 border-t border-white/10" style={{ background: 'rgba(15,15,30,0.95)' }}>
+          <div
+            className="px-4 py-3 border-t border-white/10"
+            style={{ background: 'rgba(15,15,30,0.95)' }}
+          >
             <form
-              onSubmit={(e) => { e.preventDefault(); handleSend(); }}
+              onSubmit={(e) => {
+                e.preventDefault();
+                handleSend();
+              }}
               className="flex items-center gap-2"
             >
               <input
@@ -529,7 +704,12 @@ export function ChatBot() {
                 style={{ background: 'linear-gradient(135deg, #6366f1, #a855f7)' }}
               >
                 <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8" />
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"
+                  />
                 </svg>
               </button>
             </form>

@@ -8,7 +8,11 @@ export async function generateStaticParams() {
   return products.map((p) => ({ slug: p.slug }));
 }
 
-export async function generateMetadata({ params }: { params: { slug: string } }): Promise<Metadata> {
+export async function generateMetadata({
+  params,
+}: {
+  params: { slug: string };
+}): Promise<Metadata> {
   const product = getProductBySlug(params.slug);
   if (!product) return { title: 'Товар не найден' };
 
@@ -44,7 +48,9 @@ export default function ProductPage({ params }: { params: { slug: string } }) {
     return (
       <div className="max-w-7xl mx-auto px-4 py-20 text-center">
         <h1 className="section-title mb-4">Товар не найден</h1>
-        <Link href="/categories" className="btn-primary">Перейти в каталог</Link>
+        <Link href="/categories" className="btn-primary">
+          Перейти в каталог
+        </Link>
       </div>
     );
   }

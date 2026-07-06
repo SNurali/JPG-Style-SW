@@ -52,10 +52,25 @@ export default function DashboardPage() {
           </div>
 
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
-            <StatCard label="Общая выручка" value={formatPrice(data.totalRevenue)} icon="📊" accent />
+            <StatCard
+              label="Общая выручка"
+              value={formatPrice(data.totalRevenue)}
+              icon="📊"
+              accent
+            />
             <StatCard label="Активных товаров" value={String(data.totalProducts)} icon="🛍️" />
-            <StatCard label="Ожидают обработки" value={String(data.pendingOrders)} icon="⏳" warning={data.pendingOrders > 0} />
-            <StatCard label="Ожидают модерации" value={String(data.pendingReviews)} icon="⭐" warning={data.pendingReviews > 0} />
+            <StatCard
+              label="Ожидают обработки"
+              value={String(data.pendingOrders)}
+              icon="⏳"
+              warning={data.pendingOrders > 0}
+            />
+            <StatCard
+              label="Ожидают модерации"
+              value={String(data.pendingReviews)}
+              icon="⭐"
+              warning={data.pendingReviews > 0}
+            />
           </div>
 
           {/* Recent orders */}
@@ -85,9 +100,15 @@ export default function DashboardPage() {
                           <div className="text-text-muted text-xs">{order.customerPhone}</div>
                         </td>
                         <td className="py-3 text-white">{formatPrice(order.total)}</td>
-                        <td className="py-3"><StatusBadge status={order.status} /></td>
-                        <td className="py-3"><StatusBadge status={order.paymentStatus} /></td>
-                        <td className="py-3 text-text-muted">{new Date(order.createdAt).toLocaleDateString('ru-RU')}</td>
+                        <td className="py-3">
+                          <StatusBadge status={order.status} />
+                        </td>
+                        <td className="py-3">
+                          <StatusBadge status={order.paymentStatus} />
+                        </td>
+                        <td className="py-3 text-text-muted">
+                          {new Date(order.createdAt).toLocaleDateString('ru-RU')}
+                        </td>
                       </tr>
                     ))}
                   </tbody>
@@ -103,15 +124,29 @@ export default function DashboardPage() {
   );
 }
 
-function StatCard({ label, value, icon, accent, warning }: {
-  label: string; value: string; icon: string; accent?: boolean; warning?: boolean;
+function StatCard({
+  label,
+  value,
+  icon,
+  accent,
+  warning,
+}: {
+  label: string;
+  value: string;
+  icon: string;
+  accent?: boolean;
+  warning?: boolean;
 }) {
   return (
-    <div className={`glass-card p-5 ${warning ? 'border-orange-500/30' : accent ? 'border-accent/30' : ''}`}>
+    <div
+      className={`glass-card p-5 ${warning ? 'border-orange-500/30' : accent ? 'border-accent/30' : ''}`}
+    >
       <div className="flex items-center justify-between mb-3">
         <span className="text-2xl">{icon}</span>
       </div>
-      <div className={`font-heading font-bold text-lg ${accent ? 'text-accent' : warning ? 'text-orange-400' : 'text-white'}`}>
+      <div
+        className={`font-heading font-bold text-lg ${accent ? 'text-accent' : warning ? 'text-orange-400' : 'text-white'}`}
+      >
         {value}
       </div>
       <div className="text-xs text-text-muted mt-1">{label}</div>
@@ -121,9 +156,15 @@ function StatCard({ label, value, icon, accent, warning }: {
 
 function StatusBadge({ status }: { status: string }) {
   const labels: Record<string, string> = {
-    pending: 'Ожидает', confirmed: 'Подтверждён', processing: 'В обработке',
-    delivering: 'Доставляется', delivered: 'Доставлен', cancelled: 'Отменён',
-    awaiting: 'Ожидает оплаты', paid: 'Оплачено', failed: 'Ошибка',
+    pending: 'Ожидает',
+    confirmed: 'Подтверждён',
+    processing: 'В обработке',
+    delivering: 'Доставляется',
+    delivered: 'Доставлен',
+    cancelled: 'Отменён',
+    awaiting: 'Ожидает оплаты',
+    paid: 'Оплачено',
+    failed: 'Ошибка',
   };
   return <span className={`badge-${status}`}>{labels[status] || status}</span>;
 }

@@ -19,11 +19,16 @@ export default function AnalyticsPage() {
     try {
       const res = await api(`/api/admin/analytics?days=${days}`);
       setData(res.data);
-    } catch (err) { console.error(err); }
-    finally { setLoading(false); }
+    } catch (err) {
+      console.error(err);
+    } finally {
+      setLoading(false);
+    }
   }, [api, days]);
 
-  useEffect(() => { load(); }, [load]);
+  useEffect(() => {
+    load();
+  }, [load]);
 
   return (
     <AdminShell>
@@ -57,15 +62,23 @@ export default function AnalyticsPage() {
             ) : (
               <div className="flex items-end gap-1 h-40">
                 {data.dailyRevenue.map((day: any, i: number) => {
-                  const maxRev = Math.max(...data.dailyRevenue.map((d: any) => parseInt(d.revenue)));
+                  const maxRev = Math.max(
+                    ...data.dailyRevenue.map((d: any) => parseInt(d.revenue))
+                  );
                   const height = maxRev > 0 ? (parseInt(day.revenue) / maxRev) * 100 : 0;
                   return (
-                    <div key={i} className="flex-1 flex flex-col items-center gap-1 group" title={`${day.date}: ${formatPrice(parseInt(day.revenue))} (${day.orders} заказов)`}>
+                    <div
+                      key={i}
+                      className="flex-1 flex flex-col items-center gap-1 group"
+                      title={`${day.date}: ${formatPrice(parseInt(day.revenue))} (${day.orders} заказов)`}
+                    >
                       <div
                         className="w-full bg-accent/60 rounded-t group-hover:bg-accent transition-colors"
                         style={{ height: `${Math.max(4, height)}%` }}
                       />
-                      <span className="text-[8px] text-text-muted">{new Date(day.date).getDate()}</span>
+                      <span className="text-[8px] text-text-muted">
+                        {new Date(day.date).getDate()}
+                      </span>
                     </div>
                   );
                 })}
@@ -88,7 +101,9 @@ export default function AnalyticsPage() {
                         <span className="text-white text-sm">{item.name}</span>
                       </div>
                       <div className="text-right">
-                        <div className="text-white text-sm font-medium">{formatPrice(parseInt(item.total_revenue))}</div>
+                        <div className="text-white text-sm font-medium">
+                          {formatPrice(parseInt(item.total_revenue))}
+                        </div>
                         <div className="text-text-muted text-xs">{item.total_sold} шт</div>
                       </div>
                     </div>
@@ -106,12 +121,18 @@ export default function AnalyticsPage() {
                 <div className="space-y-3">
                   {data.statusDistribution.map((item: any, i: number) => {
                     const labels: Record<string, string> = {
-                      pending: '⏳ Ожидает', confirmed: '✅ Подтверждён', processing: '📦 В обработке',
-                      delivering: '🚚 Доставляется', delivered: '🎉 Доставлен', cancelled: '❌ Отменён',
+                      pending: '⏳ Ожидает',
+                      confirmed: '✅ Подтверждён',
+                      processing: '📦 В обработке',
+                      delivering: '🚚 Доставляется',
+                      delivered: '🎉 Доставлен',
+                      cancelled: '❌ Отменён',
                     };
                     return (
                       <div key={i} className="flex items-center justify-between">
-                        <span className="text-white text-sm">{labels[item.status] || item.status}</span>
+                        <span className="text-white text-sm">
+                          {labels[item.status] || item.status}
+                        </span>
                         <span className="text-text-muted text-sm font-mono">{item.count}</span>
                       </div>
                     );
