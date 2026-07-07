@@ -76,6 +76,24 @@ services:
     networks:
       - smartwash_net
 
+  admin:
+    build:
+      context: .
+      dockerfile: apps/admin/Dockerfile
+      args:
+        - NEXT_PUBLIC_API_URL=
+    container_name: smartwash_admin
+    restart: always
+    ports:
+      - "3012:3001"
+    environment:
+      - PORT=3001
+      - NODE_ENV=production
+    depends_on:
+      - api
+    networks:
+      - smartwash_net
+
 volumes:
   smartwash_pgdata:
   smartwash_redisdata:
