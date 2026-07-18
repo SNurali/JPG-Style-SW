@@ -70,6 +70,21 @@ export function localBusinessJsonLd() {
 }
 
 export function productJsonLd(product: Product) {
+  const additionalProperty: Array<{ '@type': string; name: string; value: string }> = [];
+  if (product.volume) {
+    additionalProperty.push({ '@type': 'PropertyValue', name: 'Объём/вес', value: product.volume });
+  }
+  if (product.dilutionRatio) {
+    additionalProperty.push({
+      '@type': 'PropertyValue',
+      name: 'Разведение с водой',
+      value: product.dilutionRatio,
+    });
+  }
+  if (product.bestFor) {
+    additionalProperty.push({ '@type': 'PropertyValue', name: 'Для кого/чего', value: product.bestFor });
+  }
+
   return {
     '@context': 'https://schema.org',
     '@type': 'Product',
@@ -81,6 +96,7 @@ export function productJsonLd(product: Product) {
       '@type': 'Brand',
       name: 'SmartWash',
     },
+    ...(additionalProperty.length > 0 ? { additionalProperty } : {}),
     offers: {
       '@type': 'Offer',
       url: `${BASE_URL}/products/${product.slug}`,
@@ -99,6 +115,22 @@ export function productJsonLd(product: Product) {
       reviewCount: product.reviewCount.toString(),
       bestRating: '5',
     },
+  };
+}
+
+export function productFaqJsonLd(product: Product) {
+  if (!product.faq || product.faq.length === 0) return null;
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: product.faq.map((item) => ({
+      '@type': 'Question',
+      name: item.q,
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: item.a,
+      },
+    })),
   };
 }
 
@@ -125,3 +157,4 @@ export function categoryJsonLd(category: Category, productCount: number) {
     numberOfItems: productCount,
   };
 }
+

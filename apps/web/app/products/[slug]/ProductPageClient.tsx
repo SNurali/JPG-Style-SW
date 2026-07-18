@@ -158,6 +158,54 @@ export function ProductPageClient({ product }: { product: Product }) {
             <p className="text-text-muted text-sm leading-relaxed">{product.description}</p>
           </div>
 
+          {/* Facts — for shoppers and for AI answer engines (AEO/GEO): concrete, citable specs */}
+          {(product.volume || product.dilutionRatio || product.usageInstructions || product.bestFor) && (
+            <div className="glass-card p-6 mb-6">
+              <h3 className="font-heading font-semibold text-white mb-3">Характеристики и применение</h3>
+              <dl className="text-sm space-y-2">
+                {product.volume && (
+                  <div className="flex gap-2">
+                    <dt className="text-text-muted min-w-[140px]">Объём/вес:</dt>
+                    <dd className="text-white">{product.volume}</dd>
+                  </div>
+                )}
+                {product.dilutionRatio && (
+                  <div className="flex gap-2">
+                    <dt className="text-text-muted min-w-[140px]">Разведение с водой:</dt>
+                    <dd className="text-white">{product.dilutionRatio}</dd>
+                  </div>
+                )}
+                {product.usageInstructions && (
+                  <div className="flex gap-2">
+                    <dt className="text-text-muted min-w-[140px]">Как применять:</dt>
+                    <dd className="text-white">{product.usageInstructions}</dd>
+                  </div>
+                )}
+                {product.bestFor && (
+                  <div className="flex gap-2">
+                    <dt className="text-text-muted min-w-[140px]">Для кого/чего:</dt>
+                    <dd className="text-white">{product.bestFor}</dd>
+                  </div>
+                )}
+              </dl>
+            </div>
+          )}
+
+          {/* FAQ — visible Q&A so AI crawlers and AI Overviews can quote real answers, mirrors FAQPage JSON-LD */}
+          {product.faq && product.faq.length > 0 && (
+            <div className="glass-card p-6 mb-6">
+              <h3 className="font-heading font-semibold text-white mb-3">Частые вопросы</h3>
+              <div className="space-y-4">
+                {product.faq.map((item, i) => (
+                  <div key={i}>
+                    <p className="text-white text-sm font-medium mb-1">{item.q}</p>
+                    <p className="text-text-muted text-sm leading-relaxed">{item.a}</p>
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
+
           {/* Quantity + Add to cart */}
           <div className="flex flex-col sm:flex-row gap-4 mb-4">
             <div className="flex items-center glass-card">

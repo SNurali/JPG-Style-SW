@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import { products, getProductBySlug } from '@/lib/data';
-import { productJsonLd, breadcrumbJsonLd } from '@/lib/seo';
+import { productJsonLd, productFaqJsonLd, breadcrumbJsonLd } from '@/lib/seo';
 import { ProductPageClient } from './ProductPageClient';
 
 export async function generateStaticParams() {
@@ -62,6 +62,8 @@ export default function ProductPage({ params }: { params: { slug: string } }) {
     { name: product.name, url: `https://smartwash.uz/products/${product.slug}` },
   ];
 
+  const faqJsonLd = productFaqJsonLd(product);
+
   return (
     <>
       <script
@@ -72,6 +74,12 @@ export default function ProductPage({ params }: { params: { slug: string } }) {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd(breadcrumbs)) }}
       />
+      {faqJsonLd && (
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }}
+        />
+      )}
       <ProductPageClient product={product} />
     </>
   );

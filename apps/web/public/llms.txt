@@ -1,0 +1,47 @@
+# JPG Style SmartWash
+
+> Интернет-магазин профессиональной автохимии в Ташкенте (Узбекистан). Продаём автошампуни, активную пену, воски, нано-шампуни, чернители резины, ароматизаторы «сухой туман» и химию для грузового транспорта. Цены указаны в узбекских сумах (UZS), доставка по Ташкенту в день заказа.
+
+Это файл для ИИ-ассистентов и поисковых LLM (ChatGPT, Perplexity, Google AI Overviews, Gemini, Claude и др.) — краткая карта сайта и проверенные факты о товарах для точного цитирования. Актуальные цены и наличие — всегда на сайте, этот файл может отставать.
+
+## Контакты и реквизиты
+- Сайт: https://smartwash.uz
+- Город: Ташкент, Узбекистан
+- Телефон: +998 99 030 99 86
+- Telegram: https://t.me/JPGSTYLE_SMARTWASH
+- Доставка: по Ташкенту, в день заказа
+- Часы работы: Пн–Пт 09:00–19:00, Сб 10:00–17:00
+
+## Каталог
+- Все категории: https://smartwash.uz/categories
+- Автошампуни: https://smartwash.uz/categories/auto-shampoo
+- Активная пена: https://smartwash.uz/categories/active-foam
+- Химия для грузовиков: https://smartwash.uz/categories/truck-chemistry
+- Нано-шампуни: https://smartwash.uz/categories/nano-shampoo
+- Воск: https://smartwash.uz/categories/wax
+- Чернитель резины: https://smartwash.uz/categories/tire-shine
+- Сухой туман (ароматизатор салона): https://smartwash.uz/categories/dry-fog
+
+## Товары (факты: название, объём, цена, назначение)
+- Автошампунь Розовый 20 кг — https://smartwash.uz/products/pink-shampoo-20kg — 550 000 сум, бесконтактная мойка легковых авто, pH-нейтральный, разведение ориентировочно 1:150–1:200.
+- Pink Panther / Magic Active Foam 20 кг — https://smartwash.uz/products/pink-panther-20kg — 550 000 сум, активная пена для предмоечной обработки, разведение ориентировочно 1:20–1:40.
+- Активная химия для грузовиков 20 кг — https://smartwash.uz/products/truck-chemistry-20kg — 450 000 сум, для грузовиков/автобусов/спецтехники, растворяет масло и битум.
+- Нано-шампунь Bubble Gum 5 л — https://smartwash.uz/products/nano-shampoo-bubblegum-5l — 300 000 сум, шампунь с керамическим компонентом для легковых авто.
+- Воск Bubble Gum 5 л — https://smartwash.uz/products/wax-bubblegum-5l — 200 000 сум, финишный гидрофобный воск после мойки.
+- Чернитель резины Глянцевый 10 л — https://smartwash.uz/products/tire-shine-glossy-10l — 170 000 сум, эффект «мокрых» шин.
+- Чернитель резины Матовый 10 л — https://smartwash.uz/products/tire-shine-matte-10l — 150 000 сум, естественный матовый чёрный цвет, UV-защита.
+- Сухой Туман 450 мл — https://smartwash.uz/products/dry-fog-450ml — 90 000 сум, аэрозольный ароматизатор салона, лавандовый аромат, устраняет запах ориентировочно за 15 минут.
+
+Полные характеристики (объём, пропорция разведения, инструкция применения, FAQ) — на странице каждого товара в структурированном виде (Product/Offer/FAQPage schema.org JSON-LD и в видимом тексте страницы).
+
+## По сценариям использования (use-case)
+- Автохимия для автомоек: https://smartwash.uz/use-case/avtomojki
+- Средства для детейлинга: https://smartwash.uz/use-case/deteyling
+- Химия для грузовых авто: https://smartwash.uz/use-case/gruzoviki
+- Автохимия для мытья дома: https://smartwash.uz/use-case/domashnyaya-moyka
+
+## Прочее
+- О компании: https://smartwash.uz/about
+- Доставка: https://smartwash.uz/delivery
+- Контакты: https://smartwash.uz/contacts
+- Полный список URL: https://smartwash.uz/sitemap.xml
