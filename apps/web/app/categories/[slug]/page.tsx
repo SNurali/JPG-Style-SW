@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import Link from 'next/link';
 import { categories, getProductsByCategory, getCategoryBySlug } from '@/lib/data';
 import { categoryJsonLd, breadcrumbJsonLd } from '@/lib/seo';
+import { pluralizeRu } from '@/lib/pluralize';
 import { CategoryPageClient } from './CategoryPageClient';
 
 export async function generateStaticParams() {
@@ -18,7 +19,7 @@ export async function generateMetadata({
 
   const count = getProductsByCategory(params.slug).length;
   const title = `${category.name} — купить профессиональную автохимию в Ташкенте`;
-  const description = `${category.description}. ${count} товаров в наличии. ✓ Доставка в день заказа ✓ Оптом и в розницу. JPG Style SmartWash.`;
+  const description = `${category.description}. ${count} ${pluralizeRu(count, ['товар', 'товара', 'товаров'])} в наличии. ✓ Доставка в день заказа ✓ Оптом и в розницу. JPG Style SmartWash.`;
 
   return {
     title,

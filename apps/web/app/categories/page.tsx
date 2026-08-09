@@ -3,7 +3,7 @@
 import React from 'react';
 import Link from 'next/link';
 import { categories } from '@/lib/data';
-import { useLanguage } from '@/lib/i18n';
+import { useLanguage, pluralizeRu } from '@/lib/i18n';
 
 export default function CategoriesPage() {
   const { t } = useLanguage();
@@ -44,7 +44,8 @@ export default function CategoriesPage() {
               </h2>
               <p className="text-sm text-text-muted mb-2">{t(`catDesc.${cat.slug}`)}</p>
               <span className="text-xs text-accent">
-                {cat.productCount} {t('catalog.itemsCount')} →
+                {cat.productCount}{' '}
+                {pluralizeRu(cat.productCount, ['товар', 'товара', 'товаров'])} →
               </span>
             </div>
           </Link>

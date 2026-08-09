@@ -757,6 +757,8 @@ export const translations: Translations = {
   },
 };
 
+export { pluralizeRu } from './pluralize';
+
 interface LanguageContextType {
   language: Language;
   setLanguage: (lang: Language) => void;

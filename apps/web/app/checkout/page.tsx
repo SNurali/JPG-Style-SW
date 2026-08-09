@@ -1,12 +1,13 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
 import { useCart } from '@/lib/cart-context';
 import { useLanguage } from '@/lib/i18n';
 import { useAuth } from '@/lib/auth';
 import { formatPrice } from '@/lib/data';
 import { createOrder, validateDiscount } from '@/lib/api';
+import { trackBeginCheckout, trackPurchase } from '@/lib/analytics';
 
 export default function CheckoutPage() {
   const { items, totalPrice, clearCart } = useCart();
@@ -18,6 +19,23 @@ export default function CheckoutPage() {
   const [orderNumber, setOrderNumber] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [error, setError] = useState('');
+
+  // GA4: begin_checkout fires once when the checkout page loads with items
+  const checkoutTracked = useRef(false);
+  useEffect(() => {
+    if (checkoutTracked.current || items.length === 0) return;
+    checkoutTracked.current = true;
+    trackBeginCheckout(
+      items.map((item) => ({
+        item_id: item.id,
+        item_name: item.name,
+        price: item.price,
+        quantity: item.quantity,
+        item_brand: 'SmartWash',
+      })),
+      totalPrice,
+    );
+  }, [items, totalPrice]);
 
   // Discount
   const [discountCode, setDiscountCode] = useState('');
@@ -123,6 +141,19 @@ export default function CheckoutPage() {
 
       setOrderNumber(result.data.orderNumber);
       setOrderPlaced(true);
+      // GA4: purchase event (total computed here to avoid forward-ref on grandTotal)
+      const purchaseTotal = totalPrice - discountAmount + selectedZone.price;
+      trackPurchase(
+        result.data.orderNumber,
+        items.map((item) => ({
+          item_id: item.id,
+          item_name: item.name,
+          price: item.price,
+          quantity: item.quantity,
+          item_brand: 'SmartWash',
+        })),
+        purchaseTotal,
+      );
       clearCart();
     } catch (err: any) {
       setError(err.message || t('checkout.orderError'));

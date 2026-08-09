@@ -1,5 +1,6 @@
 import type { MetadataRoute } from 'next';
 import { products, categories } from '@/lib/data';
+import { useCases } from '@/lib/use-case-data';
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const base = 'https://smartwash.uz';
@@ -27,5 +28,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.7,
   }));
 
-  return [...staticPages, ...categoryPages, ...productPages];
+  const useCasePages: MetadataRoute.Sitemap = useCases.map((uc) => ({
+    url: `${base}/use-case/${uc.slug}`,
+    lastModified: now,
+    changeFrequency: 'monthly' as const,
+    priority: 0.75,
+  }));
+
+  return [...staticPages, ...categoryPages, ...productPages, ...useCasePages];
 }

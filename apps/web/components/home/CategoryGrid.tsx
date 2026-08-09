@@ -4,7 +4,7 @@ import React from 'react';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
 import { categories } from '@/lib/data';
-import { useLanguage } from '@/lib/i18n';
+import { useLanguage, pluralizeRu } from '@/lib/i18n';
 
 const categoryIcons: Record<string, React.ReactNode> = {
   'auto-shampoo': (
@@ -153,7 +153,8 @@ export function CategoryGrid() {
               {/* Info */}
               <div className="p-3 text-center">
                 <p className="text-xs text-text-muted">
-                  {cat.productCount} {t('catalog.itemsCount')}
+                  {cat.productCount}{' '}
+                  {pluralizeRu(cat.productCount, ['товар', 'товара', 'товаров'])}
                 </p>
               </div>
             </Link>

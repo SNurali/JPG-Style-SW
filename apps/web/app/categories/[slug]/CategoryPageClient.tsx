@@ -3,7 +3,7 @@
 import React from 'react';
 import Link from 'next/link';
 import { ProductCard } from '@/components/product/ProductCard';
-import { useLanguage } from '@/lib/i18n';
+import { useLanguage, pluralizeRu } from '@/lib/i18n';
 import type { Product, Category } from '@/lib/data';
 
 export function CategoryPageClient({
@@ -35,7 +35,8 @@ export function CategoryPageClient({
         <h1 className="section-title mb-2">{t(`cat.${category.slug}`)}</h1>
         <p className="text-text-muted">{t(`catDesc.${category.slug}`)}</p>
         <p className="text-sm text-accent mt-2">
-          {categoryProducts.length} {t('catalog.itemsCount')}
+          {categoryProducts.length}{' '}
+          {pluralizeRu(categoryProducts.length, ['товар', 'товара', 'товаров'])}
         </p>
       </div>
 
